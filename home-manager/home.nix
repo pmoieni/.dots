@@ -14,6 +14,7 @@
     ]) ++ (with pkgs-unstable; [
       # shell / terminal
       neovim
+      fastfetch
 
       # dev tools
       gh
