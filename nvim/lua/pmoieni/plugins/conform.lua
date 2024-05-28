@@ -18,6 +18,7 @@ return {
                 json = { { "prettierd", "prettier" } },
                 yaml = { { "prettierd", "prettier" } },
                 markdown = { { "prettierd", "prettier" } },
+                nix = { "alejandra" }
             },
             format_after_save = {
                 lsp_fallback = true,
