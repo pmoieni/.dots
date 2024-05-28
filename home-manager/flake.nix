@@ -2,11 +2,11 @@
   description = "Home Manager configuration of pmoieni";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -14,7 +14,7 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-unstable,
+    # nixpkgs-unstable,
     home-manager,
     ...
   } @ inputs: let
@@ -33,13 +33,12 @@
         // attrs);
 
     hm-pkgs = make-hm-packages nixpkgs {};
-    hm-pkgs-unstable = make-hm-packages nixpkgs-unstable {};
+    # hm-pkgs-unstable = make-hm-packages nixpkgs-unstable {};
   in {
     homeConfigurations."pmoieni" = home-manager.lib.homeManagerConfiguration {
       pkgs = hm-pkgs;
       extraSpecialArgs = {
         inherit inputs outputs;
-        pkgs-unstable = hm-pkgs-unstable;
       };
       modules = [./home.nix];
     };
