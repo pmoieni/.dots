@@ -25,7 +25,7 @@
       jdk21
       rustup
       nodejs
-      yarn
+      corepack
       bun
       esbuild
       clang_17
