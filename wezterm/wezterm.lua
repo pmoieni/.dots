@@ -9,7 +9,7 @@ end
 config.font = wezterm.font_with_fallback({ "FiraCode Nerd Font", "Noto Sans" })
 config.font_size = 12.0
 
-config.window_background_opacity = 0.8
+config.window_background_opacity = 1
 
 config.color_scheme = "rose-pine"
 

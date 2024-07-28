@@ -30,6 +30,8 @@
       esbuild
       clang_17
       clang-tools_17
+      podman-compose
+      devenv
 
       # LSP
       lua-language-server
@@ -55,6 +57,10 @@
       lfs.enable = true;
       userName = "Parham Moieni";
       userEmail = "62774242+pmoieni@users.noreply.github.com";
+    };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
     };
   };
 
