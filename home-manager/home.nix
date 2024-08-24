@@ -1,5 +1,13 @@
-{pkgs, ...}: {
-  imports = [];
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  imports = [
+    inputs.ags.homeManagerModules.default
+  ];
+
+  #  fonts.fontconfig.enable = true;
 
   home = {
     username = "pmoieni";
@@ -47,6 +55,30 @@
 
       # Apps
       tor-browser
+
+      # Fonts
+      (pkgs.nerdfonts.override {fonts = ["FiraCode" "IBMPlexMono"];})
+
+      # Utilities
+      pavucontrol
+      brightnessctl
+      playerctl
+      cliphist
+      tokei
+      yt-dlp
+      ripgrep
+      hyperfine
+      ncdu
+      alsa-utils
+      pamixer
+      imagemagick
+      ffmpeg-full
+      grim
+      slurp
+      wl-screenrec
+      swappy
+      dart-sass
+      fd
     ];
   };
 
@@ -57,6 +89,14 @@
       lfs.enable = true;
       userName = "Parham Moieni";
       userEmail = "62774242+pmoieni@users.noreply.github.com";
+    };
+    ags = {
+      enable = true;
+      extraPackages = with pkgs; [
+        gtksourceview
+        webkitgtk
+        accountsservice
+      ];
     };
     direnv = {
       enable = true;
