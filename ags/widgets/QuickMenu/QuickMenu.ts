@@ -6,7 +6,6 @@ import { NetworkToggle, WifiSelection } from "./widgets/Network";
 import { BluetoothToggle, BluetoothDevices } from "./widgets/Bluetooth";
 import { DND } from "./widgets/DND";
 import { DarkModeToggle } from "./widgets/DarkMode";
-import { ProfileToggle, ProfileSelector } from "./widgets/PowerProfile";
 import { Media } from "./widgets/Media";
 import options from "options";
 import { ScreenRecordToggle } from "./widgets/Recorder";
@@ -56,7 +55,7 @@ const Settings = () =>
                 [WifiSelection, BluetoothDevices]
             ),
             Row([ScreenRecordToggle, DarkModeToggle]),
-            Row([ProfileToggle, DND], [ProfileSelector]),
+            Row([DND], []),
             Widget.Box({
                 visible: media.as((l) => l.length > 0),
                 child: Media(),

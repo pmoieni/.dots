@@ -79,7 +79,7 @@
       slurp
       wl-screenrec
       swappy
-      swaybg
+      swww
       dart-sass
       sassc
       qt6ct
