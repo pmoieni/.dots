@@ -104,7 +104,7 @@ const options = mkOptions(OPTIONS, {
             sleep: opt("systemctl suspend"),
             reboot: opt("systemctl reboot"),
             logout: opt("hyprctl dispatch exit"),
-            shutdown: opt("shutdown now"),
+            shutdown: opt("systemctl poweroff"),
             labels: opt(true),
         },
         quickmenu: {
