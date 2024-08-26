@@ -1,6 +1,7 @@
 import icons from "lib/icons";
 import { uptime } from "lib/variables";
 import powermenu, { Action } from "services/powermenu";
+import wallpaper from "services/wallpaper";
 
 function up(up: number) {
     const h = Math.floor(up / 60);
@@ -13,6 +14,13 @@ const SysButton = (action: Action) =>
         vpack: "center",
         child: Widget.Icon(icons.powermenu[action]),
         onClicked: () => powermenu.action(action),
+    });
+
+const WallpaperButton = () =>
+    Widget.Button({
+        vpack: "center",
+        child: Widget.Icon(icons.ui.themes),
+        onClicked: wallpaper.random,
     });
 
 export const Header = () =>
@@ -35,6 +43,7 @@ export const Header = () =>
             ],
         }),
         Widget.Box({ hexpand: true }),
+        WallpaperButton(),
         SysButton("shutdown"),
         SysButton("logout"),
         SysButton("lock")
