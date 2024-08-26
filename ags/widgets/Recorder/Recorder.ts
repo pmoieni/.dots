@@ -1,4 +1,4 @@
-import recorder from "service/screenrecord";
+import recorder from "services/screenrecord";
 import { Variable as Var } from "types/variable";
 import PopupWindow from "widgets/PopupWindow";
 

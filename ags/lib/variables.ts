@@ -1,4 +1,4 @@
-import GLib from "gi://GLib";
+import GLib from "gi://GLib?version=2.0";
 // import options from "options"
 //
 // const intval = options.system.fetchInterval.value

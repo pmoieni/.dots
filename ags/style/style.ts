@@ -1,6 +1,6 @@
 import { type Opt } from "lib/option";
 import options from "options";
-import { bash, dependencies, sh } from "lib/utils";
+import { bash, dependencies } from "lib/utils";
 
 const deps = [
     "font",
@@ -84,6 +84,6 @@ async function resetCss() {
     }
 }
 
-Utils.monitorFile(App.configDir, resetCss);
+Utils.monitorFile(`${App.configDir}/style`, resetCss);
 options.handler(deps, resetCss);
 await resetCss();

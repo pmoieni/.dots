@@ -1,5 +1,5 @@
 import icons from "lib/icons";
-import { SimpleToggleButton } from "../components/ToggleButton";
+import { SimpleToggleButton } from "../ToggleButton";
 
 const n = await Service.import("notifications");
 const dnd = n.bind("dnd");

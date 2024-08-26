@@ -1,4 +1,4 @@
-import Gio from "gi://Gio";
+import Gio from "gi://Gio?version=2.0";
 import options from "options";
 
 const settings = new Gio.Settings({

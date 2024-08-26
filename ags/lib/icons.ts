@@ -1,8 +1,4 @@
 export const substitutes = {
-    "transmission-gtk": "transmission",
-    "blueberry.py": "blueberry",
-    Caprine: "facebook-messenger",
-    "com.raggesilver.BlackBox-symbolic": "terminal-symbolic",
     "audio-headset-bluetooth": "audio-headphones-symbolic",
     "org.wezfurlong.wezterm-symbolic": "terminal-symbolic",
     "audio-card-analog-usb": "audio-speakers-symbolic",
@@ -15,7 +11,7 @@ export const substitutes = {
 export default {
     missing: "image-missing-symbolic",
     fallback: {
-        executable: "application-x-executable",
+        executable: "application-x-executable-symbolic",
         notification: "dialog-information-symbolic",
         video: "video-x-generic-symbolic",
         audio: "audio-x-generic-symbolic",

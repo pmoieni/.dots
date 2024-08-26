@@ -1,5 +1,5 @@
 import Window from "./Window";
-import Gdk from "gi://Gdk";
+import Gdk from "gi://Gdk?version=3.0";
 import Gtk from "gi://Gtk?version=3.0";
 import options from "options";
 
@@ -22,21 +22,21 @@ const size = (id: number) => {
 export default (id: number) => {
     const fixed = Widget.Fixed();
 
-    const update = () =>
-        hyprland.messageAsync("j/clients").then((json) => {
-            fixed.get_children().forEach((ch) => ch.destroy());
-            const clients = JSON.parse(json) as typeof hyprland.clients;
-            clients
-                .filter(({ workspace }) => workspace.id === id)
-                .forEach((c) => {
-                    const x =
-                        c.at[0] - (hyprland.getMonitor(c.monitor)?.x || 0);
-                    const y =
-                        c.at[1] - (hyprland.getMonitor(c.monitor)?.y || 0);
-                    c.mapped && fixed.put(Window(c), scale(x), scale(y));
-                });
-            fixed.show_all();
-        });
+    async function update() {
+        const json = await hyprland.messageAsync("j/clients").catch(() => null);
+        if (!json) return;
+
+        fixed.get_children().forEach((ch) => ch.destroy());
+        const clients = JSON.parse(json) as typeof hyprland.clients;
+        clients
+            .filter(({ workspace }) => workspace.id === id)
+            .forEach((c) => {
+                const x = c.at[0] - (hyprland.getMonitor(c.monitor)?.x || 0);
+                const y = c.at[1] - (hyprland.getMonitor(c.monitor)?.y || 0);
+                c.mapped && fixed.put(Window(c), scale(x), scale(y));
+            });
+        fixed.show_all();
+    }
 
     return Widget.Box({
         attribute: { id },

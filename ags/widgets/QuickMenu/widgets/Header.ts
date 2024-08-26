@@ -1,6 +1,6 @@
 import icons from "lib/icons";
 import { uptime } from "lib/variables";
-import powermenu, { Action } from "service/powermenu";
+import powermenu, { Action } from "services/powermenu";
 
 function up(up: number) {
     const h = Math.floor(up / 60);

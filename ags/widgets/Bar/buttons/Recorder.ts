@@ -1,4 +1,4 @@
-import screenrecord from "service/screenrecord";
+import screenrecord from "services/screenrecord";
 import icons from "lib/icons";
 
 export default () =>

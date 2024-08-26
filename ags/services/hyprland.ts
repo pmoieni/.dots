@@ -4,6 +4,11 @@ const { messageAsync } = await Service.import("hyprland");
 const {
     hyprland,
     theme: {
+        spacing,
+        radius,
+        border: { width },
+        blur,
+        shadows,
         dark: {
             primary: { bg: darkActive },
         },
@@ -12,30 +17,26 @@ const {
         },
         scheme,
     },
-    spacing,
-    radius,
-    border: { width },
-    blur,
-    shadows,
 } = options;
 
 const deps = [
     "hyprland",
     spacing.id,
     radius.id,
-    width.id,
     blur.id,
+    width.id,
     shadows.id,
     darkActive.id,
     lightActive.id,
     scheme.id,
 ];
 
-function activeBorder() {
-    const color =
-        scheme.value === "dark" ? darkActive.value : lightActive.value;
+function primary() {
+    return scheme.value === "dark" ? darkActive.value : lightActive.value;
+}
 
-    return color.replace("#", "");
+function rgba(color: string) {
+    return `rgba(${color}ff)`.replace("#", "");
 }
 
 function sendBatch(batch: string[]) {
@@ -51,12 +52,15 @@ async function setupHyprland() {
     const wm_gaps = Math.floor(hyprland.gaps.value * spacing.value);
 
     sendBatch([
-        `general:border_size ${width.value}`,
-        `general:gaps_out ${Math.floor(wm_gaps / 2)}`,
-        `general:gaps_in ${Math.floor(wm_gaps / 4)}`,
-        `general:col.active_border rgba(${activeBorder()}ff)`,
-        `decoration:rounding ${Math.floor(radius.value / 2)}`,
+        `general:border_size ${width}`,
+        `general:gaps_out ${wm_gaps}`,
+        `general:gaps_in ${Math.floor(wm_gaps / 2)}`,
+        `general:col.active_border ${rgba(primary())}`,
+        `general:col.inactive_border ${rgba(hyprland.inactiveBorder.value)}`,
+        `decoration:rounding ${radius}`,
         `decoration:drop_shadow ${shadows.value ? "yes" : "no"}`,
+        `dwindle:no_gaps_when_only ${hyprland.gapsWhenOnly.value ? 0 : 1}`,
+        `master:no_gaps_when_only ${hyprland.gapsWhenOnly.value ? 0 : 1}`,
     ]);
 
     await sendBatch(App.windows.map(({ name }) => `layerrule unset, ${name}`));
@@ -66,9 +70,7 @@ async function setupHyprland() {
             App.windows.flatMap(({ name }) => [
                 `layerrule unset, ${name}`,
                 `layerrule blur, ${name}`,
-                `layerrule ignorealpha ${
-                    /* based on shadow color */ 0.29
-                }, ${name}`,
+                `layerrule ignorealpha ${/* based on shadow color */ 0.29}, ${name}`,
             ])
         );
     }

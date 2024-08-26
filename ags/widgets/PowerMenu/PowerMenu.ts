@@ -1,4 +1,4 @@
-import powermenu, { type Action } from "service/powermenu";
+import powermenu, { type Action } from "services/powermenu";
 import icons from "lib/icons";
 import options from "options";
 import type Gtk from "gi://Gtk?version=3.0";

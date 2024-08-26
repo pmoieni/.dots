@@ -1,6 +1,10 @@
 import { opt, mkOptions } from "lib/option";
 
 const options = mkOptions(OPTIONS, {
+    wallpaper: {
+        resolution: opt<import("services/wallpaper").Resolution>(1920),
+        market: opt<import("services/wallpaper").Market>("random"),
+    },
     theme: {
         dark: {
             primary: {
@@ -30,6 +34,15 @@ const options = mkOptions(OPTIONS, {
             widget: opt("#575279"),
             border: opt("#575279"),
         },
+        border: {
+            width: opt(1),
+            opacity: opt(96),
+        },
+        blur: opt(0),
+        shadows: opt(true),
+        padding: opt(7),
+        spacing: opt(12),
+        radius: opt(11),
         scheme: opt<"dark" | "light">("dark"),
     },
     widget: { opacity: opt(90) },
@@ -45,7 +58,7 @@ const options = mkOptions(OPTIONS, {
     transition: opt(200),
     font: {
         size: opt(11),
-        name: opt("FiraCode Nerd Font"),
+        name: opt("Ubuntu Nerd Font"),
     },
     widgets: {
         bar: {
@@ -77,8 +90,20 @@ const options = mkOptions(OPTIONS, {
                 iconSize: opt(55),
                 max: opt(5),
                 favorites: opt([
-                    ["Firefox", "Tor Browser", "Telegram Desktop"],
-                    ["wezterm", "Kate", "Konsole"],
+                    [
+                        "Firefox",
+                        "Microsoft Edge",
+                        "Tor Browser",
+                        "Telegram Desktop",
+                        "Spotify",
+                    ],
+                    [
+                        "alacritty",
+                        "wezterm",
+                        "org.gnome.Nautilus",
+                        "Obs studio",
+                        "GNU Image Manipulation Program",
+                    ],
                 ]),
             },
         },
@@ -116,6 +141,8 @@ const options = mkOptions(OPTIONS, {
     },
     hyprland: {
         gaps: opt(2),
+        inactiveBorder: opt("#282828"),
+        gapsWhenOnly: opt(false),
     },
 });
 

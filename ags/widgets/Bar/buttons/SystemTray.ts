@@ -11,10 +11,10 @@ const SysTrayItem = (item: TrayItem) =>
         child: Widget.Icon({ icon: item.bind("icon") }),
         tooltip_markup: item.bind("tooltip_markup"),
         setup: (self) => {
-            const menu = item.menu;
+            const { menu } = item;
             if (!menu) return;
 
-            const id = item.menu?.connect("popped-up", () => {
+            const id = menu.connect("popped-up", () => {
                 self.toggleClassName("active");
                 menu.connect("notify::visible", () => {
                     self.toggleClassName("active", menu.visible);
@@ -22,7 +22,7 @@ const SysTrayItem = (item: TrayItem) =>
                 menu.disconnect(id!);
             });
 
-            if (id) self.connect("destroy", () => item.menu?.disconnect(id));
+            self.connect("destroy", () => item.menu?.disconnect(id));
         },
         onClicked: (self) =>
             item.menu?.popup_at_widget(

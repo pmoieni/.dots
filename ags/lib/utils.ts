@@ -2,7 +2,7 @@
 import { type Application } from "types/service/applications";
 import icons, { substitutes } from "./icons";
 import Gtk from "gi://Gtk?version=3.0";
-import Gdk from "gi://Gdk";
+import Gdk from "gi://Gdk?version=3.0";
 import GLib from "gi://GLib?version=2.0";
 
 export type Binding<T> = import("types/service").Binding<any, any, T>;
@@ -79,13 +79,16 @@ export function wait<T>(ms: number, callback: () => T): Promise<T> {
  * @returns true if all of the `bins` are found
  */
 export function dependencies(...bins: string[]) {
-    const missing = bins.filter((bin) => {
-        return !Utils.exec(`which ${bin}`);
-    });
+    const missing = bins.filter((bin) =>
+        Utils.exec({
+            cmd: `which ${bin}`,
+            out: () => false,
+            err: () => true,
+        })
+    );
 
     if (missing.length > 0) {
-        console.warn("missing dependencies:", missing.join(", "));
-        console.warn("missing dependencies:", missing.join(", "));
+        console.warn(Error(`missing dependencies: ${missing.join(", ")}`));
         Utils.notify(`missing dependencies: ${missing.join(", ")}`);
     }
 

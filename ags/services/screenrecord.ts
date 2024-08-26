@@ -1,4 +1,4 @@
-import GLib from "gi://GLib";
+import GLib from "gi://GLib?version=2.0";
 import icons from "lib/icons";
 import { dependencies, sh, bash } from "lib/utils";
 
@@ -72,16 +72,19 @@ class Recorder extends Service {
         const file = `${this.#screenshots}/${now()}.png`;
         Utils.ensureDirectory(this.#screenshots);
 
-        const wayshot = `grim ${
-            full ? "" : `-g "${await sh("slurp")}"`
-        } ${file}`;
-        await sh(wayshot);
-        bash(`wl-copy < ${file}`);
+        if (full) {
+            await sh(`grim "${file}"`);
+        } else {
+            const size = await sh("slurp");
+            if (!size) return;
+
+            await sh(`grim -g "${size}" "${file}"`);
+        }
 
         Utils.notify({
             image: file,
             summary: "Screenshot",
-            body: this.#file,
+            body: file,
             actions: {
                 "Show in Files": () => sh(`xdg-open ${this.#screenshots}`),
                 View: () => sh(`xdg-open ${file}`),

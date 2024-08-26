@@ -21,6 +21,7 @@
 
       # dev tools
       gh
+      subversion
       niv
       alejandra
       nodePackages.eslint_d
@@ -60,6 +61,7 @@
       (pkgs.nerdfonts.override {fonts = ["FiraCode" "IBMPlexMono"];})
 
       # Utilities
+      libnotify
       pavucontrol
       brightnessctl
       playerctl
@@ -77,8 +79,16 @@
       slurp
       wl-screenrec
       swappy
+      swaybg
       dart-sass
+      sassc
+      qt6ct
       fd
+
+      # Extra
+      adwaita-icon-theme
+      rose-pine-gtk-theme
+      gtk3.dev
     ];
   };
 

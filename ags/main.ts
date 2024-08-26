@@ -1,5 +1,5 @@
 import "style/style";
-import { init } from "service/index";
+import { init } from "services/index";
 import Bar from "widgets/Bar/Bar";
 import DateMenu from "widgets/DateMenu/DateMenu";
 import Notifications from "widgets/Notifications/Notifications";

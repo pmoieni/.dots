@@ -22,9 +22,6 @@ class PowerMenu extends Service {
     get title() {
         return this.#title;
     }
-    get cmd() {
-        return this.#cmd;
-    }
 
     action(action: Action) {
         [this.#cmd, this.#title] = {
@@ -44,6 +41,11 @@ class PowerMenu extends Service {
 
     readonly shutdown = () => {
         this.action("shutdown");
+    };
+
+    readonly exec = () => {
+        App.closeWindow("verification");
+        Utils.exec(this.#cmd);
     };
 }
 

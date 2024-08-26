@@ -1,6 +1,6 @@
 import icons from "lib/icons";
 import options from "options";
-import { SimpleToggleButton } from "../components/ToggleButton";
+import { SimpleToggleButton } from "../ToggleButton";
 
 const { scheme } = options.theme;
 

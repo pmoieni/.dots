@@ -4,19 +4,6 @@ const notifications = await Service.import("notifications");
 const bluetooth = await Service.import("bluetooth");
 const audio = await Service.import("audio");
 const network = await Service.import("network");
-const powerprof = await Service.import("powerprofiles");
-
-const ProfileIndicator = () => {
-    const visible = powerprof
-        .bind("active_profile")
-        .as((p) => p !== "balanced");
-
-    const icon = powerprof
-        .bind("active_profile")
-        .as((p) => icons.powerprofile[p]);
-
-    return Widget.Icon({ visible, icon });
-};
 
 const MicrophoneIndicator = () =>
     Widget.Icon()
@@ -50,9 +37,9 @@ const BluetoothIndicator = () =>
     Widget.Overlay({
         class_name: "bluetooth",
         passThrough: true,
+        visible: bluetooth.bind("enabled"),
         child: Widget.Icon({
             icon: icons.bluetooth.enabled,
-            visible: bluetooth.bind("enabled"),
         }),
         overlay: Widget.Label({
             hpack: "end",
@@ -94,7 +81,6 @@ export default () =>
         child: Widget.Box({
             className: "indicators horizontal",
             children: [
-                ProfileIndicator(),
                 DNDIndicator(),
                 BluetoothIndicator(),
                 NetworkIndicator(),

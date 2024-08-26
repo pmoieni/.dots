@@ -1,5 +1,5 @@
 import { type Notification } from "types/service/notifications";
-import GLib from "gi://GLib";
+import GLib from "gi://GLib?version=2.0";
 import icons from "lib/icons";
 
 const time = (time: number, format = "%H:%M") =>

@@ -1,4 +1,4 @@
-import powermenu from "service/powermenu";
+import powermenu from "services/powermenu";
 import PopupWindow from "widgets/PopupWindow";
 
 export default () =>
@@ -43,10 +43,7 @@ export default () =>
                         }),
                         Widget.Button({
                             child: Widget.Label("Yes"),
-                            onClicked: () => {
-                                App.closeWindow("verification");
-                                Utils.exec(powermenu.cmd);
-                            },
+                            onClicked: powermenu.exec,
                         }),
                     ],
                 }),
