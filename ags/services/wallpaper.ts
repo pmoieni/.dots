@@ -105,4 +105,6 @@ class Wallpaper extends Service {
     }
 }
 
-export default new Wallpaper();
+const wallpaper = new Wallpaper();
+Object.assign(globalThis, { wallpaper });
+export default wallpaper;
