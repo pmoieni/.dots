@@ -63,6 +63,7 @@ class Wallpaper extends Service {
             body: "please wait.",
             iconName: icons.fallback.notification,
             urgency: "normal",
+            timeout: 5000,
         });
 
         const res = await Utils.fetch("https://bing.biturl.top/", {
