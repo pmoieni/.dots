@@ -1,5 +1,6 @@
 import options from "options";
 import { dependencies, sh } from "lib/utils";
+import icons from "lib/icons";
 
 export type Resolution = 1920 | 1366 | 3840;
 export type Market =
@@ -57,6 +58,13 @@ class Wallpaper extends Service {
     }
 
     async #fetchBing() {
+        Utils.notify({
+            summary: "Fetching new wallpaper.",
+            body: "please wait.",
+            iconName: icons.fallback.notification,
+            urgency: "normal",
+        });
+
         const res = await Utils.fetch("https://bing.biturl.top/", {
             params: {
                 resolution: options.wallpaper.resolution.value,
