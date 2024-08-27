@@ -2,16 +2,26 @@ import icons from "lib/icons";
 import options from "options";
 
 const battery = await Service.import("battery");
-const { low } = options.widgets.bar.battery;
+const { low: batteryLow } = options.widgets.bar.battery;
 
 const Indicator = () =>
     Widget.Icon({
         setup: (self) =>
             self.hook(battery, () => {
-                self.icon =
-                    battery.charging || battery.charged
-                        ? icons.battery.charging
-                        : battery.icon_name;
+                const { charging, warning, low, medium, high, full } =
+                    icons.battery;
+
+                const cons = [
+                    [100, full],
+                    [60, high],
+                    [30, medium],
+                    [batteryLow.value, low],
+                    [0, warning],
+                ] as const;
+
+                self.icon = battery.charging
+                    ? charging
+                    : cons.find(([n]) => n <= battery.percent)?.[1] || "";
             }),
     });
 
@@ -33,6 +43,6 @@ export default () =>
                     "charging",
                     battery.charging || battery.charged
                 );
-                w.toggleClassName("low", battery.percent < low.value);
+                w.toggleClassName("low", battery.percent < batteryLow.value);
             }),
     });

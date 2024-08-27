@@ -79,6 +79,10 @@ export default {
     battery: {
         charging: "icon-battery-charging-symbolic",
         warning: "icon-battery-warning-symbolic",
+        low: "icon-battery-low-symbolic",
+        medium: "icon-battery-medium-symbolic",
+        high: "icon-battery-high-symbolic",
+        full: "icon-battery-full-symbolic",
     },
     bluetooth: {
         enabled: "icon-bluetooth-symbolic",
