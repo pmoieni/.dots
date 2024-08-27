@@ -97,6 +97,7 @@ export default {
         reboot: "icon-arrow-clockwise-symbolic",
         logout: "icon-sign-out-symbolic",
         shutdown: "icon-power-symbolic",
+        sleep: "icon-moon-symbolic",
     },
     recorder: {
         recording: "icon-record-symbolic",
