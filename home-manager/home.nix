@@ -58,7 +58,7 @@
       tor-browser
 
       # Fonts
-      (pkgs.nerdfonts.override {fonts = ["FiraCode" "IBMPlexMono"];})
+      (pkgs.nerdfonts.override {fonts = ["FiraCode" "IBMPlexMono" "Ubuntu"];})
 
       # Utilities
       libnotify
