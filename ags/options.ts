@@ -64,7 +64,7 @@ const options = mkOptions(OPTIONS, {
         bar: {
             position: opt<"top" | "bottom">("top"),
             battery: {
-                low: opt(30),
+                low: opt(20),
             },
             workspaces: {
                 workspaces: opt(5),
