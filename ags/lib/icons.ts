@@ -16,10 +16,7 @@ export default {
         executable: "icon-binary-symbolic",
         notification: "icon-bell-symbolic",
         video: "icon-video-symbolic",
-        audio: "icon-speaker-symbolic",
-    },
-    nix: {
-        nix: "nix-snowflake-symbolic",
+        audio: "icon-music-note-symbolic",
     },
     app: {
         terminal: "icon-terminal-symbolic",

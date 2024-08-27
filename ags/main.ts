@@ -1,7 +1,7 @@
 import "style/style";
 import { init } from "services/index";
 import Bar from "widgets/Bar/Bar";
-import DateMenu from "widgets/DateMenu/DateMenu";
+import { setupDateMenu } from "widgets/DateMenu/DateMenu";
 import Notifications from "widgets/Notifications/Notifications";
 import PowerMenu from "widgets/PowerMenu/PowerMenu";
 import Verification from "widgets/PowerMenu/Verification";
@@ -20,6 +20,7 @@ declare global {
 App.config({
     icons: "./assets",
     onConfigParsed: () => {
+        setupDateMenu();
         init();
     },
     closeWindowDelay: {
@@ -30,7 +31,6 @@ App.config({
     },
     windows: () => [
         Bar(),
-        DateMenu(), // WIP
         Notifications(), // WIP
         PowerMenu(),
         Verification(),
