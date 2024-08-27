@@ -103,6 +103,7 @@ const Player = (player: MprisPlayer) => {
                     case "Playing":
                         return icons.mpris.playing;
                     case "Paused":
+                        return icons.mpris.paused;
                     case "Stopped":
                         return icons.mpris.stopped;
                 }

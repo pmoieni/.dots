@@ -7,7 +7,7 @@
     inputs.ags.homeManagerModules.default
   ];
 
-  #  fonts.fontconfig.enable = true;
+  fonts.fontconfig.enable = true;
 
   home = {
     username = "pmoieni";
