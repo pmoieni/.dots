@@ -8,7 +8,8 @@ export default async function init() {
     bat.connect("notify::charging", ({ charging }) => {
         if (charging) {
             Utils.notify({
-                summary: "Battery is charging.",
+                summary: "Charger plugged in.",
+                body: "battery is charging.",
                 iconName: icons.battery.charging,
                 urgency: "normal",
             });
@@ -21,7 +22,7 @@ export default async function init() {
         if ((percent === low || percent === Math.floor(low / 2)) && !charging) {
             Utils.notify({
                 summary: "Battery is running low!",
-                body: "plug in your PC",
+                body: "plug in the charger.",
                 iconName: icons.battery.warning,
                 urgency: "critical",
             });
