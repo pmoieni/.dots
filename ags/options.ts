@@ -122,7 +122,7 @@ const options = mkOptions(OPTIONS, {
             width: opt(440),
             position: opt<Array<"top" | "bottom" | "left" | "right">>([
                 "top",
-                "right",
+                "top",
             ]),
             blacklist: opt(["Spotify"]),
         },

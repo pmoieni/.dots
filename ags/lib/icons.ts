@@ -44,6 +44,7 @@ export default {
             up: "icon-arrow-up-symbolic",
         },
     },
+    graphicsCards: "icon-graphics-card-symbolic",
     audio: {
         mic: {
             muted: "icon-microphone-slash-symbolic",

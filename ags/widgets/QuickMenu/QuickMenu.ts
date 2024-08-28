@@ -55,7 +55,7 @@ const Settings = () =>
                 [WifiSelection, BluetoothDevices]
             ),
             Row([ScreenRecordToggle, DarkModeToggle]),
-            Row([DND], []),
+            Row([DND]),
             Widget.Box({
                 visible: media.as((l) => l.length > 0),
                 child: Media(),
