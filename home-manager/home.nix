@@ -54,9 +54,6 @@
       vscode-langservers-extracted
       tailwindcss-language-server
 
-      # Apps
-      tor-browser
-
       # Fonts
       (pkgs.nerdfonts.override {fonts = ["FiraCode" "IBMPlexMono" "Ubuntu"];})
 

@@ -12,6 +12,7 @@ export default async function init() {
                 body: "battery is charging.",
                 iconName: icons.battery.charging,
                 urgency: "normal",
+                timeout: 5000,
             });
         }
     });
