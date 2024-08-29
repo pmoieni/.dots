@@ -64,7 +64,10 @@ const NetworkIndicator = () =>
                 [20, low],
                 [0, none],
             ] as const;
-            icon = cons.find(([n]) => n <= network.wifi.strength)?.[1] || "";
+            icon =
+                network.wifi.state === "activated"
+                    ? cons.find(([n]) => n <= network.wifi.strength)?.[1] || ""
+                    : icons.network.strength.disconnected;
         }
 
         self.icon = icon;
