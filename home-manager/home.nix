@@ -74,7 +74,7 @@
       ffmpeg-full
       grim
       slurp
-      wl-screenrec
+      wf-recorder
       swappy
       swww
       dart-sass

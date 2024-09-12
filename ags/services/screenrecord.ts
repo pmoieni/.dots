@@ -24,18 +24,24 @@ class Recorder extends Service {
     recording = false;
     timer = 0;
 
-    async start(requireSize = false, recordAudio = false) {
-        if (!dependencies("slurp", "wl-screenrec")) return;
+    async start(full = true, recordAudio = false) {
+        if (!dependencies("slurp", "wf-recorder")) return;
 
         if (this.recording) return;
 
         Utils.ensureDirectory(this.#recordings);
         this.#file = `${this.#recordings}/${now()}.mp4`;
-        sh(
-            `wl-screenrec ${recordAudio ? "--audio" : ""} ${
-                requireSize ? `-g "${await sh("slurp")}"` : ""
-            } -f ${this.#file}`
-        );
+
+        if (full) {
+            sh(`wf-recorder ${recordAudio ? "-a" : ""} -f ${this.#file}`);
+        } else {
+            const size = await sh("slurp");
+            if (!size) return;
+
+            sh(
+                `wf-recorder ${recordAudio ? "-a" : ""} -g "${size}" -f ${this.#file}`
+            );
+        }
 
         this.recording = true;
         this.changed("recording");
@@ -50,7 +56,7 @@ class Recorder extends Service {
     async stop() {
         if (!this.recording) return;
 
-        await bash("killall -INT wl-screenrec");
+        await bash("killall -INT wf-recorder");
         this.recording = false;
         this.changed("recording");
         GLib.source_remove(this.#interval);

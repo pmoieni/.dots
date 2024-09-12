@@ -22,7 +22,7 @@ const Option = (title: string, val: Var<boolean>) =>
     });
 
 export default () => {
-    const requireSize = Variable(false);
+    const full = Variable(true);
     const recordAudio = Variable(false);
 
     const Options = () =>
@@ -31,7 +31,7 @@ export default () => {
             className: "options vertical",
             vertical: true,
             children: [
-                Option("Custom Size", requireSize),
+                Option("Full Size", full),
                 Option("Record Audio", recordAudio),
             ],
         });
@@ -51,7 +51,7 @@ export default () => {
                     }),
                     onClicked: () => {
                         App.closeWindow("recorder");
-                        recorder.start(requireSize.value, recordAudio.value);
+                        recorder.start(full.value, recordAudio.value);
                     },
                 }),
             ],

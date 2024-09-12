@@ -92,7 +92,7 @@ return {
                 }
             })
             lspconfig.nil_ls.setup({})
-            lspconfig.tsserver.setup({})
+            lspconfig.ts_ls.setup({})
             lspconfig.svelte.setup({})
             lspconfig.bashls.setup({})
             lspconfig.cssls.setup({})
