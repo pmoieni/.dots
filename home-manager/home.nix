@@ -81,6 +81,7 @@
       sassc
       qt6ct
       fd
+      ranger
 
       # Extra
       adwaita-icon-theme
