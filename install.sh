@@ -9,3 +9,4 @@ ln -s ~/.dots/nvim ~/.config/nvim
 ln -s ~/.dots/nvim-dev ~/.config/nvim-dev
 ln -s ~/.dots/ags ~/.config/ags
 ln -s ~/.dots/hypr ~/.config/hypr
+ln -s ~/.dots/zed ~/.config/zed

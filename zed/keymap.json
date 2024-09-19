@@ -1,0 +1,8 @@
+[
+  {
+    "context": "VimControl",
+    "bindings": {
+      "space f": "file_finder::Toggle"
+    }
+  }
+]
