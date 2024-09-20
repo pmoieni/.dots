@@ -1,6 +1,6 @@
 [
   {
-    "context": "VimControl",
+    "context": "vim_mode != insert",
     "bindings": {
       "space f": "file_finder::Toggle"
     }
