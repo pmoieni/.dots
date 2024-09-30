@@ -82,6 +82,7 @@
       qt6ct
       fd
       ranger
+      cloudflare-warp
 
       # Extra
       adwaita-icon-theme

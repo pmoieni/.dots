@@ -2,29 +2,13 @@ import { Menu, ArrowToggleButton } from "../ToggleButton";
 import icons from "lib/icons.js";
 import { dependencies, sh } from "lib/utils";
 import options from "options";
+import { NetworkIconName, NetworkIcon } from "widgets/Indicators";
 const { wifi } = await Service.import("network");
-
-const WifiIcon = (strength: number) => {
-    const { none, low, medium, high } = icons.network.strength;
-    const cons = [
-        [60, high],
-        [40, medium],
-        [20, low],
-        [0, none],
-    ] as const;
-    return cons.find(([n]) => n <= strength)?.[1] || "";
-};
 
 export const NetworkToggle = () =>
     ArrowToggleButton({
         name: "network",
-        icon: wifi
-            .bind("strength")
-            .as((strength) =>
-                wifi.state != "activated"
-                    ? icons.network.strength.disconnected
-                    : WifiIcon(strength)
-            ),
+        icon: NetworkIconName(),
         label: wifi.bind("ssid").as((ssid) => ssid || "Not Connected"),
         connection: [wifi, () => wifi.enabled],
         deactivate: () => (wifi.enabled = false),
@@ -59,9 +43,7 @@ export const WifiSelection = () =>
                                         },
                                         child: Widget.Box({
                                             children: [
-                                                Widget.Icon(
-                                                    WifiIcon(ap.strength)
-                                                ),
+                                                NetworkIcon(),
                                                 Widget.Label(ap.ssid || ""),
                                                 Widget.Icon({
                                                     icon: icons.ui.tick,

@@ -2,6 +2,7 @@ import { type Stream } from "types/service/audio";
 import { dependencies, icon, sh } from "lib/utils";
 import icons from "lib/icons.js";
 import { Arrow, Menu } from "../ToggleButton";
+import { AudioIcon, MicrophoneIcon } from "widgets/Indicators";
 const audio = await Service.import("audio");
 
 const VolumeSlider = (type: "speaker" | "microphone" = "speaker") =>
@@ -22,21 +23,7 @@ const AudioIndicator = () =>
     Widget.Button({
         vpack: "center",
         on_clicked: () => (audio.speaker.is_muted = !audio.speaker.is_muted),
-        child: Widget.Icon({
-            icon: audio.speaker.bind("volume").as((vol) => {
-                const { muted, low, medium, high, overamplified } =
-                    icons.audio.volume;
-                const cons = [
-                    [101, overamplified],
-                    [67, high],
-                    [34, medium],
-                    [1, low],
-                    [0, muted],
-                ] as const;
-                const icon = cons.find(([n]) => n <= vol * 100)?.[1] || "";
-                return audio.speaker.is_muted ? muted : icon;
-            }),
-        }),
+        child: AudioIcon(),
         tooltipText: audio.speaker
             .bind("volume")
             .as((vol) => `Volume: ${Math.floor(vol * 100)}%`),
@@ -65,19 +52,7 @@ const MicrophoneIndicator = () =>
         vpack: "center",
         on_clicked: () =>
             (audio.microphone.is_muted = !audio.microphone.is_muted),
-        child: Widget.Icon({
-            icon: audio.microphone.bind("volume").as((vol) => {
-                const { muted, low, medium, high } = icons.audio.mic;
-                const cons = [
-                    [67, high],
-                    [34, medium],
-                    [1, low],
-                    [0, muted],
-                ] as const;
-                const icon = cons.find(([n]) => n <= vol * 100)?.[1] || "";
-                return audio.microphone.is_muted ? muted : icon;
-            }),
-        }),
+        child: MicrophoneIcon(),
         tooltipText: audio.microphone
             .bind("volume")
             .as((vol) => `Volume: ${Math.floor(vol * 100)}%`),
