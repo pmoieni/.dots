@@ -69,7 +69,25 @@ return {
 
             -- setup servers
             lspconfig.lua_ls.setup({})
-            lspconfig.gopls.setup({})
+            lspconfig.gopls.setup({
+                capabilities = {
+                    workspace = {
+                        didChangeWatchedFiles = {
+                            dynamicRegistration = true,
+                        },
+                        workspaceFolders = true,
+                    },
+                },
+                settings = {
+                    gopls = {
+                        completeUnimported = true,
+                        usePlaceholders = true,
+                        analyses = {
+                            unusedparams = true,
+                        },
+                    },
+                },
+            })
             lspconfig.rust_analyzer.setup({
                 settings = {
                     ["rust-analyzer"] = {
