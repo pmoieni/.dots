@@ -23,11 +23,21 @@ const Player = (player: MprisPlayer) => {
                 player.bind("track_cover_url"),
                 media.coverSize.bind(),
             ],
-            (path, url, size) => `
+            (path, url, size) => {
+                let art = path || url;
+
+                if (!art || art === undefined) {
+                    art =
+                        Utils.HOME +
+                        "/.config/ags/assets/icon-music-note-symbolic.svg";
+                }
+
+                return `
             min-width: ${size}px;
             min-height: ${size}px;
-            background-image: url('${path || url}');
-        `
+            background-image: url('${art}');
+        `;
+            }
         ),
     });
 

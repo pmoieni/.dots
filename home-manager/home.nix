@@ -82,10 +82,12 @@
       sassc
       qt6ct
       fd
+      gnome.gvfs
       ranger
       cloudflare-warp
 
       # Extra
+      matugen
       adwaita-icon-theme
       rose-pine-gtk-theme
       gtk3.dev
