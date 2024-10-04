@@ -31,7 +31,7 @@
       golangci-lint
       # erlang
       # elixir
-      # jdk21
+      jdk21
       rustup
       nodejs
       corepack
@@ -46,7 +46,7 @@
       lua-language-server
       gopls
       # elixir-ls
-      # jdt-language-server
+      jdt-language-server
       nil
       nodePackages.svelte-language-server
       nodePackages.typescript-language-server
@@ -58,6 +58,7 @@
       (pkgs.nerdfonts.override {fonts = ["FiraCode" "IBMPlexMono" "Ubuntu"];})
 
       # Utilities
+      speedtest-cli
       libnotify
       pavucontrol
       brightnessctl
