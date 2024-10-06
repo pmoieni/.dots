@@ -2,7 +2,7 @@ import { type Stream } from "types/service/audio";
 import { dependencies, icon, sh } from "lib/utils";
 import icons from "lib/icons.js";
 import { Arrow, Menu } from "../ToggleButton";
-import { AudioIcon, MicrophoneIcon } from "widgets/Indicators";
+import { AudioIcon, MicrophoneIcon } from "widgets/shared/Indicators";
 const audio = await Service.import("audio");
 
 const VolumeSlider = (type: "speaker" | "microphone" = "speaker") =>

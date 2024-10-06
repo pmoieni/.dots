@@ -1,7 +1,7 @@
 import Workspace from "./Workspace";
 import options from "options";
 import { range } from "lib/utils";
-import PopupWindow from "widgets/PopupWindow";
+import PopupWindow from "widgets/shared/PopupWindow";
 
 const hyprland = await Service.import("hyprland");
 

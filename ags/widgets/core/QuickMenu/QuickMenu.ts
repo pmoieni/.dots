@@ -9,7 +9,7 @@ import { DarkModeToggle } from "./widgets/DarkMode";
 import { Media } from "./widgets/Media";
 import options from "options";
 import { ScreenRecordToggle } from "./widgets/Recorder";
-import PopupWindow from "widgets/PopupWindow";
+import PopupWindow from "widgets/shared/PopupWindow";
 
 const { bar, quickmenu } = options.widgets;
 const media = (await Service.import("mpris")).bind("players");

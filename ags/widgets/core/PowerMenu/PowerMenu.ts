@@ -2,7 +2,7 @@ import powermenu, { type Action } from "services/powermenu";
 import icons from "lib/icons";
 import options from "options";
 import type Gtk from "gi://Gtk?version=3.0";
-import PopupWindow from "widgets/PopupWindow";
+import PopupWindow from "widgets/shared/PopupWindow";
 
 const { labels } = options.widgets.powermenu;
 

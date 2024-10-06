@@ -1,5 +1,5 @@
 import options from "options";
-import icons from "../lib/icons";
+import icons from "lib/icons";
 
 export default async function init() {
     const bat = await Service.import("battery");

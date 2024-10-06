@@ -1,14 +1,14 @@
 import "style/style";
 import { init } from "services/index";
-import Bar from "widgets/Bar/Bar";
-import { setupDateMenu } from "widgets/DateMenu/DateMenu";
-import Notifications from "widgets/Notifications/Notifications";
-import PowerMenu from "widgets/PowerMenu/PowerMenu";
-import Verification from "widgets/PowerMenu/Verification";
-import QuickMenu from "widgets/QuickMenu/QuickMenu";
-import Workspaces from "widgets/Workspaces/Workspaces";
-import Launcher from "widgets/Launcher/Launcher";
-import Recorder from "widgets/Recorder/Recorder";
+import Bar from "widgets/core/Bar/Bar";
+import { setupDateMenu } from "widgets/core/DateMenu/DateMenu";
+import Notifications from "widgets/core/Notifications/Notifications";
+import PowerMenu from "widgets/core/PowerMenu/PowerMenu";
+import Verification from "widgets/core/PowerMenu/Verification";
+import QuickMenu from "widgets/core/QuickMenu/QuickMenu";
+import Workspaces from "widgets/core/Workspaces/Workspaces";
+import Launcher from "widgets/core/Launcher/Launcher";
+import Recorder from "widgets/core/Recorder/Recorder";
 import options from "options";
 
 declare global {

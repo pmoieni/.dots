@@ -1,5 +1,5 @@
 import powermenu from "services/powermenu";
-import PopupWindow from "widgets/PopupWindow";
+import PopupWindow from "widgets/shared/PopupWindow";
 
 export default () =>
     PopupWindow({

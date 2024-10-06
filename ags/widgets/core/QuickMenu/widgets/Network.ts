@@ -2,7 +2,7 @@ import { Menu, ArrowToggleButton } from "../ToggleButton";
 import icons from "lib/icons.js";
 import { dependencies, sh } from "lib/utils";
 import options from "options";
-import { NetworkIconName, NetworkIcon } from "widgets/Indicators";
+import { NetworkIconName, NetworkIcon } from "widgets/shared/Indicators";
 const { wifi } = await Service.import("network");
 
 export const NetworkToggle = () =>

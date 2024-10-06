@@ -1,6 +1,6 @@
 import recorder from "services/screenrecord";
 import { Variable as Var } from "types/variable";
-import PopupWindow from "widgets/PopupWindow";
+import PopupWindow from "widgets/shared/PopupWindow";
 
 const Option = (title: string, val: Var<boolean>) =>
     Widget.Box({

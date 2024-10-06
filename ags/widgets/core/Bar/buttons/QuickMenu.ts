@@ -4,7 +4,7 @@ import {
     DNDIcon,
     MicrophoneIcon,
     NetworkIcon,
-} from "widgets/Indicators";
+} from "widgets/shared/Indicators";
 
 const audio = await Service.import("audio");
 

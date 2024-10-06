@@ -1,6 +1,6 @@
 import NotificationColumn from "./NotificationColumn";
 import options from "options";
-import PopupWindow from "widgets/PopupWindow";
+import PopupWindow from "widgets/shared/PopupWindow";
 import DateColumn from "./DateColumn";
 
 const { bar, datemenu } = options.widgets;

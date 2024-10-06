@@ -2,7 +2,7 @@ import icons from "lib/icons";
 import options from "options";
 import * as AppLauncher from "./AppLauncher";
 import * as ShLauncher from "./ShLauncher";
-import PopupWindow, { Padding } from "widgets/PopupWindow";
+import PopupWindow, { Padding } from "widgets/shared/PopupWindow";
 
 const { width, margin } = options.widgets.launcher;
 
