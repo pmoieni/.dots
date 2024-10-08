@@ -109,6 +109,7 @@ window#datemenu .datemenu {
       .info-box {
         .label {
           padding: $padding;
+          border-top-right-radius: $radius;
           border-bottom-left-radius: $radius;
           background-color: $primary-bg;
           color: $primary-fg;
