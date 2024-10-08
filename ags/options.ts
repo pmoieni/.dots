@@ -3,8 +3,8 @@ import { opt, mkOptions } from "lib/option";
 const options = mkOptions(OPTIONS, {
     autotheme: opt(true),
     wallpaper: {
-        resolution: opt<import("services/wallpaper").Resolution>(1920),
-        market: opt<import("services/wallpaper").Market>("random"),
+        resolution: opt<import("services/wallpaper").Resolution>("1920x1080"),
+        market: opt<import("services/wallpaper").Market>("en-US"),
     },
     theme: {
         dark: {

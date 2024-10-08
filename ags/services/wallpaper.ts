@@ -2,19 +2,21 @@ import options from "options";
 import { dependencies, sh } from "lib/utils";
 import icons from "lib/icons";
 
-export type Resolution = 1920 | 1366 | 3840;
+export type Resolution = "1366x768" | "1920x1080" | "UHD";
 export type Market =
-    | "random"
+    | "zh-CN"
     | "en-US"
     | "ja-JP"
     | "en-AU"
     | "en-GB"
     | "de-DE"
     | "en-NZ"
-    | "en-CA";
+    | "en-CA"
+    | "en-IN";
 
 const WP = `${Utils.HOME}/.config/background`;
 const Cache = `${Utils.HOME}/Pictures/Wallpapers/Bing`;
+const API = "https://www.bing.com/HPImageArchive.aspx";
 
 class Wallpaper extends Service {
     static {
@@ -66,24 +68,28 @@ class Wallpaper extends Service {
             timeout: 5000,
         });
 
-        const res = await Utils.fetch("https://bing.biturl.top/", {
+        const res = await Utils.fetch(API, {
             params: {
-                resolution: options.wallpaper.resolution.value,
-                format: "json",
-                image_format: "jpg",
-                index: "random",
+                format: "js",
+                idx: 0, // TODO: allow random
+                n: 1,
                 mkt: options.wallpaper.market.value,
             },
         }).then((res) => res.text());
 
         if (!res.startsWith("{")) return console.warn("bing api", res);
 
-        const { url } = JSON.parse(res);
-        const file = `${Cache}/${url.replace("https://www.bing.com/th?id=", "")}`;
+        const { images } = JSON.parse(res);
+        const urlbase = images[0].urlbase;
+        if (!urlbase) return console.warn("bing api", res);
+
+        const file = `${Cache}/${urlbase.replace("/th?id=", "")}.jpg`;
 
         if (dependencies("curl")) {
             Utils.ensureDirectory(Cache);
-            await sh(`curl "${url}" --output ${file}`);
+            await sh(
+                `curl "${"https://www.bing.com" + urlbase + "_" + options.wallpaper.resolution + ".jpg"}" --output ${file}`
+            );
             this.#setWallpaper(file);
         }
     }
