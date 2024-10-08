@@ -2,6 +2,7 @@ import { type Notification as Notif } from "types/service/notifications";
 import options from "options";
 import icons from "lib/icons";
 import Notification from "widgets/core/Notifications/Notification";
+import { clock } from "lib/variables";
 
 const notifications = await Service.import("notifications");
 const notifs = notifications.bind("notifications");

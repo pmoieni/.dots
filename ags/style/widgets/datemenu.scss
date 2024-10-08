@@ -52,18 +52,6 @@ window#datemenu .datemenu {
     margin-right: $spacing;
   }
 
-  .clock-box {
-    padding: $padding;
-
-    .clock {
-      font-size: 5em;
-    }
-
-    .uptime {
-      color: transparentize($fg, 0.2);
-    }
-  }
-
   .date-column {
     @include spacing();
   }
@@ -101,6 +89,32 @@ window#datemenu .datemenu {
       }
 
       padding: 0.5rem;
+    }
+  }
+
+  .stats {
+    @include spacing();
+
+    .stats-box {
+      @include widget();
+
+      .progress-box {
+        padding: $padding;
+
+        .progress {
+          @include circular-progress();
+        }
+      }
+
+      .info-box {
+        .label {
+          padding: $padding;
+          border-bottom-left-radius: $radius;
+          background-color: $primary-bg;
+          color: $primary-fg;
+          font-weight: bold;
+        }
+      }
     }
   }
 }

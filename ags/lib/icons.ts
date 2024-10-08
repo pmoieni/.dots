@@ -43,6 +43,8 @@ export default {
             down: "icon-arrow-down-symbolic",
             up: "icon-arrow-up-symbolic",
         },
+        cpu: "icon-cpu-symbolic",
+        ram: "icon-memory-symbolic",
     },
     graphicsCards: "icon-graphics-card-symbolic",
     audio: {
