@@ -111,10 +111,14 @@ const options = mkOptions(OPTIONS, {
         quickmenu: {
             width: opt(400),
             position: opt<"left" | "center" | "right">("right"),
+            networkSettings: opt("alacritty -e nmtui"),
+        },
+        playerctl: {
+            width: opt(400),
+            position: opt<"left" | "center" | "right">("center"),
             media: {
                 coverSize: opt(100),
             },
-            networkSettings: opt("alacritty -e nmtui"),
         },
         datemenu: {
             position: opt<"left" | "center" | "right">("center"),

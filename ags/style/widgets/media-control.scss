@@ -1,0 +1,53 @@
+.media-control {
+  @include spacing();
+
+  .media {
+    @include spacing();
+    @include widget();
+
+    .player {
+      padding: $padding;
+
+      .cover {
+        @include border();
+        background-size: cover;
+        background-position: center;
+        border-radius: $radius;
+        margin-right: $spacing;
+      }
+
+      button {
+        @include button(true);
+        padding: $padding;
+
+        &.play-pause {
+          margin: 0 ($spacing * 0.5);
+        }
+
+        image {
+          font-size: 1.2em;
+        }
+      }
+
+      .artist {
+        color: transparentize($fg, 0.2);
+        font-size: 1rem;
+      }
+
+      scale {
+        @include slider();
+        margin-bottom: $padding * 0.5;
+
+        trough {
+          border: none;
+        }
+      }
+    }
+  }
+
+  .control-button {
+    button {
+      @include button();
+    }
+  }
+}

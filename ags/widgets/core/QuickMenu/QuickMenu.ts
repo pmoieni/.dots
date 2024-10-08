@@ -6,13 +6,11 @@ import { NetworkToggle, WifiSelection } from "./widgets/Network";
 import { BluetoothToggle, BluetoothDevices } from "./widgets/Bluetooth";
 import { DND } from "./widgets/DND";
 import { DarkModeToggle } from "./widgets/DarkMode";
-import { Media } from "./widgets/Media";
 import options from "options";
 import { ScreenRecordToggle } from "./widgets/Recorder";
 import PopupWindow from "widgets/shared/PopupWindow";
 
 const { bar, quickmenu } = options.widgets;
-const media = (await Service.import("mpris")).bind("players");
 const layout = Utils.derive(
     [bar.position, quickmenu.position],
     (bar, qs) => `${bar}-${qs}` as const
@@ -56,10 +54,6 @@ const Settings = () =>
             ),
             Row([ScreenRecordToggle, DarkModeToggle]),
             Row([DND]),
-            Widget.Box({
-                visible: media.as((l) => l.length > 0),
-                child: Media(),
-            }),
         ],
     });
 

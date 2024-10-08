@@ -3,8 +3,7 @@ import icons from "lib/icons";
 import options from "options";
 
 const mpris = await Service.import("mpris");
-const players = mpris.bind("players");
-const { media } = options.widgets.quickmenu;
+const { media } = options.widgets.playerctl;
 
 function lengthStr(length: number) {
     const min = Math.floor(length / 60);
@@ -152,9 +151,84 @@ const Player = (player: MprisPlayer) => {
     );
 };
 
-export const Media = () =>
-    Widget.Box({
-        vertical: true,
-        class_name: "media vertical",
-        children: players.as((p) => p.map(Player)),
+export const MediaControl = () => {
+    const currIdx = Variable(0);
+    const length = Variable(mpris.players.length);
+    mpris.connect("changed", ({ players }) => {
+        length.setValue(players.length);
     });
+
+    const next = () => {
+        if (length.getValue() < 2) return;
+
+        if (currIdx.getValue() + 1 >= length.getValue()) {
+            currIdx.setValue(0);
+            return;
+        }
+
+        currIdx.setValue(currIdx.getValue() + 1);
+    };
+
+    const prev = () => {
+        if (length.getValue() < 2) return;
+
+        if (currIdx.getValue() === 0) {
+            currIdx.setValue(length.getValue() - 1);
+            return;
+        }
+
+        currIdx.setValue(currIdx.getValue() - 1);
+    };
+
+    const PrevBtn = () =>
+        Widget.Box({
+            hexpand: true,
+            vexpand: true,
+            class_name: "control-button",
+            child: Widget.Button({
+                hexpand: true,
+                vexpand: true,
+                child: Widget.Icon(icons.ui.arrow.left),
+                onClicked: prev,
+            }),
+            visible: length.bind().as((l) => l > 1),
+        });
+
+    const NextBtn = () =>
+        Widget.Box({
+            hexpand: true,
+            vexpand: true,
+            class_name: "control-button",
+            child: Widget.Button({
+                hexpand: true,
+                vexpand: true,
+                child: Widget.Icon(icons.ui.arrow.right),
+                onClicked: next,
+            }),
+            visible: length.bind().as((l) => l > 1),
+        });
+
+    return Widget.Box({
+        class_name: "media-control horizontal",
+        children: [
+            PrevBtn(),
+            Widget.Box({
+                class_name: "media",
+                child: Utils.merge(
+                    [currIdx.bind(), mpris.bind("players")],
+                    (idx, ps) => {
+                        // TODO: don't use empty box as fallback
+                        return ps[idx] ? Player(ps[idx]) : Widget.Box();
+                    }
+                ),
+            }),
+            NextBtn(),
+        ],
+    }).hook(
+        mpris,
+        (self) => {
+            self.visible = !!mpris.getPlayer();
+        },
+        "changed"
+    );
+};

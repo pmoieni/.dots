@@ -22,7 +22,7 @@ window#datemenu .datemenu {
     }
 
     .notification-scrollable {
-      @include scrollable(20rem);
+      @include scrollable();
     }
 
     .notification-list {
@@ -52,10 +52,6 @@ window#datemenu .datemenu {
     margin-right: $spacing;
   }
 
-  .datemenu {
-    @include spacing;
-  }
-
   .clock-box {
     padding: $padding;
 
@@ -66,6 +62,10 @@ window#datemenu .datemenu {
     .uptime {
       color: transparentize($fg, 0.2);
     }
+  }
+
+  .date-column {
+    @include spacing();
   }
 
   .calendar {

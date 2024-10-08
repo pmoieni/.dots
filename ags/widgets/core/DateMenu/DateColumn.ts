@@ -1,4 +1,5 @@
 import { clock } from "lib/variables";
+import { MediaControl } from "widgets/shared/MediaControl";
 
 export default () =>
     Widget.Box({
@@ -8,21 +9,18 @@ export default () =>
             Widget.Box({
                 class_name: "clock-box",
                 vertical: true,
-                children: [
-                    Widget.Label({
-                        class_name: "clock",
-                        label: clock.bind().as((t) => t.format("%H:%M")!),
-                    }),
-                ],
+                child: Widget.Label({
+                    class_name: "clock",
+                    label: clock.bind().as((t) => t.format("%H:%M")!),
+                }),
             }),
             Widget.Box({
                 class_name: "calendar",
-                children: [
-                    Widget.Calendar({
-                        hexpand: true,
-                        hpack: "center",
-                    }),
-                ],
+                child: Widget.Calendar({
+                    hexpand: true,
+                    hpack: "center",
+                }),
             }),
+            MediaControl(),
         ],
     });
