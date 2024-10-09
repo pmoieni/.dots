@@ -1,4 +1,4 @@
-import = ["/home/pmoieni/.config/alacritty/rose-pine.toml"]
+import = ["/home/pmoieni/.cache/matugen/alacritty.toml"]
 
 [env]
 TERM = "xterm-256color"

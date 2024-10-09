@@ -18,7 +18,7 @@ export async function matugen(
 ) {
     if (!options.autotheme.value || !dependencies("matugen")) return;
 
-    const colors = await sh(`matugen --dry-run -j hex ${type} ${arg}`);
+    const colors = await sh(`matugen -j hex ${type} ${arg}`);
     const c = JSON.parse(colors).colors as { light: Colors; dark: Colors };
     const { dark, light } = options.theme;
 

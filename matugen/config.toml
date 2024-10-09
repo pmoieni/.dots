@@ -1,0 +1,15 @@
+[config]
+reload_apps = false 
+set_wallpaper = false
+
+[templates.alacritty]
+input_path = '~/.config/matugen/templates/alacritty.toml'
+output_path = '~/.cache/matugen/alacritty.toml'
+
+[templates.qt5ct]
+input_path = '~/.config/matugen/templates/qtct.conf'
+output_path = '~/.cache/matugen/qt5ct.conf'
+
+[templates.qt6ct]
+input_path = '~/.config/matugen/templates/qtct.conf'
+output_path = '~/.cache/matugen/qt6ct.conf'

@@ -10,3 +10,6 @@ ln -s ~/.dots/nvim-dev ~/.config/nvim-dev
 ln -s ~/.dots/ags ~/.config/ags
 ln -s ~/.dots/hypr ~/.config/hypr
 ln -s ~/.dots/zed ~/.config/zed
+ln -s ~/.dots/matugen ~/.config/matugen
+ln -s ~/.dots/qt5ct ~/.config/qt5ct
+ln -s ~/.dots/qt6ct ~/.config/qt6ct

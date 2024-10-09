@@ -80,6 +80,7 @@
       swww
       dart-sass
       sassc
+      qt5ct
       qt6ct
       fd
       gnome.gvfs
