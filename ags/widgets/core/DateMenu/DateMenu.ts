@@ -1,7 +1,7 @@
-import NotificationColumn from "./NotificationColumn";
+import NotificationColumn from "./LeftColumn";
 import options from "options";
 import PopupWindow from "widgets/shared/PopupWindow";
-import DateColumn from "./DateColumn";
+import DateColumn from "./RightColumn";
 
 const { bar, datemenu } = options.widgets;
 const pos = bar.position.bind();

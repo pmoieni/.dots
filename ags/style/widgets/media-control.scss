@@ -10,7 +10,6 @@
       @include spacing();
 
       .top {
-
         .cover {
           @include border();
           background-size: cover;
@@ -30,6 +29,10 @@
           image {
             font-size: 1.2em;
           }
+        }
+
+        .title {
+          font-weight: bold;
         }
 
         .artist {

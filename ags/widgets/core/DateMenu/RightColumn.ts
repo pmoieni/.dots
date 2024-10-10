@@ -72,7 +72,7 @@ const Stats = () =>
 export default () =>
     Widget.Box({
         vertical: true,
-        class_name: "date-column vertical",
+        class_name: "right-column vertical",
         children: [
             Widget.Box({
                 class_name: "calendar",
