@@ -106,7 +106,7 @@ const Player = (player: MprisPlayer) => {
     const playPause = Widget.Button({
         class_name: "play-pause",
         on_clicked: () => player.playPause(),
-        visible: player.bind("can_play"),
+        sensitive: player.bind("can_play"),
         child: Widget.Icon({
             icon: player.bind("play_back_status").as((s) => {
                 switch (s) {
@@ -123,13 +123,13 @@ const Player = (player: MprisPlayer) => {
 
     const prev = Widget.Button({
         on_clicked: () => player.previous(),
-        visible: player.bind("can_go_prev"),
+        sensitive: player.bind("can_go_prev"),
         child: Widget.Icon(icons.mpris.prev),
     });
 
     const next = Widget.Button({
         on_clicked: () => player.next(),
-        visible: player.bind("can_go_next"),
+        sensitive: player.bind("can_go_next"),
         child: Widget.Icon(icons.mpris.next),
     });
 
@@ -161,7 +161,7 @@ const Player = (player: MprisPlayer) => {
     return Widget.Box({
         class_name: "player",
         vertical: true,
-        vexpand: false,
+        expand: true,
         children: [
             Widget.Box({
                 class_name: "top",
