@@ -1,6 +1,6 @@
 import { type BluetoothDevice } from "types/service/bluetooth";
 import icons from "lib/icons";
-import { Menu, ArrowToggleButton } from "../ToggleButton";
+import { Menu, ArrowToggleButton } from "../../../shared/ToggleButton";
 
 const bluetooth = await Service.import("bluetooth");
 

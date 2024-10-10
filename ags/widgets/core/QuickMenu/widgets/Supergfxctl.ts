@@ -1,4 +1,4 @@
-import { SimpleToggleButton } from "../ToggleButton";
+import { SimpleToggleButton } from "../../../shared/ToggleButton";
 import icons from "lib/icons";
 
 import supergfxctl from "services/supergfxctl";

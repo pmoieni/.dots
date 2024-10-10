@@ -1,4 +1,4 @@
-import { Menu, ArrowToggleButton } from "../ToggleButton";
+import { Menu, ArrowToggleButton } from "../../../shared/ToggleButton";
 import icons from "lib/icons.js";
 import { dependencies, sh } from "lib/utils";
 import options from "options";

@@ -1,7 +1,7 @@
 import { type Stream } from "types/service/audio";
 import { dependencies, icon, sh } from "lib/utils";
 import icons from "lib/icons.js";
-import { Arrow, Menu } from "../ToggleButton";
+import { Arrow, Menu } from "../../../shared/ToggleButton";
 import { AudioIcon, MicrophoneIcon } from "widgets/shared/Indicators";
 const audio = await Service.import("audio");
 

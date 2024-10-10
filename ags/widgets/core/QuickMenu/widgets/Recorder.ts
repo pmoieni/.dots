@@ -1,6 +1,6 @@
 import icons from "lib/icons";
 import screenrecord from "services/screenrecord";
-import { SimpleToggleButton } from "../ToggleButton";
+import { SimpleToggleButton } from "../../../shared/ToggleButton";
 
 export const ScreenRecordToggle = () =>
     SimpleToggleButton({

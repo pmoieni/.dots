@@ -7,45 +7,60 @@
 
     .player {
       padding: $padding;
+      @include spacing();
 
-      .cover {
-        @include border();
-        background-size: cover;
-        background-position: center;
-        border-radius: $radius;
-        margin-right: $spacing;
-      }
+      .top {
 
-      button {
-        @include button(true);
-        padding: $padding;
-
-        &.play-pause {
-          margin: 0 ($spacing * 0.5);
+        .cover {
+          @include border();
+          background-size: cover;
+          background-position: center;
+          border-radius: $radius;
+          margin-right: $spacing;
         }
 
-        image {
-          font-size: 1.2em;
+        button {
+          @include button(true);
+          padding: $padding;
+
+          &.play-pause {
+            margin: 0 ($spacing * 0.5);
+          }
+
+          image {
+            font-size: 1.2em;
+          }
+        }
+
+        .artist {
+          color: transparentize($fg, 0.2);
+          font-size: 1rem;
+        }
+
+        scale {
+          @include slider();
+          margin-bottom: $padding * 0.5;
+
+          trough {
+            border: none;
+          }
         }
       }
 
-      .artist {
-        color: transparentize($fg, 0.2);
-        font-size: 1rem;
-      }
+      .bottom {
+        @include spacing();
 
-      scale {
-        @include slider();
-        margin-bottom: $padding * 0.5;
-
-        trough {
-          border: none;
+        button {
+          @include button();
+          padding: $padding;
         }
       }
     }
   }
 
-  .control-button {
+  .arrows {
+    @include spacing();
+
     button {
       @include button();
     }

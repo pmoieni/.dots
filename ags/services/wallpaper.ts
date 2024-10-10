@@ -13,6 +13,7 @@ export type Market =
     | "en-NZ"
     | "en-CA"
     | "en-IN";
+export type Index = "random" | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 const WP = `${Utils.HOME}/.config/background`;
 const Cache = `${Utils.HOME}/Pictures/Wallpapers/Bing`;
@@ -68,10 +69,15 @@ class Wallpaper extends Service {
             timeout: 5000,
         });
 
+        const idx =
+            options.wallpaper.idx.value === "random"
+                ? Math.floor(Math.random() * 9)
+                : options.wallpaper.idx;
+
         const res = await Utils.fetch(API, {
             params: {
                 format: "js",
-                idx: 0, // TODO: allow random
+                idx: idx,
                 n: 1,
                 mkt: options.wallpaper.market.value,
             },

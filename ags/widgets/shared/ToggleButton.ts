@@ -3,6 +3,7 @@ import type Gtk from "gi://Gtk?version=3.0";
 import icons from "lib/icons";
 import { IconProps } from "types/widgets/icon";
 import { LabelProps } from "types/widgets/label";
+import { ButtonProps } from "types/widgets/button";
 
 export const opened = Variable("");
 App.connect("window-toggled", (_, name: string, visible: boolean) => {
@@ -133,16 +134,19 @@ export const Menu = ({ name, icon, title, content }: MenuProps) =>
 type SimpleToggleButtonProps = {
     icon: IconProps["icon"];
     label: LabelProps["label"];
+    expand?: boolean;
     toggle: () => void;
     connection: [GObject.Object, () => boolean];
 };
 export const SimpleToggleButton = ({
     icon,
     label,
+    expand,
     toggle,
     connection: [service, condition],
 }: SimpleToggleButtonProps) =>
     Widget.Button({
+        expand: !!expand,
         on_clicked: toggle,
         class_name: "simple-toggle",
         setup: (self) =>
@@ -157,4 +161,19 @@ export const SimpleToggleButton = ({
                 label,
             }),
         ]),
+    });
+
+type ToggleButtonProps = ButtonProps & {
+    connection: [GObject.Object, () => boolean];
+};
+export const ToggleButton = ({
+    connection: [service, condition],
+    ...props
+}: ToggleButtonProps) =>
+    Widget.Button({
+        setup: (self) =>
+            self.hook(service, () => {
+                self.toggleClassName("active", condition());
+            }),
+        ...props,
     });

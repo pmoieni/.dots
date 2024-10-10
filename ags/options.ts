@@ -1,10 +1,12 @@
 import { opt, mkOptions } from "lib/option";
+import { Resolution, Market, Index } from "services/wallpaper";
 
 const options = mkOptions(OPTIONS, {
     autotheme: opt(true),
     wallpaper: {
-        resolution: opt<import("services/wallpaper").Resolution>("UHD"),
-        market: opt<import("services/wallpaper").Market>("en-US"),
+        resolution: opt<Resolution>("UHD"),
+        market: opt<Market>("en-US"),
+        idx: opt<Index>("random"),
     },
     theme: {
         dark: {

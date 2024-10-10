@@ -1,6 +1,7 @@
 import { type MprisPlayer } from "types/service/mpris";
 import icons from "lib/icons";
 import options from "options";
+import { SimpleToggleButton, ToggleButton } from "./ToggleButton";
 
 const mpris = await Service.import("mpris");
 const { media } = options.widgets.playerctl;
@@ -132,23 +133,61 @@ const Player = (player: MprisPlayer) => {
         child: Widget.Icon(icons.mpris.next),
     });
 
-    return Widget.Box(
-        { class_name: "player", vexpand: false },
-        cover,
-        Widget.Box(
-            { vertical: true },
-            Widget.Box([title, playericon]),
-            artist,
-            Widget.Box({ vexpand: true }),
-            positionSlider,
-            Widget.CenterBox({
-                class_name: "footer horizontal",
-                start_widget: positionLabel,
-                center_widget: Widget.Box([prev, playPause, next]),
-                end_widget: lengthLabel,
-            })
-        )
-    );
+    const shuffle = () =>
+        ToggleButton({
+            child: Widget.Icon(icons.ui.shuffle),
+            onClicked: () => player.shuffle(),
+            expand: true,
+            connection: [player, () => !!player.shuffle_status],
+        });
+
+    const loop = () =>
+        ToggleButton({
+            child: Widget.Icon().hook(
+                player,
+                (self) => {
+                    self.icon =
+                        player.loop_status === "Track"
+                            ? icons.ui.repeat_once
+                            : icons.ui.repeat;
+                },
+                "changed"
+            ),
+            onClicked: () => player.loop(),
+            expand: true,
+            connection: [player, () => player.loop_status !== "None"],
+        });
+
+    return Widget.Box({
+        class_name: "player",
+        vertical: true,
+        vexpand: false,
+        children: [
+            Widget.Box({
+                class_name: "top",
+                children: [
+                    cover,
+                    Widget.Box(
+                        { vertical: true },
+                        Widget.Box([title, playericon]),
+                        artist,
+                        Widget.Box({ vexpand: true }),
+                        positionSlider,
+                        Widget.CenterBox({
+                            class_name: "footer horizontal",
+                            start_widget: positionLabel,
+                            center_widget: Widget.Box([prev, playPause, next]),
+                            end_widget: lengthLabel,
+                        })
+                    ),
+                ],
+            }),
+            Widget.Box({
+                class_name: "bottom horizontal",
+                children: [shuffle(), loop()],
+            }),
+        ],
+    });
 };
 
 export const MediaControl = () => {
@@ -180,38 +219,29 @@ export const MediaControl = () => {
         currIdx.setValue(currIdx.getValue() - 1);
     };
 
-    const PrevBtn = () =>
-        Widget.Box({
-            hexpand: true,
-            vexpand: true,
-            class_name: "control-button",
-            child: Widget.Button({
-                hexpand: true,
-                vexpand: true,
-                child: Widget.Icon(icons.ui.arrow.left),
-                onClicked: prev,
-            }),
-            visible: length.bind().as((l) => l > 1),
+    const NextBtn = () =>
+        Widget.Button({
+            expand: true,
+            child: Widget.Icon(icons.ui.arrow.up),
+            onClicked: next,
         });
 
-    const NextBtn = () =>
-        Widget.Box({
-            hexpand: true,
-            vexpand: true,
-            class_name: "control-button",
-            child: Widget.Button({
-                hexpand: true,
-                vexpand: true,
-                child: Widget.Icon(icons.ui.arrow.right),
-                onClicked: next,
-            }),
-            visible: length.bind().as((l) => l > 1),
+    const PrevBtn = () =>
+        Widget.Button({
+            expand: true,
+            child: Widget.Icon(icons.ui.arrow.down),
+            onClicked: prev,
         });
 
     return Widget.Box({
         class_name: "media-control horizontal",
         children: [
-            PrevBtn(),
+            Widget.Box({
+                class_name: "arrows",
+                vertical: true,
+                children: [NextBtn(), PrevBtn()],
+                visible: length.bind().as((l) => l > 1),
+            }),
             Widget.Box({
                 class_name: "media",
                 child: Utils.merge(
@@ -222,7 +252,6 @@ export const MediaControl = () => {
                     }
                 ),
             }),
-            NextBtn(),
         ],
     }).hook(
         mpris,

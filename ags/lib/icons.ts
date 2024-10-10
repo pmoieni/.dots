@@ -45,6 +45,9 @@ export default {
         },
         cpu: "icon-cpu-symbolic",
         ram: "icon-memory-symbolic",
+        shuffle: "icon-shuffle-symbolic",
+        repeat: "icon-repeat-symbolic",
+        repeat_once: "icon-repeat-once-symbolic",
     },
     graphicsCards: "icon-graphics-card-symbolic",
     audio: {
