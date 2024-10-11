@@ -1,7 +1,7 @@
 import { type MprisPlayer } from "types/service/mpris";
 import icons from "lib/icons";
 import options from "options";
-import { SimpleToggleButton, ToggleButton } from "./ToggleButton";
+import { ToggleButton } from "./ToggleButton";
 
 const mpris = await Service.import("mpris");
 const { media } = options.widgets.playerctl;

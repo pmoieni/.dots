@@ -90,7 +90,6 @@
       # Extra
       matugen
       adwaita-icon-theme
-      rose-pine-gtk-theme
       gtk3.dev
     ];
   };
