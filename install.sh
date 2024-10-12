@@ -13,3 +13,5 @@ ln -s ~/.dots/zed ~/.config/zed
 ln -s ~/.dots/matugen ~/.config/matugen
 ln -s ~/.dots/qt5ct ~/.config/qt5ct
 ln -s ~/.dots/qt6ct ~/.config/qt6ct
+ln -s ~/.dots/gtk-3.0 ~/.config/gtk-3.0
+ln -s ~/.dots/gtk-4.0 ~/.config/gtk-4.0

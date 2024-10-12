@@ -37,8 +37,8 @@
       corepack
       # bun
       esbuild # required for AGS
-      # clang_17
-      # clang-tools_17
+      clang_17
+      clang-tools_17
       # podman-compose
       devenv
 
@@ -90,6 +90,7 @@
       # Extra
       matugen
       adwaita-icon-theme
+      adw-gtk3
       gtk3.dev
     ];
   };
