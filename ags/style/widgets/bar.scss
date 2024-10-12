@@ -93,6 +93,7 @@
   .bar-keyboard_layout {
     @include panel-button();
     min-width: 1.5rem;
+    font-weight: bold;
   }
 
   .bar-tray {
