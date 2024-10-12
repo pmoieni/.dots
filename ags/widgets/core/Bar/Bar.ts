@@ -8,6 +8,7 @@ import Battery from "./buttons/Battery";
 import Media from "./buttons/Media";
 import Notifications from "./buttons/Notifications";
 import QuickMenu from "./buttons/QuickMenu";
+import KeyboardLayout from "./buttons/KeyboardLayout";
 
 export default (monitor = 0) =>
     Widget.Window({
@@ -42,6 +43,7 @@ export default (monitor = 0) =>
                     }),
                     SystemTray(),
                     Recorder(),
+                    KeyboardLayout(),
                     QuickMenu(),
                     Battery(),
                     PowerMenu(),

@@ -6,7 +6,7 @@ const options = mkOptions(OPTIONS, {
     wallpaper: {
         resolution: opt<Resolution>("UHD"),
         market: opt<Market>("en-US"),
-        idx: opt<Index>("random"),
+        idx: opt<Index>(0),
     },
     theme: {
         dark: {

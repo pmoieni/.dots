@@ -90,6 +90,11 @@
     @include panel-button();
   }
 
+  .bar-keyboard_layout {
+    @include panel-button();
+    min-width: 1.5rem;
+  }
+
   .bar-tray {
     .bar-tray-item {
       @include panel-button();
