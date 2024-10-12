@@ -31,14 +31,14 @@
       golangci-lint
       # erlang
       # elixir
-      jdk21
-      rustup
+      # jdk21
+      # rustup
       nodejs
       corepack
       # bun
       esbuild # required for AGS
-      clang_17
-      clang-tools_17
+      # clang_17
+      # clang-tools_17
       # podman-compose
       devenv
 
@@ -46,7 +46,7 @@
       lua-language-server
       gopls
       # elixir-ls
-      jdt-language-server
+      # jdt-language-server
       nil
       nodePackages.svelte-language-server
       nodePackages.typescript-language-server
