@@ -1,7 +1,6 @@
 import powermenu, { type Action } from "services/powermenu";
 import icons from "lib/icons";
 import options from "options";
-import type Gtk from "gi://Gtk?version=3.0";
 import PopupWindow from "widgets/shared/PopupWindow";
 
 const { labels } = options.widgets.powermenu;
@@ -31,7 +30,7 @@ export default () =>
                 App.toggleWindow("powermenu");
             }),
         keymode: "on-demand",
-        child: Widget.Box<Gtk.Widget>({
+        child: Widget.Box({
             className: "powermenu horizontal",
             children: [
                 SysButton("shutdown", "Shutdown"),

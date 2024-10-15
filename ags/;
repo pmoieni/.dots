@@ -1,0 +1,64 @@
+import PopupWindow from "widgets/shared/PopupWindow";
+
+interface ItemData {
+    icon: string;
+    cmd: string;
+}
+
+const list = Variable<
+    [
+        [ItemData, ItemData, ItemData],
+        [ItemData, ItemData, ItemData],
+        [ItemData, ItemData, ItemData],
+    ]
+>([
+    [
+        { icon: "binary", cmd: "" },
+        { icon: "binary", cmd: "" },
+        { icon: "binary", cmd: "" },
+    ],
+    [
+        { icon: "binary", cmd: "" },
+        { icon: "binary", cmd: "" },
+        { icon: "binary", cmd: "" },
+    ],
+    [
+        { icon: "binary", cmd: "" },
+        { icon: "binary", cmd: "" },
+        { icon: "binary", cmd: "" },
+    ],
+]);
+
+const currPos = Variable([0, 0]);
+
+const Item = (data: ItemData) =>
+    Widget.Box({
+        child: Widget.Icon(data.icon),
+    });
+
+const Row = (items: [ItemData, ItemData, ItemData]) =>
+    Widget.Box({
+        children: items.map((data) => Item(data)),
+    });
+
+const move = (direction: "up" | "right" | "down" | "left") => {
+    switch(direction) {
+
+    }
+
+}
+
+const Square = () =>
+    Widget.Box({
+        className: "floatmenu vertical",
+        vertical: true,
+        children: list.bind().as((l) => l.map((row) => Row(row))),
+    }).keybind("H", ()=>);
+
+export default () =>
+    PopupWindow({
+        name: "floatmenu",
+        exclusivity: "exclusive",
+        transition: "crossfade",
+        child: Square(),
+    });

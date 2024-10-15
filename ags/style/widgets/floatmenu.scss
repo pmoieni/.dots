@@ -1,0 +1,19 @@
+window#floatmenu .floatmenu {
+  all: unset;
+  @include floating-widget();
+  @include spacing();
+
+  .row {
+    @include spacing();
+
+    .item {
+      @include widget();
+      padding: $padding;
+    }
+
+    .item.focused {
+      background-color: $primary-bg;
+      color: $primary-fg;
+    }
+  }
+}

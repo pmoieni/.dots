@@ -9,6 +9,7 @@ import QuickMenu from "widgets/core/QuickMenu/QuickMenu";
 import Workspaces from "widgets/core/Workspaces/Workspaces";
 import Launcher from "widgets/core/Launcher/Launcher";
 import Recorder from "widgets/core/Recorder/Recorder";
+import FloatMenu from "widgets/core/FloatMenu/FloatMenu";
 import options from "options";
 
 declare global {
@@ -38,5 +39,6 @@ App.config({
         Workspaces(),
         Launcher(),
         Recorder(),
+        FloatMenu(),
     ],
 });
