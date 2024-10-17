@@ -1,3 +1,3 @@
-function warps
+function warpd
     warp-cli disconnect
 end
