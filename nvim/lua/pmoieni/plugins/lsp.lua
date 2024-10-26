@@ -68,7 +68,11 @@ return {
             })
 
             -- setup servers
-            lspconfig.lua_ls.setup({})
+            lspconfig.lua_ls.setup({
+                workspace = { checkThirdParty = false },
+                telemtry = { enable = false },
+                hint = { enable = true }
+            })
             lspconfig.gopls.setup({
                 capabilities = {
                     workspace = {
@@ -155,6 +159,10 @@ return {
                     -- border = "single",
                 },
             })
+
+            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
+            vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help,
+                { border = 'rounded' })
         end,
     },
     {
@@ -167,6 +175,10 @@ return {
             local cmp = require("cmp")
 
             cmp.setup({
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
                 sources = {
                     { name = "nvim_lsp" },
                 },

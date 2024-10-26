@@ -32,7 +32,7 @@
       # erlang
       # elixir
       # jdk21
-      # rustup
+      rustup
       nodejs
       corepack
       # bun
@@ -91,6 +91,7 @@
       matugen
       adwaita-icon-theme
       adw-gtk3
+      bibata-cursors
       gtk3.dev
     ];
   };
