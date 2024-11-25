@@ -67,7 +67,7 @@ export default class Screenrecord extends GObject.Object {
     if (!this.#recorder) return;
 
     try {
-      this.#recorder.kill();
+      this.#recorder.signal(15);
       this.#recorder = null;
       this.notify("recording");
 

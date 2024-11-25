@@ -60,6 +60,7 @@ export default function Bar(monitor: number) {
       >
         <revealer
           revealChild={barVisible()}
+          transitionDuration={options.transition()}
           transitionType={position().as((p) =>
             p === "top"
               ? Gtk.RevealerTransitionType.SLIDE_DOWN
