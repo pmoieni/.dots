@@ -1,7 +1,8 @@
 import "style/style";
 import { init } from "services/index";
-import Bar from "widgets/core/Bar/Bar";
 import { setupDateMenu } from "widgets/core/DateMenu/DateMenu";
+
+import Bar from "widgets/core/Bar/Bar";
 import Notifications from "widgets/core/Notifications/Notifications";
 import PowerMenu from "widgets/core/PowerMenu/PowerMenu";
 import Verification from "widgets/core/PowerMenu/Verification";
@@ -10,6 +11,7 @@ import Workspaces from "widgets/core/Workspaces/Workspaces";
 import Launcher from "widgets/core/Launcher/Launcher";
 import Recorder from "widgets/core/Recorder/Recorder";
 import FloatMenu from "widgets/core/FloatMenu/FloatMenu";
+import Dropdown from "widgets/core/Dropdown/index";
 import options from "options";
 
 declare global {
@@ -32,7 +34,8 @@ App.config({
     },
     windows: () => [
         Bar(),
-        Notifications(), // WIP
+        Dropdown(),
+        Notifications(),
         PowerMenu(),
         Verification(),
         QuickMenu(),

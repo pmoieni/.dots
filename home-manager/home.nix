@@ -29,8 +29,8 @@
       prettierd
       go
       golangci-lint
-      # erlang
-      # elixir
+      erlang
+      elixir
       # jdk21
       rustup
       nodejs
@@ -45,7 +45,7 @@
       # LSP
       lua-language-server
       gopls
-      # elixir-ls
+      elixir-ls
       # jdt-language-server
       nil
       nodePackages.svelte-language-server
@@ -79,8 +79,7 @@
       swappy
       swww
       dart-sass
-      sassc
-      qt5ct
+      libsForQt5.qt5ct
       qt6ct
       fd
       gnome.gvfs
@@ -106,10 +105,17 @@
     };
     ags = {
       enable = true;
-      extraPackages = with pkgs; [
-        gtksourceview
-        webkitgtk
-        accountsservice
+      extraPackages = [
+        inputs.ags.packages.${pkgs.system}.apps
+        inputs.ags.packages.${pkgs.system}.battery
+        inputs.ags.packages.${pkgs.system}.hyprland
+        inputs.ags.packages.${pkgs.system}.wireplumber
+        inputs.ags.packages.${pkgs.system}.network
+        inputs.ags.packages.${pkgs.system}.tray
+        inputs.ags.packages.${pkgs.system}.battery
+        inputs.ags.packages.${pkgs.system}.notifd
+        inputs.ags.packages.${pkgs.system}.mpris
+        inputs.ags.packages.${pkgs.system}.bluetooth
       ];
     };
     direnv = {

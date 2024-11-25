@@ -5,6 +5,7 @@ import wallpaper from "services/wallpaper";
 export default function init() {
     wallpaper.connect("changed", () => matugen());
     options.autotheme.connect("changed", () => matugen());
+    options.theme.scheme.connect("changed", () => matugen());
 }
 
 function animate(...setters: Array<() => void>) {
@@ -18,7 +19,9 @@ export async function matugen(
 ) {
     if (!options.autotheme.value || !dependencies("matugen")) return;
 
-    const colors = await sh(`matugen -j hex ${type} ${arg}`);
+    const colors = await sh(
+        `matugen -j hex ${type} ${arg} -m ${options.theme.scheme.value}`
+    );
     const c = JSON.parse(colors).colors as { light: Colors; dark: Colors };
     const { dark, light } = options.theme;
 

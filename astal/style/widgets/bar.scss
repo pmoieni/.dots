@@ -1,0 +1,115 @@
+@use "../vars.scss" as *;
+@use "../mixins/spacing.scss" as *;
+@use "../mixins/button.scss" as *;
+@use 'sass:color';
+
+@mixin _component($flat: true) {
+  color: $fg;
+  box-shadow: none;
+  border-radius: $radius;
+  transition: $transition;
+  padding: $padding;
+
+  @if $flat {
+    background-color: transparent;
+  }
+
+  @else {
+    background-color: color.adjust($fg, $alpha: -0.8);
+  }
+
+  &.focused,
+  &:focus,
+  &:hover {
+    background-color: $hover-bg;
+    color: $hover-fg;
+  }
+
+  &.active,
+  &:active {
+    background-color: $primary-bg;
+    color: $primary-fg;
+  }
+}
+
+.bar {
+  transition: $transition;
+  background-color: $bg;
+  margin: 0 $spacing $spacing $spacing;
+  border-radius: $radius;
+  padding: $padding;
+
+  >box {
+    @include spacing();
+  }
+
+  .bar-applauncher {
+    @include _component(false);
+    min-width: 2rem;
+  }
+
+  .bar-workspaces {
+    @include _component(false);
+    padding: 0;
+    min-width: 1rem;
+
+    button {
+      min-width: 0.5rem;
+      border-radius: $radius;
+      transition: $transition;
+      padding: 0 $padding;
+
+      &.focused {
+        background-color: $primary-bg;
+        color: $primary-fg;
+        min-width: 1.5rem;
+        font-weight: bold
+      }
+    }
+  }
+
+  .bar-media {
+    @include spacing();
+
+    .player {
+      @include _component();
+    }
+
+    >button {
+      @include button($flat: true);
+    }
+
+    font-weight: bold;
+  }
+
+  .bar-tray {
+    @include _component();
+    @include spacing();
+  }
+
+  .bar-screenrecord {
+    @include _component();
+
+    >box {
+      @include spacing();
+    }
+  }
+
+  .bar-quickmenu {
+    @include _component(false);
+
+    >box {
+      @include spacing(1.5);
+    }
+  }
+
+  .bar-battery {
+    @include _component();
+    @include spacing();
+  }
+
+  .bar-date {
+    @include _component();
+    font-weight: bold;
+  }
+}

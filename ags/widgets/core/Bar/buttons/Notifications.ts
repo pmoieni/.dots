@@ -8,5 +8,5 @@ export default () =>
         className: "bar-notifications",
         onClicked: () => App.toggleWindow("datemenu"),
         visible: notifs.as((n) => n.length > 0),
-        child: Widget.Box([Widget.Icon(icons.notifications.message)]),
+        child: Widget.Icon(icons.notifications.message),
     });

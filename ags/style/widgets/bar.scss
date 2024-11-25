@@ -1,12 +1,19 @@
-@mixin panel-button() {
+@mixin panel-button($flat: true) {
   all: unset;
   color: $fg;
+  box-shadow: none;
   border-radius: $radius;
   transition: $transition;
-  background-color: transparent;
-  box-shadow: none;
   margin: 0.3rem;
   padding: $padding * 0.4 $padding;
+
+  @if $flat {
+    background-color: transparent;
+  }
+
+  @else {
+    background-color: $widget-bg;
+  }
 
   label,
   image {
@@ -89,10 +96,8 @@
     @include panel-button();
   }
 
-  .bar-keyboard_layout {
+  .bar-dropdown {
     @include panel-button();
-    min-width: 1.5rem;
-    font-weight: bold;
   }
 
   .bar-tray {
@@ -101,8 +106,14 @@
     }
   }
 
-  .bar-quickmenu {
+  .bar-keyboard_layout {
     @include panel-button();
+    min-width: 1.5rem;
+    font-weight: bold;
+  }
+
+  .bar-quickmenu {
+    @include panel-button(false);
 
     .indicators {
       @include spacing();

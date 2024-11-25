@@ -1,13 +1,14 @@
 import Gio from "gi://Gio?version=2.0";
 import options from "options";
+import { matugen } from "./matugen";
 
 const settings = new Gio.Settings({
     schema: "org.gnome.desktop.interface",
 });
 
 function gtk() {
-    const scheme = options.theme.scheme.value;
-    settings.set_string("color-scheme", `prefer-${scheme}`);
+    settings.set_string("color-scheme", `prefer-${options.theme.scheme.value}`);
+    matugen();
 }
 
 export default function init() {
