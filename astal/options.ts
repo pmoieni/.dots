@@ -58,7 +58,7 @@ const options = mkOptions(OPTIONS, {
   },
   widgets: {
     bar: {
-      position: opt<"top" | "bottom">("top"),
+      position: opt<"top" | "bottom">("bottom"),
       autohide: opt(true),
       dock: opt(false),
       systray: {
