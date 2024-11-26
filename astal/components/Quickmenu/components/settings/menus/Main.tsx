@@ -6,6 +6,7 @@ import Speaker from "../items/Speaker";
 import Mic from "../items/Mic";
 import DND from "../items/DND";
 import Bluetooth from "../items/Bluetooth";
+import Recorder from "../items/Recorder";
 
 function Row({ className, vertical, ...props }: Widget.BoxProps) {
   return (
@@ -27,6 +28,7 @@ export default function () {
         {Network()}
         <Bluetooth />
         <DND />
+        <Recorder />
       </Row>
       <Row vertical className="sliders-box">
         <Speaker />

@@ -1,0 +1,19 @@
+@use "../vars.scss" as *;
+@use "../mixins/button.scss" as *;
+@use "../mixins/widget.scss" as *;
+
+.verification {
+  @include floating-widget();
+
+  .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  >box {
+    button {
+      @include button();
+      padding: $padding calc($padding * 4);
+    }
+  }
+}

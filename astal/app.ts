@@ -9,7 +9,9 @@ import NotificationPopups from "@components/Notifications/NotificationPopups";
 import Scrim from "@widgets/Scrim";
 import Screenrecord from "@services/screenrecord";
 import Wallpaper from "@services/wallpaper";
-import AstalNetwork01 from "gi://AstalNetwork";
+import { toggleWindow } from "@lib/utils";
+import Verification from "@components/Applauncher/Verification";
+import Recorder from "@components/Recorder";
 
 App.start({
   icons: "./assets/icons",
@@ -18,8 +20,10 @@ App.start({
     Scrim();
     Bar(0);
     AppLauncher();
+    Verification();
     QuickMenu();
     NotificationPopups(0);
+    Recorder();
 
     init();
   },
@@ -27,9 +31,9 @@ App.start({
     const args = req.split(" ");
 
     switch (args[0]) {
-      case "wifi":
-        AstalNetwork01.get_default().wifi.enabled = true;
-        break;
+      case "toggle":
+        toggleWindow(args[1]);
+        return res("ok");
       case "screenrecord":
         const screenrecord = Screenrecord.get_default();
 

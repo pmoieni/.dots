@@ -1,7 +1,6 @@
 import { Gio, GLib } from "astal";
 import { App } from "astal/gtk3";
 import { scrimWindowNames } from "./vars";
-import Notifd from "gi://AstalNotifd";
 
 export function dependencies(...packages: string[]) {
   for (const pkg of packages) {
@@ -19,25 +18,21 @@ export function ensureDirectory(path: string) {
 }
 
 export const activePopupWindows = () => {
+  const windows = scrimWindowNames.get();
+
   return App.get_windows().filter((window) => {
-    return scrimWindowNames.get().includes(window.name) && window.visible;
+    return windows.includes(window.name) && window.visible;
   });
 };
 
 export function toggleWindow(windowName: string) {
   const w = App.get_window(windowName);
+  if (!w) return;
 
-  if (w) {
-    if (w.visible) {
-      w.visible = false;
-      // if (windowName == "control-center") currentPage.set("main");
-    } else {
-      if (windowName == "notifications") {
-        const notifications = Notifd.get_default().get_notifications();
-        if (notifications.length == 0) return;
-      }
-      App.get_window("scrim")?.set_visible(true);
-      w.visible = true;
-    }
+  if (w.visible) {
+    w.visible = false;
+  } else {
+    App.get_window("scrim")?.set_visible(true);
+    w.visible = true;
   }
 }

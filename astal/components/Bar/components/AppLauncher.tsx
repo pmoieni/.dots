@@ -1,10 +1,10 @@
 import { getIcon, icons } from "@assets/icons";
-import { App } from "astal/gtk3";
+import { toggleWindow } from "@lib/utils";
 
 export default function AppLauncher() {
   return (
     <button
-      onClicked={() => App.toggle_window("applauncher")}
+      onClicked={() => toggleWindow("applauncher")}
       className="bar-applauncher"
     >
       <icon icon={getIcon(icons.ui.search)} />

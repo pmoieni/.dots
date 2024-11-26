@@ -1,6 +1,7 @@
 import { GObject, property, register } from "astal";
 import options from "../options";
 import { App } from "astal/gtk3";
+import { toggleWindow } from "@lib/utils";
 
 export type PowerMenuAction = "sleep" | "reboot" | "logout" | "shutdown";
 
@@ -38,8 +39,8 @@ export default class Powermenu extends GObject.Object {
 
     this.notify("cmd");
     this.notify("title");
-    App.toggle_window("applauncher");
-    App.toggle_window("verification");
+    toggleWindow("applauncher");
+    toggleWindow("verification");
   }
 
   constructor() {

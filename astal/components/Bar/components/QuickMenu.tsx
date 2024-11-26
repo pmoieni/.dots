@@ -1,13 +1,13 @@
-import { App } from "astal/gtk3";
 import Network from "./Network";
 import Mic from "./Mic";
 import Speaker from "./Speaker";
+import { toggleWindow } from "@lib/utils";
 
 export default function () {
   return (
     <button
       className="bar-quickmenu"
-      onClicked={() => App.toggle_window("quickmenu")}
+      onClicked={() => toggleWindow("quickmenu")}
     >
       <box className="horizontal">
         <Network />

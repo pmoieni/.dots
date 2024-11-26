@@ -1,54 +1,39 @@
-import { Gtk, Widget } from "astal/gtk3";
+import { Gtk } from "astal/gtk3";
 import { bind, exec } from "astal";
-import { toggleWindow } from "@lib/utils";
 import PopupWindow from "@widgets/PopupWindow";
+import options from "options";
+import { toggleWindow } from "@lib/utils";
+import Powermenu from "@services/powermenu";
 
 export default () => {
+  const powermenu = Powermenu.get_default();
+
   return (
-    <PopupWindow
-      name={"verification"}
-      namespace={"verification"}
-      onKeyPressEvent={(self, event) => {
-        const [keyEvent, keyCode] = event.get_keycode();
-        if (keyEvent && keyCode == 9) {
-          toggleWindow(self.name);
-        }
-      }}
-      setup={(self) =>
-        self.hook(self, "notify::visible", () => {
-          button.ref!.grab_focus();
-        })
-      }
-    >
-      <box spacing={spacing * 2} vertical className={"verification"}>
+    <PopupWindow name="verification" namespace="verification">
+      <box spacing={options.theme.spacing()} vertical className="verification">
         <label
-          halign={Gtk.Align.START}
-          className="verification__title"
-          label={bind(PowermenuService, "title")}
+          halign={Gtk.Align.CENTER}
+          className="title"
+          label={bind(powermenu, "title")}
         />
         <label
-          halign={Gtk.Align.START}
-          className="verification__description"
-          label={"Are you sure?"}
+          halign={Gtk.Align.CENTER}
+          className="description"
+          label="Are you sure?"
         />
-        <box hexpand={false} spacing={spacing} halign={Gtk.Align.END}>
-          <Button
-            buttonType="outlined"
-            canFocus
-            onClicked={() => toggleWindow("verification")}
-          >
-            <label label={"No"} />
-          </Button>
-          <Button
+        <box spacing={options.theme.spacing()} homogeneous>
+          <button
             canFocus
             onClicked={() => {
-              exec(PowermenuService.cmd);
+              exec(powermenu.cmd);
               toggleWindow("verification");
             }}
-            setup={(self) => (button.ref = self)}
           >
-            <label label={bind(PowermenuService, "title")} />
-          </Button>
+            <label label="Yes" />
+          </button>
+          <button canFocus onClicked={() => toggleWindow("verification")}>
+            <label label="No" />
+          </button>
         </box>
       </box>
     </PopupWindow>

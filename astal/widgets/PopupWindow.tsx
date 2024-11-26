@@ -1,8 +1,7 @@
-import { App, Astal, Widget } from "astal/gtk3";
+import { App, Astal, Gdk, Widget } from "astal/gtk3";
 import { scrimWindowNames } from "@lib/vars";
-import { activePopupWindows } from "@lib/utils";
 
-export default ({
+export default function ({
   application = App,
   layer = Astal.Layer.OVERLAY,
   keymode = Astal.Keymode.EXCLUSIVE,
@@ -10,27 +9,34 @@ export default ({
   child,
   setup,
   className,
+  onKeyReleaseEvent,
   ...props
-}: Widget.WindowProps) => (
-  <window
-    className={`popup-window ${className}`}
-    application={application}
-    layer={layer}
-    keymode={keymode}
-    visible={visible}
-    {...props}
-    setup={(self) => {
-      scrimWindowNames.set([...scrimWindowNames.get(), self.name]);
+}: Widget.WindowProps) {
+  return (
+    <window
+      className={`popup-window ${className}`}
+      application={application}
+      layer={layer}
+      keymode={keymode}
+      visible={visible}
+      onKeyReleaseEvent={(self, event: Gdk.Event) => {
+        if (event.get_keyval()[1] === Gdk.KEY_Escape) self.visible = false;
 
-      self.hook(self, "notify::visible", () => {
-        const activePopups = activePopupWindows();
-        if (activePopups.length == 0) {
-          App.get_window("scrim")?.set_visible(false);
-        }
-      });
-      if (setup) setup(self);
-    }}
-  >
-    {child}
-  </window>
-);
+        if (onKeyReleaseEvent) onKeyReleaseEvent(self, event);
+      }}
+      {...props}
+      setup={(self) => {
+        scrimWindowNames.set([...scrimWindowNames.get(), self.name]);
+
+        self.hook(self, "notify::visible", () => {
+          if (!self.visible) {
+            App.get_window("scrim")?.set_visible(false);
+          }
+        });
+        if (setup) setup(self);
+      }}
+    >
+      {child}
+    </window>
+  );
+}

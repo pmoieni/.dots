@@ -1,9 +1,10 @@
 import Apps from "gi://AstalApps";
-import { App, Astal, Gdk, Gtk } from "astal/gtk3";
+import { App, Astal, Gtk } from "astal/gtk3";
 import { Variable } from "astal";
 import { getIcon, icons } from "@assets/icons";
 import PopupWindow from "@widgets/PopupWindow";
 import options from "options";
+import Powermenu from "@services/powermenu";
 
 const {
   width,
@@ -41,58 +42,59 @@ function AppButton({ app }: { app: Apps.Application }) {
   );
 }
 
-export default function AppLauncher() {
+export default function () {
   const { CENTER } = Gtk.Align;
   const apps = new Apps.Apps();
 
-  const text = Variable("");
-  const list = text((text) => apps.fuzzy_query(text).slice(0, max.value));
+  const query = Variable("");
+  const list = query((query) => apps.fuzzy_query(query).slice(0, max.value));
   const onEnter = () => {
-    apps.fuzzy_query(text.get())?.[0].launch();
+    apps.fuzzy_query(query.get())?.[0].launch();
     hide();
   };
 
   const input = (
     <entry
       placeholderText="Search"
-      text={text()}
-      onChanged={(self) => text.set(self.text)}
+      text={query()}
+      onChanged={(self) => query.set(self.text)}
       onActivate={onEnter}
     />
   );
 
+  const powermenu = Powermenu.get_default();
+
   return (
     <PopupWindow
-      visible={false}
       name="applauncher"
       namespace="applauncher"
-      application={App}
       anchor={Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
       exclusivity={Astal.Exclusivity.NORMAL}
-      keymode={Astal.Keymode.ON_DEMAND}
-      onShow={() => {
-        text.set("");
-        input.grab_focus();
-      }}
-      onKeyPressEvent={(self, event: Gdk.Event) => {
-        if (event.get_keyval()[1] === Gdk.KEY_Escape) self.hide();
+      setup={(self) => {
+        self.hook(self, "notify::visible", () => {
+          if (!self.get_visible()) {
+            query.set("");
+          } else {
+            input.grab_focus();
+          }
+        });
       }}
     >
       <box widthRequest={width.value} className="applauncher horizontal">
         <box className="controls" vertical>
           <box vexpand className="user"></box>
           <box className="powermenu" vertical>
-            <button>
+            <button onClicked={() => powermenu.action("shutdown")}>
               <icon icon={getIcon(icons.powermenu.shutdown)} />
             </button>
-            <button>
+            <button onClicked={() => powermenu.action("reboot")}>
               <icon icon={getIcon(icons.powermenu.reboot)} />
             </button>
-            <button>
+            <button onClicked={() => powermenu.action("sleep")}>
               <icon icon={getIcon(icons.powermenu.sleep)} />
             </button>
-            <button>
-              <icon icon={getIcon(icons.powermenu.lock)} />
+            <button onClicked={() => powermenu.action("logout")}>
+              <icon icon={getIcon(icons.powermenu.logout)} />
             </button>
           </box>
         </box>
