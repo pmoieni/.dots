@@ -34,6 +34,7 @@ export const icons = {
     music: "icon-music-note-symbolic",
     toolbars: "icon-app-window-symbolic",
     warning: "icon-warning-symbolic",
+    clear: "edit-clear-symbolic",
   },
   arrow: {
     right: "go-next-symbolic",

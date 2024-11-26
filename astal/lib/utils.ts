@@ -2,6 +2,8 @@ import { Gio, GLib } from "astal";
 import { App } from "astal/gtk3";
 import { scrimWindowNames } from "./vars";
 
+export type Ref<T> = { ref?: T };
+
 export function dependencies(...packages: string[]) {
   for (const pkg of packages) {
     const result = GLib.find_program_in_path(pkg);

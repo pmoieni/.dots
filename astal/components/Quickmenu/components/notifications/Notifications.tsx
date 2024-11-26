@@ -22,8 +22,8 @@ export default function () {
       <box spacing={options.theme.spacing()} className="header" hexpand>
         <label halign={Gtk.Align.START} hexpand label="Notifications" />
         <button onClick={clearAll} halign={Gtk.Align.END}>
-          <box>
-            <icon icon={getIcon(icons.trash.full)} />
+          <box spacing={options.theme.spacing()}>
+            <icon icon={getIcon(icons.ui.clear)} />
             <label label="Clear all" />
           </box>
         </button>
