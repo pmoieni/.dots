@@ -2,12 +2,13 @@ import { App } from "astal/gtk3";
 import { Gdk } from "astal/gtk3";
 import { bind } from "astal";
 import Tray from "gi://AstalTray";
+import options from "options";
 
 export default function SysTray() {
   const tray = Tray.get_default();
 
   return (
-    <box className="bar-tray">
+    <box spacing={options.theme.spacing()} className="bar-tray">
       {bind(tray, "items").as((items) =>
         items.map((item) => {
           if (item.iconThemePath) App.add_icons(item.iconThemePath);

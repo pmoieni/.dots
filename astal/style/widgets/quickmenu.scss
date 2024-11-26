@@ -1,18 +1,14 @@
 @use "../vars.scss" as *;
 @use "../mixins/widget.scss" as *;
 @use "../mixins/button.scss" as *;
-@use "../mixins/spacing.scss" as *;
 @use "../mixins/slider.scss" as *;
 @use 'sass:color';
 
 .quickmenu {
   @include floating-widget();
-  @include spacing();
 
   .notifications {
     .header {
-      @include spacing();
-
       button {
         @include button();
         padding: $padding;
@@ -36,11 +32,7 @@
 
     >stack {
       .main {
-        @include spacing();
-
         .row {
-          @include spacing();
-
           .arrow-button {
             border-radius: $radius;
 
@@ -99,8 +91,6 @@
           padding: $padding;
 
           .slider-box {
-            @include spacing();
-
             button {
               @include button(true);
               padding: calc($padding * 1.5);

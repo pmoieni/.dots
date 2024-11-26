@@ -19,7 +19,7 @@ export default function () {
       className="notifications"
       vertical
     >
-      <box className="header horizontal" hexpand>
+      <box spacing={options.theme.spacing()} className="header" hexpand>
         <label halign={Gtk.Align.START} hexpand label="Notifications" />
         <button onClick={clearAll} halign={Gtk.Align.END}>
           <box>

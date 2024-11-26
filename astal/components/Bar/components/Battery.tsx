@@ -39,7 +39,7 @@ export default () => {
   });
 
   return (
-    <box className="bar-battery horizontal" css={css()}>
+    <box spacing={options.theme.spacing()} className="bar-battery" css={css()}>
       <icon icon={icon()} />
       <label label={percentage.as((p) => `${Math.floor(p * 100)}%`)} />
     </box>

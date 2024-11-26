@@ -63,7 +63,8 @@ export default function Media() {
 
   return (
     <centerbox
-      className="bar-media horizontal"
+      spacing={options.theme.spacing()}
+      className="bar-media"
       visible={bind(mpris, "players").as((ps) => ps.length > 0)}
     >
       <button

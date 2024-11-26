@@ -1,6 +1,6 @@
 import { Binding, Variable } from "astal";
 import { Widget } from "astal/gtk3";
-import { getIcon, icons } from "../../../assets/icons";
+import { getIcon, icons } from "@assets/icons";
 
 export interface ToggleButtonProps extends Widget.ButtonProps {
   onToggled?: () => void;

@@ -7,14 +7,15 @@ import Mic from "../items/Mic";
 import DND from "../items/DND";
 import Bluetooth from "../items/Bluetooth";
 import Recorder from "../items/Recorder";
+import options from "options";
 
-function Row({ className, vertical, ...props }: Widget.BoxProps) {
+function Row({ className, ...props }: Widget.BoxProps) {
   return (
     <box
+      spacing={options.theme.spacing()}
       homogeneous
-      vertical={vertical}
       {...props}
-      className={`${className} row ${vertical ? "vertical" : "horizontal"}`}
+      className={`${className} row`}
     >
       {props.children}
     </box>
@@ -23,7 +24,12 @@ function Row({ className, vertical, ...props }: Widget.BoxProps) {
 
 export default function () {
   return (
-    <box name="main" className="main vertical" vertical>
+    <box
+      spacing={options.theme.spacing()}
+      name="main"
+      className="main"
+      vertical
+    >
       <Row>
         {Network()}
         <Bluetooth />

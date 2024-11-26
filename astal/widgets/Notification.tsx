@@ -2,6 +2,7 @@ import { GLib } from "astal";
 import { Gtk, Astal } from "astal/gtk3";
 import Notifd from "gi://AstalNotifd";
 import { getIcon, icons } from "@assets/icons";
+import options from "options";
 
 const isIcon = (icon: string) => !!Astal.Icon.lookup_icon(icon);
 
@@ -20,7 +21,7 @@ export default function Notification(props: Props) {
 
   return (
     <box className="notification" vertical>
-      <box className="header horizontal">
+      <box spacing={options.theme.spacing()} className="header">
         {(n.appIcon || n.desktopEntry) && (
           <icon
             className="app-icon"
@@ -40,7 +41,7 @@ export default function Notification(props: Props) {
         </button>
       </box>
       {/*<Gtk.Separator visible />*/}
-      <box className="content horizontal">
+      <box spacing={options.theme.spacing()} className="content">
         {n.image && fileExists(n.image) && (
           <box
             valign={START}
@@ -55,7 +56,12 @@ export default function Notification(props: Props) {
             <icon icon={n.image} expand halign={CENTER} valign={CENTER} />
           </box>
         )}
-        <box className="text" hexpand vertical>
+        <box
+          spacing={options.theme.spacing()}
+          className="text"
+          hexpand
+          vertical
+        >
           <label
             className="summary"
             halign={START}
@@ -80,7 +86,7 @@ export default function Notification(props: Props) {
         </box>
       </box>
       {n.get_actions().length > 0 && (
-        <box className="actions horizontal">
+        <box spacing={options.theme.spacing()} className="actions">
           {n.get_actions().map(({ label, id }) => (
             <button hexpand onClicked={() => n.invoke(id)}>
               <label label={label} halign={CENTER} hexpand />

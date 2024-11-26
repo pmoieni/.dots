@@ -80,10 +80,14 @@ export default function () {
         });
       }}
     >
-      <box widthRequest={width.value} className="applauncher horizontal">
-        <box className="controls" vertical>
+      <box
+        widthRequest={width.value}
+        spacing={options.theme.spacing()}
+        className="applauncher"
+      >
+        <box className="controls" spacing={options.theme.spacing()} vertical>
           <box vexpand className="user"></box>
-          <box className="powermenu" vertical>
+          <box className="powermenu" spacing={options.theme.spacing()} vertical>
             <button onClicked={() => powermenu.action("shutdown")}>
               <icon icon={getIcon(icons.powermenu.shutdown)} />
             </button>
@@ -98,7 +102,7 @@ export default function () {
             </button>
           </box>
         </box>
-        <box expand className="apps" vertical>
+        <box expand className="apps" spacing={options.theme.spacing()} vertical>
           {input}
           <box vertical>
             {list.as((list) => list.map((app) => <AppButton app={app} />))}

@@ -2,6 +2,7 @@ import { Astal } from "astal/gtk3";
 import Notifications from "./components/notifications/Notifications";
 import Settings from "./components/settings/Settings";
 import PopupWindow from "@widgets/PopupWindow";
+import options from "options";
 
 export default function () {
   return (
@@ -15,7 +16,13 @@ export default function () {
       }
       exclusivity={Astal.Exclusivity.NORMAL}
     >
-      <box widthRequest={400} expand className="quickmenu" vertical>
+      <box
+        spacing={options.theme.spacing()}
+        widthRequest={400}
+        expand
+        className="quickmenu"
+        vertical
+      >
         <Notifications />
         <Settings />
       </box>

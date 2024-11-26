@@ -1,19 +1,13 @@
 @use "../vars.scss" as *;
 @use "../mixins/widget.scss" as *;
 @use "../mixins/button.scss" as *;
-@use "../mixins/spacing.scss" as *;
 @use 'sass:color';
 
 .applauncher {
   @include floating-widget();
-  @include spacing();
 
   .controls {
-    @include spacing();
-
     .powermenu {
-      @include spacing();
-
       button {
         @include button(false);
         padding: calc($padding * 2);
@@ -22,8 +16,6 @@
   }
 
   .apps {
-    @include spacing();
-
     entry {
       @include button();
       padding: calc($padding * 2);

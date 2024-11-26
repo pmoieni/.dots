@@ -67,15 +67,19 @@ export default function Bar(monitor: number) {
               : Gtk.RevealerTransitionType.SLIDE_UP,
           )}
         >
-          <centerbox className="bar horizontal" css={css()}>
-            <box className="horizontal" expand>
+          <centerbox className="bar" css={css()}>
+            <box spacing={options.theme.spacing()} expand>
               <AppLauncher />
               <Workspaces />
             </box>
-            <box className="horizontal" expand>
+            <box spacing={options.theme.spacing()} expand>
               <Media />
             </box>
-            <box className="horizontal" expand halign={Gtk.Align.END}>
+            <box
+              spacing={options.theme.spacing()}
+              expand
+              halign={Gtk.Align.END}
+            >
               <SysTray />
               <Screenrecord />
               <QuickMenu />

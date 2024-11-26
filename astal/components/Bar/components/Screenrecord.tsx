@@ -1,6 +1,7 @@
 import { getIcon, icons } from "@assets/icons";
 import Screenrecord from "@services/screenrecord";
 import { bind } from "astal";
+import options from "options";
 
 export default function () {
   const screenrecord = Screenrecord.get_default();
@@ -11,7 +12,7 @@ export default function () {
       visible={bind(screenrecord, "recording").as(Boolean)}
       onClicked={() => screenrecord.stop()}
     >
-      <box>
+      <box spacing={options.theme.spacing()}>
         <icon icon={getIcon(icons.recorder.recording)} />
         <label
           label={bind(screenrecord, "timer").as((time) => {
