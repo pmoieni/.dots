@@ -18,7 +18,7 @@ export default function () {
     >
       <box
         spacing={options.theme.spacing()}
-        widthRequest={400}
+        widthRequest={options.widgets.quickmenu.width()}
         expand
         className="quickmenu"
         vertical

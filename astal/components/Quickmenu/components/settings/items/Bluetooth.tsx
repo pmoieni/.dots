@@ -1,7 +1,7 @@
 import { bind } from "astal";
 import { Gtk } from "astal/gtk3";
 import { ArrowToggleButton } from "../../../widgets/Toggle";
-import { getIcon, icons } from "@assets/icons";
+import { icons } from "@assets/icons";
 import Bluetooth from "gi://AstalBluetooth";
 import { settingsMenu } from "../Settings";
 
@@ -17,9 +17,7 @@ export default function () {
       <box hexpand halign={Gtk.Align.CENTER}>
         <icon
           icon={bind(bluetooth, "isPowered").as((ic) =>
-            ic
-              ? getIcon(icons.bluetooth.enabled)
-              : getIcon(icons.bluetooth.disabled),
+            ic ? icons.bluetooth.enabled : icons.bluetooth.disabled,
           )}
         />
       </box>

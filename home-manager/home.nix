@@ -91,7 +91,6 @@
       adwaita-icon-theme
       adw-gtk3
       bibata-cursors
-      gtk3.dev
     ];
   };
 

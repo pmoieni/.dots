@@ -14,7 +14,7 @@ export default function () {
           speaker.get_mute() ? speaker.set_mute(false) : speaker.set_mute(true)
         }
       >
-        <icon icon={speakerIcon()} />
+        <icon icon={speakerIcon} />
       </button>
       <slider
         hexpand

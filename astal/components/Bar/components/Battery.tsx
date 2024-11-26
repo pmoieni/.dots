@@ -1,4 +1,3 @@
-import { icons } from "@assets/icons";
 import { bind, Variable } from "astal";
 import Battery from "gi://AstalBattery";
 import options from "options";
@@ -8,21 +7,6 @@ export default () => {
   const charging = bind(bat, "charging");
   const warningLevel = bind(bat, "warningLevel");
   const percentage = bind(bat, "percentage");
-  const icon = Variable.derive([charging, percentage], (ch, per) => {
-    const { charging, warning, low, medium, high, full } = icons.battery;
-
-    const cons = [
-      [100, full],
-      [60, high],
-      [30, medium],
-      [15, low],
-      [0, warning],
-    ] as const;
-
-    return ch
-      ? charging
-      : cons.find(([n]) => n <= Math.floor(per * 100))?.[1] || "";
-  });
 
   const css = Variable.derive([charging, warningLevel], (ch, wl) => {
     if (ch)
@@ -40,7 +24,7 @@ export default () => {
 
   return (
     <box spacing={options.theme.spacing()} className="bar-battery" css={css()}>
-      <icon icon={icon()} />
+      <icon icon={bind(bat, "iconName")} />
       <label label={percentage.as((p) => `${Math.floor(p * 100)}%`)} />
     </box>
   );

@@ -14,7 +14,7 @@ export default function () {
           mic.get_mute() ? mic.set_mute(false) : mic.set_mute(true)
         }
       >
-        <icon icon={micIcon()} />
+        <icon icon={micIcon} />
       </button>
       <slider
         hexpand

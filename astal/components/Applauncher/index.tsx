@@ -68,7 +68,13 @@ export default function () {
     <PopupWindow
       name="applauncher"
       namespace="applauncher"
-      anchor={Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM}
+      anchor={options.widgets.bar
+        .position()
+        .as((p) =>
+          p === "top"
+            ? Astal.WindowAnchor.LEFT | Astal.WindowAnchor.TOP
+            : Astal.WindowAnchor.LEFT | Astal.WindowAnchor.BOTTOM,
+        )}
       exclusivity={Astal.Exclusivity.NORMAL}
       setup={(self) => {
         self.hook(self, "notify::visible", () => {
