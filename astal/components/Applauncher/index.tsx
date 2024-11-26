@@ -84,10 +84,26 @@ export default function () {
         widthRequest={width.value}
         spacing={options.theme.spacing()}
         className="applauncher"
+        vertical
       >
-        <box className="controls" spacing={options.theme.spacing()} vertical>
-          <box vexpand className="user"></box>
-          <box className="powermenu" spacing={options.theme.spacing()} vertical>
+        <box expand className="apps" spacing={options.theme.spacing()} vertical>
+          {input}
+          <box vertical>
+            {list.as((list) => list.map((app) => <AppButton app={app} />))}
+          </box>
+          <box
+            halign={CENTER}
+            className="placeholder"
+            vertical
+            visible={list.as((l) => l.length === 0)}
+          >
+            <icon icon="system-search-symbolic" />
+            <label label="No match found" />
+          </box>
+        </box>
+        <box className="controls" spacing={options.theme.spacing()}>
+          <box hexpand className="user"></box>
+          <box className="powermenu" spacing={options.theme.spacing()}>
             <button onClicked={() => powermenu.action("shutdown")}>
               <icon icon={getIcon(icons.powermenu.shutdown)} />
             </button>
@@ -100,21 +116,6 @@ export default function () {
             <button onClicked={() => powermenu.action("logout")}>
               <icon icon={getIcon(icons.powermenu.logout)} />
             </button>
-          </box>
-        </box>
-        <box expand className="apps" spacing={options.theme.spacing()} vertical>
-          {input}
-          <box vertical>
-            {list.as((list) => list.map((app) => <AppButton app={app} />))}
-          </box>
-          <box
-            halign={CENTER}
-            className="not-found"
-            vertical
-            visible={list.as((l) => l.length === 0)}
-          >
-            <icon icon="system-search-symbolic" />
-            <label label="No match found" />
           </box>
         </box>
       </box>
