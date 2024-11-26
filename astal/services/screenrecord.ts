@@ -2,7 +2,6 @@ import { icons } from "@assets/icons";
 import { dependencies, ensureDirectory } from "@lib/utils";
 import {
   AstalIO,
-  exec,
   execAsync,
   GLib,
   GObject,
@@ -90,12 +89,12 @@ export default class Screenrecord extends GObject.Object {
 
       switch (res) {
         case "file":
-          return exec([
+          return execAsync([
             GLib.getenv("FILE_MANAGER") || "xdg-open",
             this.#recordings,
           ]);
         case "view":
-          return exec(["xdg-open", this.#file]);
+          return execAsync(["xdg-open", this.#file]);
       }
     } catch (e) {
       console.error("Error executing screenrecord-end script:", e);
@@ -132,14 +131,14 @@ export default class Screenrecord extends GObject.Object {
 
     switch (res) {
       case "file":
-        return exec([
+        return execAsync([
           GLib.getenv("FILE_MANAGER") || "xdg-open",
           this.#screenshots,
         ]);
       case "view":
-        return exec(["xdg-open", file]);
+        return execAsync(["xdg-open", file]);
       case "edit":
-        return exec(`swappy -f ${file}`);
+        return execAsync(`swappy -f ${file}`);
     }
   }
 
