@@ -1,23 +1,13 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
+        "baseUrl": ".",
         "experimentalDecorators": true,
-        "strict": true,
-        "target": "ES2022",
+        "jsx": "react-jsx",
+        "jsxImportSource": "/home/pmoieni/.local/share/ags/gtk3",
         "module": "ES2022",
         "moduleResolution": "Bundler",
-        // "checkJs": true,
-        // "allowJs": true,
-        "jsx": "react-jsx",
-        "jsxImportSource": "/nix/store/791ph7xbzhklz9xz58gqg6wq30yx40zb-astal-gjs/share/astal/gjs/gtk3",
-        "baseUrl": ".",
         "paths": {
-            "astal": [
-                "/nix/store/791ph7xbzhklz9xz58gqg6wq30yx40zb-astal-gjs/share/astal/gjs"
-            ],
-            "astal/*": [
-                "/nix/store/791ph7xbzhklz9xz58gqg6wq30yx40zb-astal-gjs/share/astal/gjs/*"
-            ],
             "@assets/*": [
                 "assets/*"
             ],
@@ -32,7 +22,15 @@
             ],
             "@widgets/*": [
                 "widgets/*"
+            ],
+            "astal": [
+                "/home/pmoieni/.local/share/ags"
+            ],
+            "astal/*": [
+                "/home/pmoieni/.local/share/ags/*"
             ]
-        }
+        },
+        "strict": true,
+        "target": "ES2022"
     }
 }
