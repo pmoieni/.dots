@@ -45,12 +45,12 @@ function AppButton({ app }: { app: Apps.Application }) {
 export default function () {
   const { CENTER } = Gtk.Align;
   const apps = new Apps.Apps({
-    nameMultiplier: 15,
-    entryMultiplier: 5,
-    executableMultiplier: 1,
-    descriptionMultiplier: 1,
+    nameMultiplier: 2,
+    entryMultiplier: 0.05,
+    executableMultiplier: 0.05,
+    descriptionMultiplier: 0.1,
     keywordsMultiplier: 0,
-    minScore: 0.5,
+    minScore: 0.75,
   });
 
   const query = Variable("");
