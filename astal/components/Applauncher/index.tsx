@@ -44,7 +44,14 @@ function AppButton({ app }: { app: Apps.Application }) {
 
 export default function () {
   const { CENTER } = Gtk.Align;
-  const apps = new Apps.Apps();
+  const apps = new Apps.Apps({
+    nameMultiplier: 15,
+    entryMultiplier: 5,
+    executableMultiplier: 1,
+    descriptionMultiplier: 1,
+    keywordsMultiplier: 0,
+    minScore: 0.5,
+  });
 
   const query = Variable("");
   const list = query((query) => apps.fuzzy_query(query).slice(0, max.value));
