@@ -35,15 +35,20 @@ class NotifiationMap implements Subscribable {
     // notifd.ignoreTimeout = true
 
     notifd.connect("notified", (_, id) => {
+      const notif = notifd.get_notification(id);
+
       this.set(
         id,
         Notification({
-          notification: notifd.get_notification(id)!,
+          notification: notif!,
           onHoverLost: () => this.delete(id),
-          setup: () =>
-            timeout(TIMEOUT_DELAY, () => {
-              this.delete(id);
-            }),
+          setup: () => {
+            if (notif.urgency !== Notifd.Urgency.CRITICAL) {
+              timeout(TIMEOUT_DELAY, () => {
+                this.delete(id);
+              });
+            }
+          },
         }),
       );
     });
