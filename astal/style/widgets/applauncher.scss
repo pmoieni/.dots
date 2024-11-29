@@ -7,6 +7,20 @@
   @include floating-widget();
 
   .controls {
+    .user {
+      >label {
+        @include widget();
+        font-weight: bold;
+        padding: $padding;
+        color: $primary-bg;
+      }
+
+      >button {
+        @include button();
+        padding: calc($padding * 2);
+      }
+    }
+
     .powermenu {
       button {
         @include button(false);

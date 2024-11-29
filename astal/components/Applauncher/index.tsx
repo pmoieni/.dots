@@ -114,9 +114,23 @@ export default function () {
             <label label="No match found" />
           </box>
         </box>
-        <box className="controls" spacing={options.theme.spacing()}>
-          <box hexpand className="user"></box>
-          <box className="powermenu" spacing={options.theme.spacing()}>
+        <centerbox className="controls" spacing={options.theme.spacing()}>
+          <box
+            halign={Gtk.Align.START}
+            spacing={options.theme.spacing()}
+            className="user"
+          >
+            <label label={USER} />
+            <button>
+              <icon icon={getIcon(icons.ui.settings)} />
+            </button>
+          </box>
+          <box hexpand />
+          <box
+            halign={Gtk.Align.END}
+            className="powermenu"
+            spacing={options.theme.spacing()}
+          >
             <button onClicked={() => powermenu.action("shutdown")}>
               <icon icon={getIcon(icons.powermenu.shutdown)} />
             </button>
@@ -130,7 +144,7 @@ export default function () {
               <icon icon={getIcon(icons.powermenu.logout)} />
             </button>
           </box>
-        </box>
+        </centerbox>
       </box>
     </PopupWindow>
   );

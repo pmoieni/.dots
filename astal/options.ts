@@ -60,7 +60,7 @@ const options = mkOptions(OPTIONS, {
     bar: {
       position: opt<"top" | "bottom">("bottom"),
       autohide: opt(true),
-      dock: opt(false),
+      dock: opt(true),
       systray: {
         ignore: opt(["spotify-client"]),
       },

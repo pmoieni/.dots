@@ -16,9 +16,6 @@
     }
 
     .list {
-      @include widget();
-      padding: $padding;
-
       .placeholder {
         padding: $padding;
       }

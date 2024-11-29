@@ -8,11 +8,46 @@ import QuickMenu from "./components/QuickMenu";
 import Screenrecord from "./components/Screenrecord";
 import Battery from "./components/Battery";
 import options from "options";
-import { Variable } from "astal";
+import { bind, Variable } from "astal";
+import Hyprland from "gi://AstalHyprland";
 
 export default function Bar(monitor: number) {
+  const hypr = Hyprland.get_default();
+
   const { position, dock, autohide } = options.widgets.bar;
-  const barVisible = Variable(!autohide.value);
+  const isWorkspaceEmpty = bind(hypr, "focusedWorkspace").as(
+    (fw) => fw.clients.length === 0,
+  );
+  const barVisible = Variable.derive(
+    [isWorkspaceEmpty, autohide],
+    (isEmpty, ah) => {
+      if (isEmpty) {
+        return true;
+      }
+
+      return !ah;
+    },
+  );
+  const exclusivity = Variable.derive(
+    [isWorkspaceEmpty, autohide],
+    (isEmpty, ah) => {
+      if (!ah || (ah && isEmpty)) {
+        return Astal.Exclusivity.EXCLUSIVE;
+      }
+
+      return Astal.Exclusivity.NORMAL;
+    },
+  );
+
+  function hide() {
+    if (isWorkspaceEmpty.get()) return;
+
+    autohide.value && barVisible.set(false);
+  }
+
+  function show() {
+    autohide.value && barVisible.set(true);
+  }
 
   const css = Variable.derive([position, dock], (p, d) => {
     let css = "";
@@ -40,9 +75,7 @@ export default function Bar(monitor: number) {
       name="bar"
       namespace="bar"
       monitor={monitor}
-      exclusivity={autohide().as((ah) =>
-        ah ? Astal.Exclusivity.NORMAL : Astal.Exclusivity.EXCLUSIVE,
-      )}
+      exclusivity={exclusivity()}
       anchor={position().as((p) =>
         p === "top"
           ? Astal.WindowAnchor.TOP |
@@ -54,10 +87,7 @@ export default function Bar(monitor: number) {
       )}
       application={App}
     >
-      <eventbox
-        onHover={() => autohide.value && barVisible.set(true)}
-        onHoverLost={() => autohide.value && barVisible.set(false)}
-      >
+      <eventbox onHover={show} onHoverLost={hide}>
         <revealer
           revealChild={barVisible()}
           transitionDuration={options.transition()}
