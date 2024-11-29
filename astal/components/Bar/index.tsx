@@ -15,7 +15,8 @@ export default function Bar(monitor: number) {
   const hypr = Hyprland.get_default();
 
   const { position, dock, autohide } = options.widgets.bar;
-  const isWorkspaceEmpty = bind(hypr, "focusedWorkspace").as(
+  const isWorkspaceEmpty = Variable.derive(
+    [bind(hypr, "focusedWorkspace"), bind(hypr, "clients")],
     (fw) => fw.clients.length === 0,
   );
   const barVisible = Variable.derive(
