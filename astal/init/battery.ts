@@ -1,6 +1,5 @@
 import Battery from "gi://AstalBattery";
 import { bind, execAsync } from "astal";
-import { icons } from "@assets/icons";
 
 export default function () {
   const battery = Battery.get_default();
@@ -10,8 +9,6 @@ export default function () {
         "notify-send",
         "-a",
         "Battery",
-        "-i",
-        icons.battery.charging,
         "-t",
         "5000",
         "Charger plugged in",
@@ -27,8 +24,6 @@ export default function () {
           "notify-send",
           "-a",
           "Battery",
-          "-i",
-          icons.battery.low,
           "-t",
           "10000",
           "Battery low",
@@ -40,8 +35,6 @@ export default function () {
           "notify-send",
           "-a",
           "Battery",
-          "-i",
-          icons.battery.warning,
           "-u",
           "critical",
           "Critical battery alert",
