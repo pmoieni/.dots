@@ -3,9 +3,9 @@ import { bind, execAsync } from "astal";
 
 export default function () {
   const battery = Battery.get_default();
-  bind(battery, "charging").as(async (ch) => {
-    if (ch) {
-      await execAsync([
+  battery.connect("notify::charging", (bat: Battery.Device) => {
+    if (bat.charging) {
+      execAsync([
         "notify-send",
         "-a",
         "Battery",
@@ -17,10 +17,10 @@ export default function () {
     }
   });
 
-  bind(battery, "warningLevel").as(async (wl) => {
-    switch (wl) {
+  battery.connect("notify::warning-level", (bat: Battery.Device) => {
+    switch (bat.warningLevel) {
       case Battery.WarningLevel.LOW:
-        await execAsync([
+        execAsync([
           "notify-send",
           "-a",
           "Battery",
@@ -31,7 +31,7 @@ export default function () {
         ]);
         break;
       case Battery.WarningLevel.CRITICIAL:
-        await execAsync([
+        execAsync([
           "notify-send",
           "-a",
           "Battery",
