@@ -49,7 +49,7 @@ const options = mkOptions(OPTIONS, {
   transition: opt(300),
   font: {
     size: opt(11),
-    name: opt("Ubuntu Nerd Font"),
+    name: opt("Ubuntu Nerd Font Regular"),
   },
   battery: {
     chargingBg: opt("#00D787"),
