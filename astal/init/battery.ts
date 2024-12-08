@@ -24,8 +24,8 @@ export default function () {
           "notify-send",
           "-a",
           "Battery",
-          "-t",
-          "10000",
+          "-u",
+          "critical",
           "Battery low",
           "consider plugging in the charger.",
         ]);

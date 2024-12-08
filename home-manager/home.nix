@@ -55,7 +55,10 @@
       tailwindcss-language-server
 
       # Fonts
-      (pkgs.nerdfonts.override {fonts = ["FiraCode" "IBMPlexMono" "Ubuntu" "Recursive"];})
+      nerd-fonts.fira-code
+      nerd-fonts.blex-mono
+      nerd-fonts.ubuntu
+      nerd-fonts.recursive-mono
 
       # Utilities
       speedtest-cli
