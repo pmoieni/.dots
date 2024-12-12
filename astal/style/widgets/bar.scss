@@ -76,6 +76,10 @@
 
   .bar-tray {
     @include _component();
+
+    >button {
+      padding: 0 $padding;
+    }
   }
 
   .bar-screenrecord {
