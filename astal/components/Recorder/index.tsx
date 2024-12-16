@@ -3,17 +3,18 @@ import Screenrecord from "@services/screenrecord"
 import PopupWindow from "@widgets/PopupWindow"
 import { Variable } from "astal"
 import { Astal, Gtk } from "astal/gtk3"
+import { Switch } from "astal/gtk3/widget"
 import options from "options"
 
 function Option({ title, val }: { title: string; val: Variable<boolean> }) {
+    const sw = <switch halign={Gtk.Align.END} active={val()}></switch>
+
+    sw.connect("notify::active", (sw: Switch) => val.set(sw.active))
+
     return (
         <box hexpand spacing={options.theme.spacing()} className="option">
             <label hexpand halign={Gtk.Align.START} label={title} />
-            <switch
-                halign={Gtk.Align.END}
-                active={val()}
-                onActivate={({ active }) => val.set(active)}
-            ></switch>
+            {sw}
         </box>
     )
 }
