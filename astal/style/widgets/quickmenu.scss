@@ -5,9 +5,12 @@
 @use 'sass:color';
 
 .quickmenu {
-  @include floating-widget();
+  padding: $padding;
 
   .notifications {
+    @include floating-widget();
+    margin: 0;
+
     .header {
       button {
         @include button();
@@ -23,9 +26,8 @@
   }
 
   .settings {
-    .header {
-      padding: $padding 0;
-    }
+    @include floating-widget();
+    margin: 0;
 
     >stack {
       .main {
@@ -106,11 +108,7 @@
       }
 
       .menu {
-        @include widget();
-
         .header {
-          padding: $padding;
-
           >button {
             @include button();
             padding: $padding;
@@ -124,10 +122,6 @@
             font-size: 1.2rem;
             font-weight: bold;
           }
-        }
-
-        .content {
-          padding: $padding;
         }
       }
 

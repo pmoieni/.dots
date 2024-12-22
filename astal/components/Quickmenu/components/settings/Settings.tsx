@@ -9,10 +9,7 @@ export const settingsMenu = Variable("main")
 
 export default function () {
     return (
-        <box className="settings" spacing={options.theme.spacing()} vertical>
-            <box className="header">
-                <label halign={Gtk.Align.START} label="Quick menu" />
-            </box>
+        <box className="settings">
             <stack
                 transitionType={Gtk.StackTransitionType.SLIDE_LEFT_RIGHT}
                 transitionDuration={options.transition()}

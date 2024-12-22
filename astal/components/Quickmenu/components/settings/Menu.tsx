@@ -1,6 +1,7 @@
 import { Gtk } from "astal/gtk3"
 import { icons } from "@assets/icons"
 import { settingsMenu } from "./Settings"
+import options from "options"
 
 type PageProps = {
     name: string
@@ -10,7 +11,12 @@ type PageProps = {
 
 export default ({ name, child, action = undefined }: PageProps) => {
     return (
-        <box name={name} className={`menu ${name}`} vertical>
+        <box
+            name={name}
+            className={`menu ${name}`}
+            spacing={options.theme.spacing()}
+            vertical
+        >
             <centerbox className="header">
                 <button
                     hexpand={false}
