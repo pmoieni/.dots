@@ -85,6 +85,7 @@ const options = mkOptions(OPTIONS, {
             width: opt(400),
             position: opt<"left" | "right">("right"),
             networkSettings: opt("alacritty -e nmtui"),
+            audioSettings: opt("pavucontrol"),
         },
         notification: {
             width: opt(440),

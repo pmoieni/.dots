@@ -105,6 +105,12 @@
             }
           }
         }
+
+        .audio {
+          button {
+            @include button();
+          }
+        }
       }
 
       .menu {
