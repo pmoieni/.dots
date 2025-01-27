@@ -40,6 +40,7 @@
       clang_17
       clang-tools_17
       # podman-compose
+      dotnet-sdk_9
       devenv
 
       # LSP

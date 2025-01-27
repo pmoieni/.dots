@@ -4,7 +4,7 @@ import { Index, Market, Resolution } from "@services/wallpaper"
 const options = mkOptions(OPTIONS, {
     wallpaper: {
         resolution: opt<Resolution>("UHD"),
-        market: opt<Market>("en-US"),
+        market: opt<Market>("en-GB"),
         idx: opt<Index>(0),
     },
     theme: {
