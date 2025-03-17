@@ -76,7 +76,6 @@
       alsa-utils
       pamixer
       imagemagick
-      ffmpeg-full
       grim
       slurp
       wf-recorder
