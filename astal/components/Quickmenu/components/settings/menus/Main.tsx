@@ -1,7 +1,7 @@
 import KbdBrightness from "../items/KbdBrightness"
 import Network from "../items/Network"
 import ScreenBrightness from "../items/ScreenBrightness"
-import { Astal, Gtk, Widget } from "astal/gtk3"
+import { Gtk, Widget } from "astal/gtk3"
 import Speaker from "../items/Speaker"
 import Mic from "../items/Mic"
 import DND from "../items/DND"
@@ -9,7 +9,7 @@ import Bluetooth from "../items/Bluetooth"
 import Recorder from "../items/Recorder"
 import options from "options"
 import { getIcon, icons } from "@assets/icons"
-import { execAsync } from "../../../../../../../.local/share/ags"
+import { execAsync } from "astal"
 
 function Row({ className, ...props }: Widget.BoxProps) {
     return (
