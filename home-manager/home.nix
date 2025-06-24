@@ -1,100 +1,82 @@
 {
+  config,
   pkgs,
-  inputs,
+  hostname,
+  username,
   ...
 }: {
-  imports = [
-    inputs.ags.homeManagerModules.default
-  ];
+  imports = [./hosts/${hostname}/home.nix];
+
+  home.username = "${username}";
+  home.homeDirectory = "/home/${username}";
+
+  home.stateVersion = "25.05";
 
   fonts.fontconfig.enable = true;
 
-  home = {
-    username = "pmoieni";
-    homeDirectory = "/home/pmoieni";
-    packages = with pkgs; [
-      # shell / terminal
-      fish
-      tmux
-      neovim
-      fastfetch
+  home.packages = with pkgs; [
+    fish
+    neovim
+    fastfetch
+    gh
+    subversion
+    niv
+    alejandra
+    nodePackages.eslint_d
+    nodePackages.prettier
+    prettierd
+    go
+    golangci-lint
+    rustup
+    nodejs
+    corepack
+    clang_17
+    clang-tools_17
+    devenv
+    lua-language-server
+    gopls
+    nil
+    nodePackages.svelte-language-server
+    nodePackages.typescript-language-server
+    nodePackages.bash-language-server
+    vscode-langservers-extracted
+    tailwindcss-language-server
+    cloudflare-warp
 
-      # dev tools
-      gh
-      subversion
-      niv
-      alejandra
-      nodePackages.eslint_d
-      nodePackages.prettier
-      prettierd
-      go
-      golangci-lint
-      erlang
-      elixir
-      # jdk21
-      rustup
-      nodejs
-      corepack
-      # bun
-      esbuild # required for AGS
-      clang_17
-      clang-tools_17
-      # podman-compose
-      dotnet-sdk_9
-      devenv
+    nerd-fonts.fira-code
+    nerd-fonts.blex-mono
+    nerd-fonts.recursive-mono
+  ];
 
-      # LSP
-      lua-language-server
-      gopls
-      elixir-ls
-      # jdt-language-server
-      nil
-      nodePackages.svelte-language-server
-      nodePackages.typescript-language-server
-      nodePackages.bash-language-server
-      vscode-langservers-extracted
-      tailwindcss-language-server
+  home.file = {
+    "${config.xdg.configHome}/alacritty" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/alacritty";
+      recursive = true;
+    };
+    "${config.xdg.configHome}/home-manager" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/home-manager";
+      recursive = true;
+    };
+    "${config.xdg.configHome}/nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/nvim";
+      recursive = true;
+    };
+    "${config.xdg.configHome}/nvim-dev" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/nvim-dev";
+      recursive = true;
+    };
+    "${config.xdg.configHome}/wezterm" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/wezterm";
+      recursive = true;
+    };
+    "${config.xdg.configHome}/zed" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/zed";
+      recursive = true;
+    };
+  };
 
-      # Fonts
-      nerd-fonts.fira-code
-      nerd-fonts.blex-mono
-      nerd-fonts.ubuntu
-      nerd-fonts.recursive-mono
-
-      # Utilities
-      speedtest-cli
-      libnotify
-      pavucontrol
-      brightnessctl
-      playerctl
-      cliphist
-      tokei
-      yt-dlp
-      ripgrep
-      hyperfine
-      ncdu
-      alsa-utils
-      pamixer
-      imagemagick
-      grim
-      slurp
-      wf-recorder
-      swappy
-      swww
-      dart-sass
-      libsForQt5.qt5ct
-      qt6ct
-      fd
-      gnome.gvfs
-      ranger
-      cloudflare-warp
-
-      # Extra
-      matugen
-      adwaita-icon-theme
-      adw-gtk3
-      bibata-cursors
-    ];
+  home.sessionVariables = {
+    EDITOR = "nvim";
   };
 
   programs = {
@@ -102,32 +84,12 @@
     git = {
       enable = true;
       lfs.enable = true;
-      userName = "Parham Moieni";
+      userName = "pmoieni";
       userEmail = "62774242+pmoieni@users.noreply.github.com";
-    };
-    ags = {
-      enable = true;
-      extraPackages = [
-        inputs.ags.packages.${pkgs.system}.apps
-        inputs.ags.packages.${pkgs.system}.battery
-        inputs.ags.packages.${pkgs.system}.hyprland
-        inputs.ags.packages.${pkgs.system}.wireplumber
-        inputs.ags.packages.${pkgs.system}.network
-        inputs.ags.packages.${pkgs.system}.tray
-        inputs.ags.packages.${pkgs.system}.battery
-        inputs.ags.packages.${pkgs.system}.notifd
-        inputs.ags.packages.${pkgs.system}.mpris
-        inputs.ags.packages.${pkgs.system}.bluetooth
-      ];
     };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
     };
   };
-
-  systemd.user.startServices = "sd-switch";
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.11";
 }

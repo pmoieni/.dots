@@ -1,29 +1,23 @@
 {
-  description = "Home Manager configuration of pmoieni";
+  description = "¯\_(ツ)_/¯";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://flakehub.com/f/NixOS/nixpkgs/0";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "https://flakehub.com/f/nix-community/home-manager/0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    ags.url = "github:Aylur/ags";
   };
 
   outputs = {
-    self,
     nixpkgs,
-    # nixpkgs-unstable,
     home-manager,
     ...
-  } @ inputs: let
-    inherit (self) outputs;
+  }: let
     system = "x86_64-linux";
 
-    make-hm-packages = ps: attrs:
+    makePackages = ps: attrs:
       import ps ({
           inherit system;
           config = {
@@ -34,15 +28,28 @@
         }
         // attrs);
 
-    hm-pkgs = make-hm-packages nixpkgs {};
-    # hm-pkgs-unstable = make-hm-packages nixpkgs-unstable {};
-  in {
-    homeConfigurations."pmoieni" = home-manager.lib.homeManagerConfiguration {
-      pkgs = hm-pkgs;
-      extraSpecialArgs = {
-        inherit inputs outputs;
+    hmPkgs = makePackages nixpkgs {};
+
+    mkHost = {
+      hostname,
+      username,
+    }:
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = hmPkgs;
+        modules = [
+          ./home.nix
+          ./hosts/${hostname}/home.nix
+        ];
+        extraSpecialArgs = {
+          inherit hostname username;
+        };
       };
-      modules = [./home.nix];
+  in {
+    homeConfigurations = {
+      asus = mkHost {
+        hostname = "asus";
+        username = "pmoieni";
+      };
     };
   };
 }
