@@ -73,6 +73,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/zed";
       recursive = true;
     };
+    "${config.xdg.configHome}/fish" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/fish";
+      recursive = true;
+    };
   };
 
   home.sessionVariables = {
