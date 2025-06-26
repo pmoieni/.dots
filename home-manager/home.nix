@@ -77,6 +77,22 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/fish";
       recursive = true;
     };
+    "${config.xdg.configHome}/niri" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/niri";
+      recursive = true;
+    };
+    "${config.xdg.configHome}/waybar" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/waybar";
+      recursive = true;
+    };
+    "${config.xdg.configHome}/swaylock" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/swaylock";
+      recursive = true;
+    };
+    "${config.xdg.configHome}/mako" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/mako";
+      recursive = true;
+    };
   };
 
   home.sessionVariables = {
