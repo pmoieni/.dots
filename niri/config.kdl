@@ -37,6 +37,8 @@ hotkey-overlay {
 }
 
 layout {
+    background-color "transparent"
+
     gaps 8
 
     center-focused-column "never"
@@ -64,6 +66,12 @@ layout {
 
     insert-hint {
         color "#eb6f9280"
+    }
+}
+
+overview {
+    workspace-shadow {
+        off
     }
 }
 
@@ -133,10 +141,17 @@ layer-rule {
     block-out-from "screencast"
 }
 
+layer-rule {
+    match namespace="^wallpaper$"
+
+    place-within-backdrop true
+}
+
+
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
     Mod+A hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
