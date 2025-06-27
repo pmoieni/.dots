@@ -24,7 +24,7 @@ window#waybar {
   border-radius: 0;
   background-color: transparent;
   border: none;
-  padding: 0.5rem;
+  padding: 0.4rem;
 }
 
 #workspaces button.focused {
@@ -33,7 +33,7 @@ window#waybar {
 
 #workspaces button:hover {
   background-color: @overlay;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
 }
 
 #tray,
@@ -57,7 +57,7 @@ window#waybar {
 #custom-lock,
 #custom-reboot,
 #custom-shutdown {
-  padding: 0 1rem;
+  padding: 0 0.8rem;
   background-color: @love;
   color: @surface;
 }
