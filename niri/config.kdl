@@ -52,7 +52,7 @@ layout {
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        width 2
+        width 4
 
         active-color "#eb6f92"
 
@@ -97,8 +97,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 animations {
     // off
 
-    // Slow down all animations by this factor. Values below 1 speed them up instead.
-    // slowdown 3.0
+    slowdown 0.5
 }
 
 window-rule {
