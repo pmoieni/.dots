@@ -38,9 +38,7 @@ hotkey-overlay {
 
 layout {
     background-color "transparent"
-
     gaps 8
-
     center-focused-column "never"
 
     preset-column-widths {
@@ -53,15 +51,18 @@ layout {
 
     focus-ring {
         width 4
-
         active-color "#eb6f92"
-
         inactive-color "#505050"
     }
 
     tab-indicator {
         hide-when-single-tab
         corner-radius 8
+        gap 8
+        width 8
+        position "bottom"
+        gaps-between-tabs 8
+        place-within-column
     }
 
     insert-hint {
@@ -127,10 +128,6 @@ window-rule {
 
     border {
         active-gradient from="#31748f" to="#ebbcba" angle=45 relative-to="workspace-view"
-    }
-
-    shadow {
-        color "#ebbcba"
     }
 }
 
