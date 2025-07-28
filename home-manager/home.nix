@@ -93,6 +93,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/mako";
       recursive = true;
     };
+    "${config.xdg.configHome}/fuzzel" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/fuzzel";
+      recursive = true;
+    };
   };
 
   home.sessionVariables = {
