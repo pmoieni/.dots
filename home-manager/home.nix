@@ -16,6 +16,7 @@
 
   home.packages = with pkgs; [
     fish
+    tokei
     neovim
     fastfetch
     gh
