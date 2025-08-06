@@ -1,0 +1,10 @@
+/gomod2nix-template
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml
+
+# nix build result
+/result

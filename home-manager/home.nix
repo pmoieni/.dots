@@ -18,7 +18,6 @@
     fish
     tokei
     neovim
-    fastfetch
     gh
     subversion
     niv
