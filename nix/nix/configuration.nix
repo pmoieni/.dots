@@ -38,7 +38,9 @@
   };
 
   networking.hostName = "nixos";
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+  };
 
   time.timeZone = "Asia/Tehran";
   time.hardwareClockInLocalTime = true;
@@ -67,7 +69,7 @@
   services.xserver = {
     enable = true;
     xkb.layout = "us,ir";
-    xkb.options = "grp:win_space_toggle";
+    xkb.options = "grp:win_space_toggle,caps:swapescape";
     videoDrivers = ["nvidia"];
   };
 
@@ -101,6 +103,8 @@
     };
   };
 
+  services.cloudflare-warp.enable = true;
+
   hardware = {
     bluetooth = {
       enable = true;
@@ -118,16 +122,18 @@
     nvidia = {
       modesetting.enable = true;
       powerManagement.enable = true;
-      # powerManagement.finegrained = true;
-      open = false;
+      powerManagement.finegrained = true;
+      open = true;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
-      # prime = {
-      # 	offload = {
-      # 		enable = true;
-      # 		enableOffloadCmd = true;
-      # 	};
-      # };
+      prime = {
+        offload = {
+          enable = true;
+          enableOffloadCmd = true;
+        };
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
     };
   };
 
@@ -153,11 +159,19 @@
     isNormalUser = true;
     extraGroups = ["wheel" "networkmanager" "video" "audio" "lp" "scanner"];
     packages = with pkgs; [
-      cloudflare-warp
+      waybar
+      xwayland-satellite
+      swayidle
+      swaybg
+      variety
+      alacritty
+      fuzzel
+      swaylock
     ];
   };
 
   programs.firefox.enable = true;
+  programs.niri.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
@@ -175,6 +189,7 @@
     jq
     fzf
     git
+    lshw
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
