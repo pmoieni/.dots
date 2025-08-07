@@ -41,7 +41,6 @@
     nodePackages.bash-language-server
     vscode-langservers-extracted
     tailwindcss-language-server
-    cloudflare-warp
 
     nerd-fonts.fira-code
     nerd-fonts.blex-mono
