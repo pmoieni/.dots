@@ -169,6 +169,7 @@
       swaylock
       mako
       pavucontrol
+      google-chrome
     ];
   };
 
