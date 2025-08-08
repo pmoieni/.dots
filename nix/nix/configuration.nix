@@ -55,19 +55,59 @@
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
+    user.services = {
+      # Polkit
+      polkit-gnome-authentication-agent-1 = {
+        description = "polkit-gnome-authentication-agent-1";
+        wantedBy = ["graphical-session.target"];
+        wants = ["graphical-session.target"];
+        after = ["graphical-session.target"];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+      };
+      niri-flake-polkit.enable = false;
+
+      cliphist-text = {
+        description = "wl-paste + cliphist service for text";
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store";
+          Restart = "on-failure";
+        };
+      };
+
+      cliphist-image = {
+        description = "wl-paste + cliphist service for text";
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store";
+          Restart = "on-failure";
+        };
       };
     };
+  };
+
+  environment.sessionVariables = {
+    POLKIT_AUTH_AGENT = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
+    MOZ_ENABLE_WAYLAND = "1";
+    SDL_VIDEODRIVER = "wayland";
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+    CLUTTER_BACKEND = "wayland";
+    WLR_RENDERER = "vulkan";
+    GTK_USE_PORTAL = "1";
+    NIXOS_XDG_OPEN_USE_PORTAL = "1";
+    # If your cursor becomes invisible
+    # WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+    # Below is a fix to force OBS docks and integrations all work under xwayland to bypass bugs on wayland. Enable only if OBS does not behave well.
+    # QT_QPA_PLATFORM = "xcb obs"
   };
 
   services.printing.enable = true;
@@ -130,9 +170,7 @@
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
-        intel-media-driver
-        vaapiVdpau
-        libvdpau-va-gl
+        vpl-gpu-rt
       ];
     };
     nvidia = {
@@ -171,8 +209,19 @@
     wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-gnome
     ];
+    config = {
+      common = {
+        default = [
+          "gnome"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Access" = ["gtk"];
+        "org.freedesktop.impl.portal.Notification" = ["gtk"];
+        "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
+        "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
+      };
+    };
   };
 
   users.users.pmoieni = {
@@ -190,9 +239,14 @@
       mako
       pavucontrol
       google-chrome
+      wl-clipboard
+      wl-clip-persist
+      wl-color-picker
+      discord
     ];
   };
 
+  programs.xwayland.enable = true;
   programs.firefox.enable = true;
   programs.niri.enable = true;
 
@@ -207,7 +261,6 @@
     coreutils-full
     pciutils
     nettools
-    wl-clipboard
     fd
     jq
     fzf
@@ -232,5 +285,5 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }

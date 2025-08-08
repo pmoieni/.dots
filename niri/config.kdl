@@ -76,6 +76,10 @@ overview {
     }
 }
 
+
+spawn-at-startup "systemctl --user start polkit-gnome-authentication-agent-1.service"
+spawn-at-startup "systemctl --user start cliphist-text.service"
+spawn-at-startup "systemctl --user start cliphist-image.service" 
 spawn-at-startup "waybar"
 spawn-at-startup "xwayland-sattelite"
 spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -f"
@@ -87,7 +91,7 @@ environment {
     DISPLAY ":0"
     XDG_SESSION_TYPE "wayland"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
-    MOZ_ENABLE_WAYLAND "1"
+    // MOZ_ENABLE_WAYLAND "1" // already set by nix
     QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
 }
 
