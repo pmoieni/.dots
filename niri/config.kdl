@@ -77,7 +77,6 @@ overview {
 }
 
 
-spawn-at-startup "systemctl --user start polkit-gnome-authentication-agent-1.service"
 spawn-at-startup "systemctl --user start cliphist-text.service"
 spawn-at-startup "systemctl --user start cliphist-image.service" 
 spawn-at-startup "waybar"
