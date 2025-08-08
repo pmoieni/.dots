@@ -167,6 +167,7 @@
       alacritty
       fuzzel
       swaylock
+      mako
       pavucontrol
     ];
   };
