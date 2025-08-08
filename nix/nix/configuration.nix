@@ -247,6 +247,8 @@
       wl-clip-persist
       wl-color-picker
       discord
+      mpv
+      ffmpeg-full
     ];
   };
 
