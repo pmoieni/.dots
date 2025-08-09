@@ -25,6 +25,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # boot
   boot = {
     kernelParams = [
       "mem_sleep_default=deep"
@@ -37,134 +38,7 @@
     supportedFilesystems = ["ntfs"];
   };
 
-  networking.hostName = "nixos";
-  networking.networkmanager = {
-    enable = true;
-  };
-
-  time.timeZone = "Asia/Tehran";
-  time.hardwareClockInLocalTime = true;
-
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  systemd = {
-    user.services = {
-      # Polkit
-      polkit-gnome-authentication-agent-1 = {
-        description = "polkit-gnome-authentication-agent-1";
-        wantedBy = ["graphical-session.target"];
-        wants = ["graphical-session.target"];
-        after = ["graphical-session.target"];
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
-      };
-      niri-flake-polkit.enable = false;
-
-      cliphist-text = {
-        description = "wl-paste + cliphist service for text";
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store";
-          Restart = "on-failure";
-        };
-      };
-
-      cliphist-image = {
-        description = "wl-paste + cliphist service for text";
-        serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store";
-          Restart = "on-failure";
-        };
-      };
-    };
-  };
-
-  environment.variables = {
-    GSK_RENDERER = "ngl";
-  };
-
-  environment.sessionVariables = {
-    POLKIT_AUTH_AGENT = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-    GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}/glib-2.0/schemas";
-    MOZ_ENABLE_WAYLAND = "1";
-    SDL_VIDEODRIVER = "wayland";
-    _JAVA_AWT_WM_NONREPARENTING = "1";
-    CLUTTER_BACKEND = "wayland";
-    WLR_RENDERER = "vulkan";
-    GTK_USE_PORTAL = "1";
-    NIXOS_XDG_OPEN_USE_PORTAL = "1";
-    # If your cursor becomes invisible
-    # WLR_NO_HARDWARE_CURSORS = "1";
-    # Hint electron apps to use wayland
-    NIXOS_OZONE_WL = "1";
-    # Below is a fix to force OBS docks and integrations all work under xwayland to bypass bugs on wayland. Enable only if OBS does not behave well.
-    # QT_QPA_PLATFORM = "xcb obs"
-  };
-
-  services.printing.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    jack.enable = true;
-  };
-
-  services.xserver = {
-    enable = true;
-    xkb.layout = "us,ir";
-    xkb.options = "grp:win_space_toggle,caps:swapescape";
-    videoDrivers = ["nvidia"];
-  };
-
-  services.desktopManager.gnome = {
-    enable = true;
-    extraGSettingsOverridePackages = [pkgs.mutter];
-    extraGSettingsOverrides = ''
-      [org.gnome.mutter]
-      experimental-features=['scale-monitor-framebuffer']
-    '';
-  };
-
-  services.displayManager.gdm = {
-    enable = true;
-    wayland = true;
-  };
-
-  services.dbus.enable = true;
-
-  services.libinput.enable = true;
-
-  services.thermald.enable = true;
-  services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
-    settings = {
-      START_CHARGE_THRESH_BAT0 = 0;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-      START_CHARGE_THRESH_BAT1 = 0;
-      STOP_CHARGE_THRESH_BAT1 = 80;
-    };
-  };
-
-  services.cloudflare-warp.enable = true;
-
+  # hardware
   hardware = {
     bluetooth = {
       enable = true;
@@ -174,6 +48,8 @@
     graphics = {
       enable = true;
       extraPackages = with pkgs; [
+        vaapiIntel
+        intel-media-driver
         vpl-gpu-rt
       ];
     };
@@ -195,17 +71,131 @@
     };
   };
 
+  # nnetworking
+  networking.hostName = "nixos";
+  networking.networkmanager = {
+    enable = true;
+  };
+
+  # time
+  time.timeZone = "Asia/Tehran";
+  time.hardwareClockInLocalTime = true;
+
+  # locale
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  # services
+  services.printing.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    jack.enable = true;
+  };
+
+  services.xserver = {
+    enable = true;
+    xkb.layout = "us,ir";
+    xkb.options = "grp:win_space_toggle,caps:swapescape";
+    videoDrivers = ["modesetting" "nvidia"];
+  };
+
+  services.desktopManager.gnome.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+
+  services.desktopManager.cosmic = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  services.udev.packages = [pkgs.gnome-settings-daemon];
+
+  services.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+  };
+
+  services.dbus.enable = true;
+
+  services.libinput.enable = true;
+
+  services.thermald.enable = true;
+  services.power-profiles-daemon.enable = false;
+  #services.tlp = {
+  #enable = true;
+  #settings = {
+  #  START_CHARGE_THRESH_BAT0 = 0;
+  #  STOP_CHARGE_THRESH_BAT0 = 80;
+  #  START_CHARGE_THRESH_BAT1 = 0;
+  #  STOP_CHARGE_THRESH_BAT1 = 80;
+  #};
+  #};
+  services.auto-cpufreq = {
+    enable = true;
+    settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
+
+  services.cloudflare-warp.enable = true;
+
+  systemd = {
+    user.services = {
+      cliphist-text = {
+        description = "wl-paste + cliphist service for text";
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type text --watch ${pkgs.cliphist}/bin/cliphist store";
+          Restart = "on-failure";
+        };
+      };
+
+      cliphist-image = {
+        description = "wl-paste + cliphist service for text";
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --type image --watch ${pkgs.cliphist}/bin/cliphist store";
+          Restart = "on-failure";
+        };
+      };
+    };
+  };
+
+  #  environment.variables = {
+  #GSK_RENDERER = "ngl";
+  #};
+
+  # env
+  environment.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+    NIXOS_OZONE_WL = "1";
+  };
+
   security = {
     rtkit.enable = true;
     polkit.enable = true;
-    pam.loginLimits = [
-      {
-        domain = "@users";
-        item = "rtprio";
-        type = "-";
-        value = 1;
-      }
-    ];
+    pam = {
+      loginLimits = [
+        {
+          domain = "@users";
+          item = "rtprio";
+          type = "-";
+          value = 1;
+        }
+      ];
+      services.swaylock = {};
+    };
   };
 
   xdg.portal = {
@@ -213,6 +203,8 @@
     wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr
+      xdg-desktop-portal-gnome
     ];
     config = {
       common = {
@@ -249,12 +241,9 @@
       discord
       mpv
       ffmpeg-full
+      telegram-desktop
     ];
   };
-
-  programs.xwayland.enable = true;
-  programs.firefox.enable = true;
-  programs.niri.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
@@ -272,8 +261,33 @@
     fzf
     git
     lshw
+    gnomeExtensions.appindicator
   ];
 
+  programs.xwayland.enable = true;
+  programs.dconf.profiles.user.databases = [
+    {
+      settings = {
+        "org/gnome/mutter" = {
+          experimental-features = [
+            "scale-monitor-framebuffer" # Enables fractional scaling (125% 150% 175%)
+            "xwayland-native-scaling" # Scales Xwayland applications to look crisp on HiDPI screens
+          ];
+        };
+        "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+      };
+    }
+  ];
+  programs.firefox = {
+    enable = true;
+    preferences = {
+      "privacy.resistFingerprinting" = true;
+    };
+    policies = {
+      DisableTelemetry = true;
+    };
+  };
+  programs.niri.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
@@ -282,14 +296,11 @@
     enableSSHSupport = true;
   };
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
+  };
 
   system.stateVersion = "25.05";
 }
