@@ -73,8 +73,17 @@
 
   # nnetworking
   networking.hostName = "nixos";
+  networking.wireless.iwd = {
+    enable = true;
+    settings = {
+      Settings = {
+        AutoConnect = true;
+      };
+    };
+  };
   networking.networkmanager = {
     enable = true;
+    wifi.backend = "iwd";
   };
 
   # time
@@ -203,8 +212,6 @@
     wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
-      xdg-desktop-portal-wlr
-      xdg-desktop-portal-gnome
     ];
     config = {
       common = {
