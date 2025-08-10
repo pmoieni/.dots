@@ -1,6 +1,5 @@
 {
   inputs,
-  config,
   lib,
   pkgs,
   ...
@@ -23,7 +22,10 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [inputs.niri.overlays.niri];
+  };
 
   # boot
   boot = {
@@ -59,7 +61,6 @@
       powerManagement.finegrained = true;
       open = true;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
       prime = {
         offload = {
           enable = true;
@@ -74,7 +75,7 @@
   # nnetworking
   networking.hostName = "nixos";
   networking.wireless.iwd = {
-    enable = true;
+    enable = false;
     settings = {
       Settings = {
         AutoConnect = true;
@@ -83,7 +84,7 @@
   };
   networking.networkmanager = {
     enable = true;
-    wifi.backend = "iwd";
+    # wifi.backend = "iwd";
   };
 
   # time
@@ -114,7 +115,6 @@
   };
 
   services.desktopManager.gnome.enable = true;
-  services.gnome.gnome-keyring.enable = true;
 
   services.desktopManager.cosmic = {
     enable = true;
@@ -189,6 +189,7 @@
   environment.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
+    GSK_RENDERER = "ngl";
   };
 
   security = {
@@ -241,6 +242,8 @@
       swaylock
       mako
       pavucontrol
+      brightnessctl
+      libnotify
       google-chrome
       wl-clipboard
       wl-clip-persist

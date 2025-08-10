@@ -1,14 +1,5 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
-  home.packages = with pkgs; [
-    speedtest-cli
-    quickshell
-  ];
-
-  services.polkit-gnome.enable = true;
+{config, ...}: {
+  # home.packages = with pkgs; [];
 
   home.file = {
     "${config.xdg.configHome}/alacritty" = {
