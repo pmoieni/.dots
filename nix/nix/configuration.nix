@@ -24,7 +24,12 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-    overlays = [inputs.niri.overlays.niri];
+  };
+
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
   };
 
   # boot
@@ -59,7 +64,7 @@
       modesetting.enable = true;
       powerManagement.enable = true;
       powerManagement.finegrained = true;
-      open = true;
+      open = false;
       nvidiaSettings = true;
       prime = {
         offload = {
@@ -110,27 +115,24 @@
   services.xserver = {
     enable = true;
     xkb.layout = "us,ir";
+    xkb.variant = "";
     xkb.options = "grp:win_space_toggle,caps:swapescape";
     videoDrivers = ["modesetting" "nvidia"];
   };
 
   services.desktopManager.gnome.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
+
+  services.fwupd.enable = true;
+  services.blueman.enable = true;
 
   services.desktopManager.cosmic = {
     enable = true;
     xwayland.enable = true;
   };
 
-  services.udev.packages = [pkgs.gnome-settings-daemon];
-
-  services.displayManager.gdm = {
-    enable = true;
-    wayland = true;
-  };
-
-  services.dbus.enable = true;
-
-  services.libinput.enable = true;
+  services.displayManager.gdm.enable = true;
 
   services.thermald.enable = true;
   services.power-profiles-daemon.enable = false;
@@ -181,15 +183,13 @@
     };
   };
 
-  #  environment.variables = {
-  #GSK_RENDERER = "ngl";
-  #};
-
   # env
-  environment.sessionVariables = {
+  environment.variables = {
     MOZ_ENABLE_WAYLAND = "1";
     NIXOS_OZONE_WL = "1";
     GSK_RENDERER = "ngl";
+    GDK_BACKEND = "wayland";
+    XDG_SESSION_TYPE = "wayland";
   };
 
   security = {
@@ -214,18 +214,6 @@
     extraPortals = with pkgs; [
       xdg-desktop-portal-gtk
     ];
-    config = {
-      common = {
-        default = [
-          "gnome"
-          "gtk"
-        ];
-        "org.freedesktop.impl.portal.Access" = ["gtk"];
-        "org.freedesktop.impl.portal.Notification" = ["gtk"];
-        "org.freedesktop.impl.portal.Secret" = ["gnome-keyring"];
-        "org.freedesktop.impl.portal.FileChooser" = ["gtk"];
-      };
-    };
   };
 
   users.users.pmoieni = {

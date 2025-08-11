@@ -48,6 +48,8 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    VISUAL = "nvim";
+    MANPAGER = "nvim +Man!";
   };
 
   programs = {
