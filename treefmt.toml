@@ -13,4 +13,4 @@ includes = ["*.lua"]
 
 [formatter.go]
 command = "gofmt"
-includes = ["*.go" "go.mod"]
+includes = ["*.go", "go.mod"]
