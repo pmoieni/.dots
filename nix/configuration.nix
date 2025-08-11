@@ -254,6 +254,7 @@
       mpv
       ffmpeg-full
       telegram-desktop
+      blender
     ];
   };
 
@@ -261,7 +262,7 @@
     vim
     wget
     tree
-    btop
+    htop
     curl
     zip
     unzip
