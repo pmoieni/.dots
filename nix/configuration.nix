@@ -142,17 +142,18 @@
 
   services.thermald.enable = true;
   services.power-profiles-daemon.enable = false;
-  #services.tlp = {
-  #enable = true;
-  #settings = {
-  #  START_CHARGE_THRESH_BAT0 = 0;
-  #  STOP_CHARGE_THRESH_BAT0 = 80;
-  #  START_CHARGE_THRESH_BAT1 = 0;
-  #  STOP_CHARGE_THRESH_BAT1 = 80;
-  #};
-  #};
-  services.auto-cpufreq = {
+  # tlp and auto-cpufreq shouldn't be enabled simultaneously
+  services.tlp = {
     enable = true;
+    settings = {
+      START_CHARGE_THRESH_BAT0 = 0;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+      START_CHARGE_THRESH_BAT1 = 0;
+      STOP_CHARGE_THRESH_BAT1 = 80;
+    };
+  };
+  services.auto-cpufreq = {
+    enable = false;
     settings = {
       battery = {
         governor = "powersave";
