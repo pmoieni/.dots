@@ -6,8 +6,18 @@ return {
         local conform = require("conform")
 
         conform.setup({
-            formatters_by_ft = {
-                lua = { "stylua" },
+            formatters_by_ft = vim.tbl_map(function(formatters)
+                table.insert(formatters, 1, 'treefmt')
+                return formatters
+            end, {
+                c = { 'clang-format' },
+                cpp = { 'clang-format' },
+                json = { 'jq' },
+                lua = { 'stylua' },
+                nix = { 'nixfmt' },
+                rust = { 'rustfmt' },
+                sh = { 'shfmt' },
+                toml = { 'taplo' },
                 javascript = { "prettierd", "prettier", stop_after_first = true },
                 javascriptreact = { "prettierd", "prettier", stop_after_first = true },
                 typescript = { "prettierd", "prettier" },
@@ -15,14 +25,18 @@ return {
                 svelte = { "prettierd", "prettier", stop_after_first = true },
                 css = { "prettierd", "prettier", stop_after_first = true },
                 html = { "prettierd", "prettier", stop_after_first = true },
-                json = { "prettierd", "prettier", stop_after_first = true },
                 yaml = { "prettierd", "prettier", stop_after_first = true },
                 markdown = { "prettierd", "prettier", stop_after_first = true },
-                nix = { "alejandra" }
+            }),
+            format_on_save = {
+                lsp_format = 'fallback',
+                stop_after_first = true,
             },
-            format_after_save = {
-                lsp_fallback = true,
+            default_format_opts = {
+                timeout_ms = 2500,
+                stop_after_first = true,
             },
+            notify_on_error = true,
         })
 
         vim.api.nvim_create_user_command("Format", function(args)

@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -13,8 +14,10 @@
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
     };
-    registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-    nixPath = ["/etc/nix/path"];
+    registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
+      (lib.filterAttrs (_: lib.isType "flake")) inputs
+    );
+    nixPath = [ "/etc/nix/path" ];
     gc = {
       automatic = true;
       dates = "weekly";
@@ -42,7 +45,7 @@
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot";
     };
-    supportedFilesystems = ["ntfs"];
+    supportedFilesystems = [ "ntfs" ];
   };
 
   # hardware
@@ -117,7 +120,10 @@
     xkb.layout = "us,ir";
     xkb.variant = "";
     xkb.options = "grp:win_space_toggle,caps:swapescape";
-    videoDrivers = ["modesetting" "nvidia"];
+    videoDrivers = [
+      "modesetting"
+      "nvidia"
+    ];
   };
 
   services.desktopManager.gnome.enable = true;
@@ -204,7 +210,7 @@
           value = 1;
         }
       ];
-      services.swaylock = {};
+      services.swaylock = { };
     };
   };
 
@@ -218,7 +224,14 @@
 
   users.users.pmoieni = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager" "video" "audio" "lp" "scanner"];
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "video"
+      "audio"
+      "lp"
+      "scanner"
+    ];
     packages = with pkgs; [
       waybar
       xwayland-satellite

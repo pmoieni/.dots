@@ -3,8 +3,9 @@
   hostname,
   username,
   ...
-}: {
-  imports = [./hosts/${hostname}/home.nix];
+}:
+{
+  imports = [ ./hosts/${hostname}/home.nix ];
 
   home.username = "${username}";
   home.homeDirectory = "/home/${username}";
@@ -20,7 +21,7 @@
     gh
     subversion
     niv
-    alejandra
+    taplo
     nodePackages.eslint_d
     nodePackages.prettier
     prettierd
