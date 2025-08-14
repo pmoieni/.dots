@@ -11,7 +11,7 @@
 
   nix = {
     settings = {
-      experimental-features = "nix-command flakes";
+      experimental-features = "nix-command flakes pipe-operators";
       auto-optimise-store = true;
     };
     registry = (lib.mapAttrs (_: flake: { inherit flake; })) (
@@ -246,7 +246,6 @@
       pavucontrol
       brightnessctl
       libnotify
-      google-chrome
       wl-clipboard
       wl-clip-persist
       wl-color-picker
@@ -255,6 +254,7 @@
       ffmpeg-full
       telegram-desktop
       blender
+      brave
     ];
   };
 
@@ -307,6 +307,10 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+  };
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
   };
 
   qt = {

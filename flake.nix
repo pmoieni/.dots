@@ -15,6 +15,17 @@
     };
 
     systems.url = "github:nix-systems/default";
+
+    astal = {
+      url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.astal.follows = "astal";
+    };
   };
 
   outputs =
@@ -24,6 +35,8 @@
       home-manager,
       treefmt-nix,
       systems,
+      ags,
+      astal,
       ...
     }:
     let
@@ -49,6 +62,8 @@
           ];
         };
 
+      pkgs = nixpkgs.legacyPackages.${system};
+
       eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
 
       # Eval the treefmt modules from ./treefmt.nix
@@ -66,5 +81,17 @@
       checks = eachSystem (pkgs: {
         formatting = treefmtEval.${pkgs.system}.config.build.check self;
       });
+
+      devShells.${system}.default = import ./nix/shells {
+        inherit
+          pkgs
+          system
+          ags
+          ;
+      };
+
+      packages.${system}.default = pkgs.callPackage ./nix/pkgs {
+        inherit ags astal;
+      };
     };
 }
