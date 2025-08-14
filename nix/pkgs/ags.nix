@@ -1,7 +1,6 @@
 {
   pkgs,
   makeBinPath,
-  mkDerivation,
   glib,
   gjs,
   ags,
@@ -9,7 +8,7 @@
   ...
 }:
 
-mkDerivation {
+pkgs.mkDerivation {
   pname = "shell";
   src = ../../config/ags;
 

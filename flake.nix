@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +34,7 @@
     inputs@{
       self,
       nixpkgs,
+      flake-utils,
       home-manager,
       treefmt-nix,
       systems,
@@ -40,58 +43,75 @@
       ...
     }:
     let
-      inherit (self) outputs;
-      system = "x86_64-linux";
+      inherit (builtins) foldl' listToAttrs;
+      inherit (nixpkgs) lib;
+      inherit (lib) attrsets;
+      inherit (flake-utils.lib) eachDefaultSystem;
 
-      mkHost =
-        {
-          hostname,
-          username,
-        }:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs outputs; };
-          modules = [
-            ./nix/configuration.nix
+      foldAttrs = { } |> foldl' attrsets.recursiveUpdate;
 
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.users.${username} = ./nix/home-manager/home.nix;
-              home-manager.extraSpecialArgs = { inherit username hostname; };
-            }
-          ];
-        };
-
-      pkgs = nixpkgs.legacyPackages.${system};
-
-      eachSystem = f: nixpkgs.lib.genAttrs (import systems) (system: f nixpkgs.legacyPackages.${system});
-
-      # Eval the treefmt modules from ./treefmt.nix
-      treefmtEval = eachSystem (pkgs: treefmt-nix.lib.evalModule pkgs ./treefmt.nix);
     in
-    {
-      nixosConfigurations.asus = mkHost {
-        hostname = "asus";
-        username = "pmoieni";
-      };
+    foldAttrs [
+      (eachDefaultSystem (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+          };
 
-      # for `nix fmt`
-      formatter = eachSystem (pkgs: treefmtEval.${pkgs.system}.config.build.wrapper);
-      # for `nix flake check`
-      checks = eachSystem (pkgs: {
-        formatting = treefmtEval.${pkgs.system}.config.build.check self;
-      });
+          treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+        in
+        {
+          # for `nix fmt`
+          formatter = treefmtEval.${pkgs.system}.config.build.wrapper;
+          # for `nix flake check`
+          checks = {
+            formatting = treefmtEval.${pkgs.system}.config.build.check self;
+          };
 
-      devShells.${system}.default = import ./nix/shells {
-        inherit
-          pkgs
-          system
-          ags
-          ;
-      };
+          devShells = import ./nix/shells {
+            inherit
+              pkgs
+              system
+              ags
+              ;
+          };
 
-      packages.${system}.default = pkgs.callPackage ./nix/pkgs {
-        inherit ags astal;
-      };
-    };
+          packages = import ./nix/pkgs {
+            inherit pkgs ags astal;
+          };
+        }
+      ))
+      {
+        nixosConfigurations =
+          let
+            systems = with flake-utils.lib.system; [
+              {
+                hostname = "asus";
+                system = x86_64-linux;
+              }
+            ];
+
+            mkHost =
+              {
+                hostname,
+                system,
+              }:
+              nixpkgs.lib.nixosSystem {
+                inherit system;
+                specialArgs = { inherit inputs; };
+                modules = [
+                  ./nix/configuration.nix
+
+                  home-manager.nixosModules.home-manager
+                  {
+                    home-manager.users.pmoieni = ./nix/home-manager/home.nix;
+                    home-manager.extraSpecialArgs = { inherit hostname; };
+                  }
+                ];
+              };
+          in
+          systems |> map (attrs: attrsets.nameValuePair attrs.hostname (mkHost attrs)) |> listToAttrs;
+      }
+    ];
 }

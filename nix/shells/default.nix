@@ -1,37 +1,12 @@
-{ pkgs, ... }:
-
-let
-  inherit (builtins)
-    attrNames
-    filter
-    listToAttrs
-    readDir
-    ;
-
-  inherit (pkgs) lib;
-  inherit (lib) attrsets strings;
-
-  commonBuildInputs = [ ];
-in
-
 {
-  default = pkgs.mkShell {
-    nativeBuildInputs = commonBuildInputs;
+  pkgs,
+  ags,
+  system,
+  ...
+}:
+{
+  default = pkgs.mkShell { };
+  ags = pkgs.callPackage ./ags.nix {
+    inherit pkgs ags system;
   };
 }
-// (
-  readDir ./.
-  |> attrNames
-  |> filter (strings.hasSuffix ".nix")
-  |> map (strings.removeSuffix ".nix")
-  |> filter (filename: filename != "default")
-  |> map (
-    filename:
-    attrsets.nameValuePair filename (
-      pkgs.callPackage ./${filename}.nix {
-        inherit commonBuildInputs;
-      }
-    )
-  )
-  |> listToAttrs
-)

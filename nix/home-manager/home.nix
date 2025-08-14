@@ -1,14 +1,13 @@
 {
   pkgs,
   hostname,
-  username,
   ...
 }:
 {
   imports = [ ./hosts/${hostname}/home.nix ];
 
-  home.username = "${username}";
-  home.homeDirectory = "/home/${username}";
+  home.username = "pmoieni";
+  home.homeDirectory = "/home/pmoieni";
 
   home.stateVersion = "25.05";
 
