@@ -47,5 +47,9 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/fuzzel";
       recursive = true;
     };
+    "${config.xdg.configHome}/ags" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/ags";
+      recursive = true;
+    };
   };
 }

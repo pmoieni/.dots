@@ -1,16 +1,37 @@
 {
   pkgs,
-  makeBinPath,
-  glib,
-  gjs,
   ags,
-  astal,
+  system,
   ...
 }:
-
-pkgs.mkDerivation {
+let
   pname = "shell";
-  src = ../../config/ags;
+  entry = "./app.ts";
+
+  astalPackages = with ags.packages.${system}; [
+    io
+    astal4
+    apps
+    auth
+    battery
+    bluetooth
+    cava
+    greet
+    mpris
+    network
+    notifd
+    tray
+    wireplumber
+  ];
+
+  extraPackages = astalPackages ++ [
+    pkgs.libadwaita
+    pkgs.libsoup_3
+  ];
+in
+pkgs.stdenv.mkDerivation {
+  name = pname;
+  src = ./.;
 
   nativeBuildInputs = with pkgs; [
     wrapGAppsHook
@@ -18,35 +39,16 @@ pkgs.mkDerivation {
     ags.packages.${pkgs.system}.default
   ];
 
-  buildInputs = [
-    glib
-    gjs
-    astal.io
-    astal.astal4
-    astal.apps
-    astal.auth
-    astal.battey
-    astal.bluetooh
-    astal.cava
-    astal.greet
-    astal.mpris
-    astal.network
-    astal.notifd
-    astal.tray
-    astal.wireplumber
-  ];
+  buildInputs = extraPackages ++ [ pkgs.gjs ];
 
   installPhase = ''
-    ags bundle app.ts $out/bin/shell
-  '';
+    runHook preInstall
 
-  preFixup = ''
-    gappsWrapperArgs+=(
-      --prefix PATH : ${
-        makeBinPath ([
-          # runtime executables
-        ])
-      }
-    )
+    mkdir -p $out/bin
+    mkdir -p $out/share
+    cp -r * $out/share
+    ags bundle ${entry} $out/bin/${pname} -d "SRC='$out/share'"
+
+    runHook postInstall
   '';
 }

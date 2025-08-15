@@ -2,10 +2,16 @@
   pkgs,
   ags,
   astal,
+  system,
   ...
 }:
 {
   ags = pkgs.callPackage ./ags.nix {
-    inherit ags astal;
+    inherit
+      pkgs
+      ags
+      astal
+      system
+      ;
   };
 }

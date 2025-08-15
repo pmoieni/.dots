@@ -49,7 +49,6 @@
       inherit (flake-utils.lib) eachDefaultSystem;
 
       foldAttrs = { } |> foldl' attrsets.recursiveUpdate;
-
     in
     foldAttrs [
       (eachDefaultSystem (
@@ -78,7 +77,12 @@
           };
 
           packages = import ./nix/pkgs {
-            inherit pkgs ags astal;
+            inherit
+              pkgs
+              system
+              ags
+              astal
+              ;
           };
         }
       ))

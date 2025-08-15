@@ -254,6 +254,7 @@
       ffmpeg-full
       telegram-desktop
       blender
+      shotcut
       brave
     ];
   };

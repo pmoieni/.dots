@@ -61,7 +61,7 @@ layout {
         gap 8
         width 8
         position "bottom"
-        gaps-between-tabs 8
+        gaps-between-tabs 4
         place-within-column
     }
 
