@@ -31,6 +31,14 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/niri";
       recursive = true;
     };
+    "${config.xdg.configHome}/hypr" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/hypr";
+      recursive = true;
+    };
+    "${config.xdg.configHome}/uwsm" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/uwsm";
+      recursive = true;
+    };
     "${config.xdg.configHome}/waybar" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/waybar";
       recursive = true;
@@ -51,5 +59,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/ags";
       recursive = true;
     };
+    "${config.xdg.configHome}/quickshell" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/quickshell";
+      recursive = true;
+    };
+
   };
 }

@@ -1,0 +1,16 @@
+@use './theme.scss';
+
+window.bar {
+  background: transparent;
+  color: theme.$text;
+  font-weight: bold;
+
+  >box {
+    background: theme.$base;
+  }
+
+  button {
+    border-radius: 8px;
+    margin: 2px;
+  }
+}

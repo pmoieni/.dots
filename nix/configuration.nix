@@ -232,6 +232,7 @@
       "audio"
       "lp"
       "scanner"
+      "wireshark"
     ];
     packages = with pkgs; [
       waybar
@@ -242,7 +243,6 @@
       alacritty
       fuzzel
       swaylock
-      mako
       pavucontrol
       brightnessctl
       libnotify
@@ -256,6 +256,10 @@
       blender
       shotcut
       brave
+      quickshell
+      qt6.full
+      cava
+      hypridle
     ];
   };
 
@@ -302,6 +306,11 @@
     };
   };
   programs.niri.enable = true;
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true; # recommended for most users
+    xwayland.enable = true; # Xwayland can be disabled.
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;
@@ -313,12 +322,26 @@
     enable = true;
     binfmt = true;
   };
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark;
+    dumpcap.enable = true;
+    usbmon.enable = true;
+  };
 
   qt = {
     enable = true;
     platformTheme = "gnome";
     style = "adwaita-dark";
   };
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.fira-code
+    nerd-fonts.blex-mono
+    nerd-fonts.recursive-mono
+    nerd-fonts.caskaydia-cove
+    material-symbols
+  ];
 
   system.stateVersion = "25.05";
 }

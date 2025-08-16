@@ -80,6 +80,7 @@ overview {
 spawn-at-startup "systemctl --user start cliphist-text.service"
 spawn-at-startup "systemctl --user start cliphist-image.service" 
 spawn-at-startup "waybar"
+// spawn-at-startup "qs"
 spawn-at-startup "xwayland-sattelite"
 spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -f"
 spawn-at-startup "swaybg"

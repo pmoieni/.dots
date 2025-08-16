@@ -11,8 +11,6 @@
 
   home.stateVersion = "25.05";
 
-  fonts.fontconfig.enable = true;
-
   home.packages = with pkgs; [
     fish
     tokei
@@ -40,10 +38,6 @@
     nodePackages.bash-language-server
     vscode-langservers-extracted
     tailwindcss-language-server
-
-    nerd-fonts.fira-code
-    nerd-fonts.blex-mono
-    nerd-fonts.recursive-mono
   ];
 
   home.sessionVariables = {
