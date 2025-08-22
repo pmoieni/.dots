@@ -16,6 +16,7 @@
     tokei
     neovim
     gh
+    flyctl
     subversion
     niv
     taplo
@@ -38,6 +39,7 @@
     nodePackages.bash-language-server
     vscode-langservers-extracted
     tailwindcss-language-server
+    nixfmt
   ];
 
   home.sessionVariables = {

@@ -169,6 +169,19 @@
   services.cloudflare-warp.enable = true;
 
   systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
     user.services = {
       cliphist-text = {
         description = "wl-paste + cliphist service for text";
@@ -249,8 +262,9 @@
       wl-clipboard
       wl-clip-persist
       wl-color-picker
-      discord
       mpv
+      obsidian
+      audacity
       ffmpeg-full
       telegram-desktop
       blender
@@ -260,6 +274,7 @@
       qt6.full
       cava
       hypridle
+      mako
     ];
   };
 

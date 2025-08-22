@@ -10,8 +10,8 @@ import (
 )
 
 type TUN struct {
-	device *tunnel.Iface
-	link   netlink.Link
+	*tunnel.Iface
+	link netlink.Link
 }
 
 var _ network.IPDevice = (*TUN)(nil)
@@ -28,7 +28,7 @@ func (t *TUN) SetDevice(name, ip string) error {
 
 	defer func() {
 		if err != nil {
-			device.Close()
+			device.Close() // TODO: handle error
 		}
 	}()
 
@@ -45,7 +45,7 @@ func (t *TUN) SetDevice(name, ip string) error {
 		return fmt.Errorf("failed to bring up TUN/TAP device: %w", err)
 	}
 
-	t.device = device
+	t.Iface = device
 	t.link = tunLink
 
 	return nil
@@ -55,10 +55,6 @@ func (t *TUN) MTU() int {
 	return 1500
 }
 
-func (t *TUN) Close() error {
-	return t.device.Close()
-}
-
 func (t *TUN) configureSubnet(ip string) error {
 	subnet := ip + "/32"
 	addr, err := netlink.ParseAddr(subnet)
@@ -66,14 +62,14 @@ func (t *TUN) configureSubnet(ip string) error {
 		return fmt.Errorf("subnet address '%s' is not valid: %w", subnet, err)
 	}
 	if err := netlink.AddrAdd(t.link, addr); err != nil {
-		return fmt.Errorf("failed to add subnet to TUN/TAP device '%s': %w", t.device.Name(), err)
+		return fmt.Errorf("failed to add subnet to TUN/TAP device '%s': %w", t.Name(), err)
 	}
 	return nil
 }
 
 func (t *TUN) bringUp() error {
 	if err := netlink.LinkSetUp(t.link); err != nil {
-		return fmt.Errorf("failed to bring TUN/TAP device '%s' up: %w", t.device.Name(), err)
+		return fmt.Errorf("failed to bring TUN/TAP device '%s' up: %w", t.Name(), err)
 	}
 	return nil
 }
