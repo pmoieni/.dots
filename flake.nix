@@ -11,6 +11,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +45,7 @@
       systems,
       ags,
       astal,
+      nur,
       ...
     }:
     let
@@ -106,6 +112,8 @@
                 specialArgs = { inherit inputs; };
                 modules = [
                   ./nix/configuration.nix
+
+                  nur.modules.nixos.default
 
                   home-manager.nixosModules.home-manager
                   {

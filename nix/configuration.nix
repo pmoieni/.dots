@@ -284,6 +284,7 @@ in
     psmisc
     wirelesstools
     gnomeExtensions.appindicator
+    nur.repos.ataraxiasjel.waydroid-script
   ];
 
   programs.xwayland.enable = true;
@@ -331,6 +332,9 @@ in
     package = pkgs.wireshark;
     dumpcap.enable = true;
     usbmon.enable = true;
+  };
+  programs.kdeconnect = {
+    enable = true;
   };
 
   virtualisation = {
