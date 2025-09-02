@@ -4,6 +4,12 @@
   pkgs,
   ...
 }:
+let
+  chargeUpto = pkgs.writeScriptBin "charge-upto" ''
+    #!${pkgs.bash}/bin/bash
+    echo ''${1:-100} > /sys/class/power_supply/BAT?/charge_control_end_threshold
+  '';
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -35,52 +41,7 @@
     backupFileExtension = "backup";
   };
 
-  # boot
-  boot = {
-    kernelParams = [
-      "mem_sleep_default=deep"
-    ];
-    loader.systemd-boot.enable = true;
-    loader.efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
-    supportedFilesystems = [ "ntfs" ];
-  };
-
-  # hardware
-  hardware = {
-    bluetooth = {
-      enable = true;
-      powerOnBoot = false;
-    };
-    cpu.intel.updateMicrocode = true;
-    graphics = {
-      enable = true;
-      extraPackages = with pkgs; [
-        vaapiIntel
-        intel-media-driver
-        vpl-gpu-rt
-      ];
-    };
-    nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = true;
-      powerManagement.finegrained = true;
-      open = false;
-      nvidiaSettings = true;
-      prime = {
-        offload = {
-          enable = true;
-          enableOffloadCmd = true;
-        };
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-    };
-  };
-
-  # nnetworking
+  # networking
   networking.hostName = "nixos";
   networking.wireless.iwd = {
     enable = false;
@@ -103,7 +64,12 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   # services
-  services.printing.enable = true;
+  services.fstrim.enable = true;
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.hplipWithPlugin ];
+  };
 
   services.pipewire = {
     enable = true;
@@ -144,7 +110,7 @@
   services.power-profiles-daemon.enable = false;
   # tlp and auto-cpufreq shouldn't be enabled simultaneously
   services.tlp = {
-    enable = true;
+    enable = false;
     settings = {
       START_CHARGE_THRESH_BAT0 = 0;
       STOP_CHARGE_THRESH_BAT0 = 80;
@@ -153,7 +119,7 @@
     };
   };
   services.auto-cpufreq = {
-    enable = false;
+    enable = true;
     settings = {
       battery = {
         governor = "powersave";
@@ -169,6 +135,24 @@
   services.cloudflare-warp.enable = true;
 
   systemd = {
+    services.battery-charge-threshold = {
+      wantedBy = [
+        "local-fs.target"
+        "suspend.target"
+      ];
+      after = [
+        "local-fs.target"
+        "suspend.target"
+      ];
+      description = "Set the battery charge threshold to the given percentage";
+      startLimitBurst = 5;
+      startLimitIntervalSec = 1;
+      serviceConfig = {
+        Type = "oneshot";
+        Restart = "on-failure";
+        ExecStart = "${pkgs.runtimeShell} -c 'echo ${toString 80} > /sys/class/power_supply/BAT?/charge_control_end_threshold'";
+      };
+    };
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
       wantedBy = [ "graphical-session.target" ];
@@ -246,6 +230,7 @@
       "lp"
       "scanner"
       "wireshark"
+      "podman"
     ];
     packages = with pkgs; [
       waybar
@@ -275,10 +260,12 @@
       cava
       hypridle
       mako
+      inkscape
     ];
   };
 
   environment.systemPackages = with pkgs; [
+    chargeUpto # battery charge limit script
     vim
     wget
     tree
@@ -294,6 +281,8 @@
     fzf
     git
     lshw
+    psmisc
+    wirelesstools
     gnomeExtensions.appindicator
   ];
 
@@ -342,6 +331,18 @@
     package = pkgs.wireshark;
     dumpcap.enable = true;
     usbmon.enable = true;
+  };
+
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      dockerCompat = true;
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+    waydroid.enable = true;
   };
 
   qt = {

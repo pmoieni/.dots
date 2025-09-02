@@ -27,10 +27,12 @@
     go
     golangci-lint
     rustup
+    python3
     nodejs
     corepack
-    clang_17
-    clang-tools_17
+    # clang_17
+    # clang-tools_17
+    gcc
     devenv
     lua-language-server
     gopls
