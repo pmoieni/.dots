@@ -336,6 +336,7 @@ in
   programs.kdeconnect = {
     enable = true;
   };
+  programs.adb.enable = true;
 
   virtualisation = {
     containers.enable = true;
