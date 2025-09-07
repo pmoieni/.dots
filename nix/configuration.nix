@@ -333,10 +333,8 @@ in
     dumpcap.enable = true;
     usbmon.enable = true;
   };
-  programs.kdeconnect = {
-    enable = true;
-  };
   programs.adb.enable = true;
+  programs.localsend.enable = true;
 
   virtualisation = {
     containers.enable = true;
