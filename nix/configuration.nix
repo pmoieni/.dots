@@ -99,10 +99,10 @@ in
   services.fwupd.enable = true;
   services.blueman.enable = true;
 
-  services.desktopManager.cosmic = {
-    enable = true;
-    xwayland.enable = true;
-  };
+  #    services.desktopManager.cosmic = {
+  #enable = true;
+  #xwayland.enable = true;
+  # };
 
   services.displayManager.gdm.enable = true;
 
@@ -311,11 +311,11 @@ in
     };
   };
   programs.niri.enable = true;
-  programs.hyprland = {
-    enable = true;
-    withUWSM = true; # recommended for most users
-    xwayland.enable = true; # Xwayland can be disabled.
-  };
+  #programs.hyprland = {
+  #enable = true;
+  #withUWSM = true; # recommended for most users
+  #xwayland.enable = true; # Xwayland can be disabled.
+  #};
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;

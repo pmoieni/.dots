@@ -40,6 +40,7 @@ layout {
     background-color "transparent"
     gaps 8
     center-focused-column "never"
+    empty-workspace-above-first
 
     preset-column-widths {
         proportion 0.33333

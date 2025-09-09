@@ -63,6 +63,5 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/quickshell";
       recursive = true;
     };
-
   };
 }
