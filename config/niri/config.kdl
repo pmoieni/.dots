@@ -107,6 +107,12 @@ animations {
 }
 
 window-rule {
+    match app-id=r#"Waydroid"#
+    default-column-width { proportion 1.0; }
+    open-maximized true
+}
+
+window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
 }

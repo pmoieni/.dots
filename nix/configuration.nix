@@ -99,12 +99,13 @@ in
   services.fwupd.enable = true;
   services.blueman.enable = true;
 
-  #    services.desktopManager.cosmic = {
-  #enable = true;
-  #xwayland.enable = true;
-  # };
+  services.desktopManager.cosmic = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
-  services.displayManager.gdm.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
+  # services.displayManager.gdm.enable = true;
 
   services.thermald.enable = true;
   services.power-profiles-daemon.enable = false;
@@ -261,6 +262,8 @@ in
       hypridle
       mako
       inkscape
+      obs-studio
+      zed-editor
     ];
   };
 
@@ -354,13 +357,16 @@ in
     style = "adwaita-dark";
   };
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.fira-code
-    nerd-fonts.blex-mono
-    nerd-fonts.recursive-mono
-    nerd-fonts.caskaydia-cove
-    material-symbols
-  ];
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      nerd-fonts.fira-code
+      nerd-fonts.blex-mono
+      nerd-fonts.recursive-mono
+      nerd-fonts.caskaydia-cove
+      material-symbols
+    ];
+  };
 
   system.stateVersion = "25.05";
 }
