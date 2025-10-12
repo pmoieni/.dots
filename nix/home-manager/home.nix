@@ -12,13 +12,12 @@
   home.stateVersion = "25.05";
 
   home.packages = with pkgs; [
-    bat
     fish
     tokei
     neovim
     gh
-    flyctl
     subversion
+    openssl
     niv
     taplo
     nodePackages.eslint_d
@@ -33,7 +32,6 @@
     # clang_17
     # clang-tools_17
     gcc
-    devenv
     lua-language-server
     gopls
     nil
@@ -42,7 +40,6 @@
     nodePackages.bash-language-server
     vscode-langservers-extracted
     tailwindcss-language-server
-    nixfmt
   ];
 
   home.sessionVariables = {

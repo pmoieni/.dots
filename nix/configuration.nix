@@ -92,9 +92,9 @@ in
     ];
   };
 
-  services.desktopManager.gnome.enable = true;
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
+  # services.desktopManager.gnome.enable = true;
+  # services.gvfs.enable = true;
+  # services.udisks2.enable = true;
 
   services.fwupd.enable = true;
   services.blueman.enable = true;
@@ -234,6 +234,7 @@ in
       "podman"
     ];
     packages = with pkgs; [
+      btop
       waybar
       xwayland-satellite
       swayidle
@@ -254,14 +255,14 @@ in
       ffmpeg-full
       telegram-desktop
       blender
-      shotcut
+      # shotcut
       brave
-      quickshell
-      qt6.full
-      cava
-      hypridle
+      # quickshell
+      # qt6.full
+      # cava
+      # hypridle
       mako
-      inkscape
+      # inkscape
       obs-studio
       zed-editor
     ];
@@ -273,7 +274,7 @@ in
     wget
     tree
     htop
-    curl
+    curlFull
     zip
     unzip
     coreutils-full
@@ -338,6 +339,11 @@ in
   };
   programs.adb.enable = true;
   programs.localsend.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
 
   virtualisation = {
     containers.enable = true;
@@ -353,8 +359,8 @@ in
 
   qt = {
     enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
+    # platformTheme = "gnome";
+    # style = "adwaita-dark";
   };
 
   fonts = {
