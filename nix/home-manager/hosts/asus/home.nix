@@ -59,9 +59,5 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/ags";
       recursive = true;
     };
-    "${config.xdg.configHome}/quickshell" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/quickshell";
-      recursive = true;
-    };
   };
 }
