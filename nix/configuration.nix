@@ -238,7 +238,7 @@ in
       waybar
       xwayland-satellite
       swayidle
-      swaybg
+      swww
       variety
       alacritty
       fuzzel
