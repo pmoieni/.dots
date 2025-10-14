@@ -265,6 +265,7 @@ in
       # inkscape
       obs-studio
       zed-editor
+      gparted
     ];
   };
 
