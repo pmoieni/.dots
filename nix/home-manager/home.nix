@@ -53,8 +53,10 @@
     git = {
       enable = true;
       lfs.enable = true;
-      userName = "pmoieni";
-      userEmail = "62774242+pmoieni@users.noreply.github.com";
+      settings = {
+        user.name = "pmoieni";
+        user.email = "62774242+pmoieni@users.noreply.github.com";
+      };
     };
     direnv = {
       enable = true;

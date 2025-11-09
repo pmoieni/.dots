@@ -1,15 +1,16 @@
 {
   "features": {
-    "edit_prediction_provider": "none"
+    "inline_completion_provider": "none"
   },
   "collaboration_panel": {
     "dock": "right"
   },
-  "agent": {
+  "assistant": {
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-5-sonnet-20240620"
-    }
+    },
+    "version": "2"
   },
   "telemetry": {
     "diagnostics": false,
@@ -38,10 +39,5 @@
   },
   "calls": {
     "mute_on_join": true
-  },
-  "terminal": {
-    "shell": {
-      "program": "fish"
-    }
   }
 }

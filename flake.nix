@@ -23,15 +23,9 @@
 
     systems.url = "github:nix-systems/default";
 
-    astal = {
-      url = "github:aylur/astal";
+    stylix = {
+      url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ags = {
-      url = "github:aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.astal.follows = "astal";
     };
   };
 
@@ -43,8 +37,7 @@
       home-manager,
       treefmt-nix,
       systems,
-      ags,
-      astal,
+      stylix,
       nur,
       ...
     }:
@@ -73,23 +66,6 @@
           checks = {
             formatting = treefmtEval.${pkgs.system}.config.build.check self;
           };
-
-          devShells = import ./nix/shells {
-            inherit
-              pkgs
-              system
-              ags
-              ;
-          };
-
-          packages = import ./nix/pkgs {
-            inherit
-              pkgs
-              system
-              ags
-              astal
-              ;
-          };
         }
       ))
       {
@@ -111,15 +87,15 @@
                 inherit system;
                 specialArgs = { inherit inputs; };
                 modules = [
+                  stylix.nixosModules.stylix
                   ./nix/configuration.nix
-
                   nur.modules.nixos.default
-
                   home-manager.nixosModules.home-manager
                   {
                     home-manager.users.pmoieni = ./nix/home-manager/home.nix;
                     home-manager.extraSpecialArgs = { inherit hostname; };
                   }
+
                 ];
               };
           in
