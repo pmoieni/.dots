@@ -262,14 +262,9 @@ in
     ];
     packages = with pkgs; [
       btop
-      waybar
       xwayland-satellite
       swayidle
-      swww
-      variety
       alacritty
-      fuzzel
-      swaylock
       pavucontrol
       brightnessctl
       libnotify
@@ -282,21 +277,13 @@ in
       ffmpeg-full
       telegram-desktop
       blender
-      # shotcut
       brave
-      # quickshell
-      # qt6.full
-      # cava
-      # hypridle
-      mako
-      # inkscape
       obs-studio
       zed-editor
       gparted
       nemo
       shotwell
       file-roller
-      lutris
       anydesk
       vesktop
       evince
