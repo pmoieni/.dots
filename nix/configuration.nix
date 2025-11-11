@@ -37,6 +37,8 @@ in
 
   stylix = {
     enable = true;
+    polarity = "dark";
+    autoEnable = false;
     base16Scheme = {
       base00 = "191724";
       base01 = "1f1d2e";
@@ -159,24 +161,24 @@ in
   services.cloudflare-warp.enable = true;
 
   systemd = {
-    services.battery-charge-threshold = {
-      wantedBy = [
-        "local-fs.target"
-        "suspend.target"
-      ];
-      after = [
-        "local-fs.target"
-        "suspend.target"
-      ];
-      description = "Set the battery charge threshold to the given percentage";
-      startLimitBurst = 5;
-      startLimitIntervalSec = 1;
-      serviceConfig = {
-        Type = "oneshot";
-        Restart = "on-failure";
-        ExecStart = "${pkgs.runtimeShell} -c 'echo ${toString 80} > /sys/class/power_supply/BAT?/charge_control_end_threshold'";
-      };
-    };
+    # services.battery-charge-threshold = {
+    # wantedBy = [
+    #"local-fs.target"
+    #"suspend.target"
+    #];
+    #after = [
+    #"local-fs.target"
+    #"suspend.target"
+    #];
+    #description = "Set the battery charge threshold to the given percentage";
+    #startLimitBurst = 5;
+    #startLimitIntervalSec = 1;
+    # serviceConfig = {
+    #Type = "oneshot";
+    #Restart = "on-failure";
+    #ExecStart = "${pkgs.runtimeShell} -c 'echo ${toString 80} > /sys/class/power_supply/BAT?/charge_control_end_threshold'";
+    #};
+    #};
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
       wantedBy = [ "graphical-session.target" ];

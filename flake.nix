@@ -87,7 +87,6 @@
                 inherit system;
                 specialArgs = { inherit inputs; };
                 modules = [
-                  stylix.nixosModules.stylix
                   ./nix/configuration.nix
                   nur.modules.nixos.default
                   home-manager.nixosModules.home-manager
@@ -95,7 +94,7 @@
                     home-manager.users.pmoieni = ./nix/home-manager/home.nix;
                     home-manager.extraSpecialArgs = { inherit hostname; };
                   }
-
+                  stylix.nixosModules.stylix
                 ];
               };
           in

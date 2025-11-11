@@ -26,8 +26,3 @@ opacity = 0.8
 [window.padding]
 x = 5
 y = 5
-
-[general]
-import = ["/home/pmoieni/.cache/matugen/alacritty.toml"]
-
-[terminal]
