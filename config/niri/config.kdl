@@ -167,7 +167,7 @@ binds {
     XF86MonBrightnessUp       allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "brightness" "increase"; }
     XF86MonBrightnessDown        allow-when-locked=true { spawn "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
 
-    Mod+B { spawn "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
+    Mod+B { spawn "noctalia-shell" "ipc" "call" "bar" "toggle"; }
 
     Mod+Shift+V { spawn "noctalia-shell" "ipc" "call" "launcher" "clipboard"; }
 
