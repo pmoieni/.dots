@@ -80,12 +80,13 @@ overview {
 
 spawn-at-startup "systemctl --user start cliphist-text.service"
 spawn-at-startup "systemctl --user start cliphist-image.service" 
-spawn-at-startup "waybar"
+// spawn-at-startup "waybar"
 // spawn-at-startup "qs"
-spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -f"
-spawn-at-startup "swww-daemon"
-spawn-at-startup "fish" "-c" "swww img -t wave $(find ~/.config/variety/Downloaded/Bing/ -type f -name '*.jpg' | shuf | head -1)"
-spawn-at-startup "variety"
+spawn-at-startup "noctalia-shell"
+// spawn-at-startup "swayidle" "-w" "timeout" "300" "swaylock -f" "timeout" "600" "niri msg action power-off-monitors" "resume" "niri msg action power-on-monitors" "before-sleep" "swaylock -f"
+// spawn-at-startup "swww-daemon"
+// spawn-at-startup "fish" "-c" "swww img -t wave $(find ~/.config/variety/Downloaded/Bing/ -type f -name '*.jpg' | shuf | head -1)"
+// spawn-at-startup "variety"
 
 environment {
     XDG_CURRENT_DESKTOP "niri"

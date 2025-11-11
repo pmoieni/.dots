@@ -55,5 +55,10 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/fuzzel";
       recursive = true;
     };
+    "${config.xdg.configHome}/noctalia" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/noctalia";
+      recursive = true;
+    };
+
   };
 }

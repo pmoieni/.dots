@@ -90,6 +90,8 @@ in
   # services
   services.fstrim.enable = true;
 
+  services.upower.enable = true;
+
   services.printing = {
     enable = true;
     drivers = [ pkgs.hplipWithPlugin ];
@@ -321,8 +323,8 @@ in
     lshw
     psmisc
     wirelesstools
-    gnomeExtensions.appindicator
     nur.repos.ataraxiasjel.waydroid-script
+    inputs.noctalia.packages.${system}.default
   ];
 
   programs.xwayland.enable = true;
