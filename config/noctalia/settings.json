@@ -200,15 +200,12 @@
         "backgroundOpacity": 1,
         "colorizeIcons": false,
         "displayMode": "auto_hide",
-        "enabled": true,
+        "enabled": false,
         "floatingRatio": 1,
         "monitors": [
         ],
         "onlySameOutput": true,
         "pinnedApps": [
-            "brave-browser",
-            "org.telegram.desktop",
-            "Alacritty"
         ],
         "size": 1
     },
