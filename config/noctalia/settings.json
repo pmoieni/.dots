@@ -25,12 +25,12 @@
         "backgroundOpacity": 1,
         "density": "comfortable",
         "exclusive": true,
-        "floating": true,
+        "floating": false,
         "marginHorizontal": 0.25,
         "marginVertical": 0.25,
         "monitors": [
         ],
-        "outerCorners": false,
+        "outerCorners": true,
         "position": "left",
         "showCapsule": true,
         "widgets": {
@@ -44,21 +44,11 @@
             ],
             "left": [
                 {
-                    "colorizeDistroLogo": false,
+                    "colorizeDistroLogo": true,
                     "customIconPath": "",
-                    "icon": "noctalia",
+                    "icon": "",
                     "id": "ControlCenter",
-                    "useDistroLogo": false
-                },
-                {
-                    "id": "SystemMonitor",
-                    "showCpuTemp": true,
-                    "showCpuUsage": true,
-                    "showDiskUsage": false,
-                    "showMemoryAsPercent": false,
-                    "showMemoryUsage": true,
-                    "showNetworkStats": false,
-                    "usePrimaryColor": false
+                    "useDistroLogo": true
                 },
                 {
                     "colorizeIcons": false,
@@ -83,16 +73,16 @@
             ],
             "right": [
                 {
-                    "id": "ScreenRecorder"
-                },
-                {
                     "blacklist": [
                     ],
-                    "colorizeIcons": false,
+                    "colorizeIcons": true,
                     "drawerEnabled": true,
                     "id": "Tray",
                     "pinned": [
                     ]
+                },
+                {
+                    "id": "ScreenRecorder"
                 },
                 {
                     "hideWhenZero": true,
@@ -113,13 +103,13 @@
                     "id": "Brightness"
                 },
                 {
-                    "displayMode": "onhover",
+                    "displayMode": "forceOpen",
                     "id": "KeyboardLayout"
                 },
                 {
                     "customFont": "",
                     "formatHorizontal": "HH:mm ddd, MMM dd",
-                    "formatVertical": "HH mm - dd MM",
+                    "formatVertical": "HH mm",
                     "id": "Clock",
                     "useCustomFont": false,
                     "usePrimaryColor": true
@@ -229,7 +219,7 @@
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
-        "showScreenCorners": false
+        "showScreenCorners": true
     },
     "hooks": {
         "darkModeChange": "",
@@ -262,7 +252,7 @@
     "notifications": {
         "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
-        "enableKeyboardLayoutToast": true,
+        "enableKeyboardLayoutToast": false,
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
@@ -337,7 +327,7 @@
             {
                 "directory": "/home/pmoieni/.dots/wallpapers",
                 "name": "eDP-1",
-                "wallpaper": "/home/pmoieni/.dots/wallpapers/OHR.TowerBridgeUK_EN-US6871236865_UHD.jpg"
+                "wallpaper": "/home/pmoieni/.dots/wallpapers/OHR.WoodDuckHen_EN-US0382439406_UHD.jpg"
             }
         ],
         "overviewEnabled": true,
