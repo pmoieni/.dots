@@ -15,10 +15,6 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/nvim-dev";
       recursive = true;
     };
-    "${config.xdg.configHome}/wezterm" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/wezterm";
-      recursive = true;
-    };
     "${config.xdg.configHome}/zed" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/zed";
       recursive = true;
@@ -31,34 +27,9 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/niri";
       recursive = true;
     };
-    "${config.xdg.configHome}/hypr" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/hypr";
-      recursive = true;
-    };
-    "${config.xdg.configHome}/uwsm" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/uwsm";
-      recursive = true;
-    };
-    "${config.xdg.configHome}/waybar" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/waybar";
-      recursive = true;
-    };
-    "${config.xdg.configHome}/swaylock" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/swaylock";
-      recursive = true;
-    };
-    "${config.xdg.configHome}/mako" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/mako";
-      recursive = true;
-    };
-    "${config.xdg.configHome}/fuzzel" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/fuzzel";
-      recursive = true;
-    };
     "${config.xdg.configHome}/noctalia" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dots/config/noctalia";
       recursive = true;
     };
-
   };
 }

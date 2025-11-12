@@ -1,9 +1,0 @@
-env = AQ_DRM_DEVICES,/dev/dri/card1:/dev/dri/card0
-env = XCURSOR_THEME,Adwaita
-env = XCURSOR_SIZE,24
-env = HYPRCURSOR_THEME,Bibata-Original-Classic
-env = HYPRCURSOR_SIZE,24
-env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
-env = QT_QPA_PLATFORM,wayland;xcb
-env = GDK_BACKEND,wayland,x11
-env = TERM,xterm-256color

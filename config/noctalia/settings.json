@@ -31,7 +31,7 @@
         "monitors": [
         ],
         "outerCorners": false,
-        "position": "top",
+        "position": "left",
         "showCapsule": true,
         "widgets": {
             "center": [
@@ -90,9 +90,9 @@
                     ],
                     "colorizeIcons": false,
                     "drawerEnabled": true,
-                    "favorites": [
-                    ],
-                    "id": "Tray"
+                    "id": "Tray",
+                    "pinned": [
+                    ]
                 },
                 {
                     "hideWhenZero": true,
@@ -262,6 +262,7 @@
     "notifications": {
         "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
+        "enableKeyboardLayoutToast": true,
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
@@ -274,7 +275,7 @@
     "osd": {
         "autoHideMs": 2000,
         "enabled": true,
-        "location": "top_right",
+        "location": "bottom",
         "monitors": [
         ],
         "overlayLayer": true
