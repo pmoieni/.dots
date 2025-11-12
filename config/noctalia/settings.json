@@ -218,7 +218,7 @@
         "avatarImage": "",
         "compactLockScreen": false,
         "dimDesktop": true,
-        "enableShadows": true,
+        "enableShadows": false,
         "forceBlackScreenCorners": false,
         "language": "",
         "lockOnSuspend": true,
