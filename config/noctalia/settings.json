@@ -25,12 +25,12 @@
         "backgroundOpacity": 1,
         "density": "comfortable",
         "exclusive": true,
-        "floating": false,
+        "floating": true,
         "marginHorizontal": 0.25,
         "marginVertical": 0.25,
         "monitors": [
         ],
-        "outerCorners": true,
+        "outerCorners": false,
         "position": "top",
         "showCapsule": true,
         "widgets": {
@@ -113,6 +113,10 @@
                     "id": "Brightness"
                 },
                 {
+                    "displayMode": "onhover",
+                    "id": "KeyboardLayout"
+                },
+                {
                     "customFont": "",
                     "formatHorizontal": "HH:mm ddd, MMM dd",
                     "formatVertical": "HH mm - dd MM",
@@ -156,7 +160,7 @@
                 "id": "audio-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "weather-card"
             },
             {
@@ -225,7 +229,7 @@
         "shadowDirection": "bottom_right",
         "shadowOffsetX": 2,
         "shadowOffsetY": 3,
-        "showScreenCorners": true
+        "showScreenCorners": false
     },
     "hooks": {
         "darkModeChange": "",
