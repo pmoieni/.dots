@@ -173,6 +173,10 @@ binds {
 
     Mod+Shift+W { spawn "noctalia-shell" "ipc" "call" "wallpaper" "toggle";  };
 
+    Mod+Shift+Period { spawn "noctalia-shell" "ipc" "call" "media" "next";  }
+
+    Mod+Shift+Comma { spawn "noctalia-shell" "ipc" "call" "media" "previous";  }
+
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
