@@ -118,20 +118,9 @@ in
     ];
   };
 
-  # services.desktopManager.gnome.enable = true;
-  # services.gvfs.enable = true;
-  # services.udisks2.enable = true;
-
   services.fwupd.enable = true;
   services.blueman.enable = true;
 
-  # services.desktopManager.cosmic = {
-  # enable = true;
-  # xwayland.enable = true;
-  #};
-
-  # services.displayManager.cosmic-greeter.enable = true;
-  # services.displayManager.gdm.enable = true;
   services.displayManager.ly.enable = true;
 
   services.thermald.enable = true;
@@ -203,7 +192,6 @@ in
           Restart = "on-failure";
         };
       };
-
       cliphist-image = {
         description = "wl-paste + cliphist service for text";
         serviceConfig = {
@@ -263,11 +251,8 @@ in
     packages = with pkgs; [
       btop
       xwayland-satellite
-      swayidle
       alacritty
       pavucontrol
-      brightnessctl
-      libnotify
       wl-clipboard
       wl-clip-persist
       wl-color-picker
