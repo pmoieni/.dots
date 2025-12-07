@@ -1,6 +1,5 @@
 {
     "appLauncher": {
-        "backgroundOpacity": 1,
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
         "enableClipboardHistory": false,
@@ -13,6 +12,7 @@
     },
     "audio": {
         "cavaFrameRate": 30,
+        "externalMixer": "pwvucontrol || pavucontrol",
         "mprisBlacklist": [
         ],
         "preferredPlayer": "",
@@ -23,6 +23,7 @@
     },
     "bar": {
         "backgroundOpacity": 1,
+        "capsuleOpacity": 1,
         "density": "comfortable",
         "exclusive": true,
         "floating": false,
@@ -66,6 +67,7 @@
                     "maxWidth": 145,
                     "scrollingMode": "hover",
                     "showAlbumArt": false,
+                    "showArtistFirst": true,
                     "showVisualizer": false,
                     "useFixedWidth": false,
                     "visualizerType": "linear"
@@ -116,9 +118,6 @@
                 }
             ]
         }
-    },
-    "battery": {
-        "chargingMode": 1
     },
     "brightness": {
         "brightnessStep": 5,
@@ -204,11 +203,12 @@
         "size": 1
     },
     "general": {
+        "allowPanelsOnScreenWithoutBar": true,
         "animationDisabled": false,
         "animationSpeed": 1,
         "avatarImage": "",
         "compactLockScreen": false,
-        "dimDesktop": true,
+        "dimmerOpacity": 0.8,
         "enableShadows": false,
         "forceBlackScreenCorners": false,
         "language": "",
@@ -235,7 +235,8 @@
         "showWeekNumberInCalendar": false,
         "use12hourFormat": false,
         "useFahrenheit": false,
-        "weatherEnabled": false
+        "weatherEnabled": false,
+        "weatherShowEffects": true
     },
     "network": {
         "wifiEnabled": true
@@ -264,6 +265,7 @@
     },
     "osd": {
         "autoHideMs": 2000,
+        "backgroundOpacity": 1,
         "enabled": true,
         "location": "bottom",
         "monitors": [
@@ -276,23 +278,62 @@
         "colorRange": "limited",
         "directory": "/home/pmoieni/Videos",
         "frameRate": 60,
-        "quality": "very_high",
+        "quality": "high",
         "showCursor": true,
         "videoCodec": "hevc",
         "videoSource": "portal"
     },
-    "settingsVersion": 21,
+    "sessionMenu": {
+        "countdownDuration": 10000,
+        "enableCountdown": true,
+        "position": "center",
+        "powerOptions": [
+            {
+                "action": "lock",
+                "enabled": true
+            },
+            {
+                "action": "suspend",
+                "enabled": true
+            },
+            {
+                "action": "hibernate",
+                "enabled": true
+            },
+            {
+                "action": "reboot",
+                "enabled": true
+            },
+            {
+                "action": "logout",
+                "enabled": true
+            },
+            {
+                "action": "shutdown",
+                "enabled": true
+            }
+        ],
+        "showHeader": true
+    },
+    "settingsVersion": 23,
     "setupCompleted": true,
+    "systemMonitor": {
+        "cpuCriticalThreshold": 90,
+        "cpuWarningThreshold": 80,
+        "criticalColor": "",
+        "diskCriticalThreshold": 90,
+        "diskWarningThreshold": 80,
+        "memCriticalThreshold": 90,
+        "memWarningThreshold": 80,
+        "tempCriticalThreshold": 90,
+        "tempWarningThreshold": 80,
+        "useCustomColors": false,
+        "warningColor": ""
+    },
     "templates": {
         "alacritty": false,
         "code": false,
         "discord": false,
-        "discord_armcord": false,
-        "discord_dorion": false,
-        "discord_equibop": false,
-        "discord_lightcord": false,
-        "discord_vesktop": false,
-        "discord_webcord": false,
         "enableUserTemplates": false,
         "foot": false,
         "fuzzel": false,
@@ -312,6 +353,7 @@
         "fontDefaultScale": 1,
         "fontFixed": "DejaVu Sans Mono",
         "fontFixedScale": 1,
+        "panelBackgroundOpacity": 1,
         "panelsAttachedToBar": true,
         "settingsPanelAttachToBar": true,
         "tooltipsEnabled": true
@@ -323,6 +365,7 @@
         "enabled": true,
         "fillColor": "#000000",
         "fillMode": "crop",
+        "hideWallpaperFilenames": false,
         "monitors": [
             {
                 "directory": "/home/pmoieni/.dots/wallpapers",
@@ -338,6 +381,15 @@
         "setWallpaperOnAllMonitors": true,
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
-        "transitionType": "wipe"
+        "transitionType": "wipe",
+        "useWallhaven": false,
+        "wallhavenCategories": "111",
+        "wallhavenOrder": "desc",
+        "wallhavenPurity": "100",
+        "wallhavenQuery": "",
+        "wallhavenResolutionHeight": "",
+        "wallhavenResolutionMode": "atleast",
+        "wallhavenResolutionWidth": "",
+        "wallhavenSorting": "relevance"
     }
 }

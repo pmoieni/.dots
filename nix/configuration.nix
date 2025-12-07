@@ -249,35 +249,42 @@ in
       "podman"
     ];
     packages = with pkgs; [
-      btop
-      xwayland-satellite
       alacritty
-      pavucontrol
-      wl-clipboard
-      wl-clip-persist
-      wl-color-picker
-      mpv
       obsidian
       audacity
-      ffmpeg-full
       telegram-desktop
       blender
       brave
       obs-studio
       zed-editor
-      gparted
-      nemo
       shotwell
-      file-roller
       anydesk
       vesktop
       evince
+      podman-compose
+      neovim
+      fish
+      tokei
+      gh
     ];
   };
 
   environment.systemPackages = with pkgs; [
     # battery charge limit script
     # chargeUpto
+    wev
+    file-roller
+    nemo
+    gparted
+    ffmpeg-full
+    mpv
+    wl-clipboard
+    wl-clip-persist
+    wl-color-picker
+    pavucontrol
+    xwayland-satellite
+    btop
+    playerctl
     vim
     wget
     tree
@@ -292,6 +299,8 @@ in
     jq
     fzf
     git
+    subversion
+    openssl
     lshw
     psmisc
     wirelesstools
