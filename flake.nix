@@ -8,7 +8,7 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -25,7 +25,7 @@
     systems.url = "github:nix-systems/default";
 
     stylix = {
-      url = "github:nix-community/stylix";
+      url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -73,10 +73,10 @@
         in
         {
           # for `nix fmt`
-          formatter = treefmtEval.${pkgs.system}.config.build.wrapper;
+          formatter = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.wrapper;
           # for `nix flake check`
           checks = {
-            formatting = treefmtEval.${pkgs.system}.config.build.check self;
+            formatting = treefmtEval.${pkgs.stdenv.hostPlatform.system}.config.build.check self;
           };
         }
       ))

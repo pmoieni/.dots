@@ -266,12 +266,15 @@ in
       fish
       tokei
       gh
+      ripgrep
     ];
   };
 
   environment.systemPackages = with pkgs; [
     # battery charge limit script
     # chargeUpto
+    man-pages
+    man-pages-posix 
     wev
     file-roller
     nemo
@@ -305,7 +308,7 @@ in
     psmisc
     wirelesstools
     nur.repos.ataraxiasjel.waydroid-script
-    inputs.noctalia.packages.${system}.default
+    inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
   ];
 
   programs.xwayland.enable = true;
