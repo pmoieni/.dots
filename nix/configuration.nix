@@ -277,7 +277,7 @@ in
     man-pages-posix 
     wev
     file-roller
-    nemo
+    kdePackages.dolphin
     gparted
     ffmpeg-full
     mpv
