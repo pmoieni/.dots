@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -44,7 +43,6 @@
     inputs@{
       self,
       nixpkgs,
-      nixpkgs-unstable,
       flake-utils,
       home-manager,
       treefmt-nix,
@@ -97,14 +95,14 @@
               }:
               nixpkgs.lib.nixosSystem {
                 inherit system;
-                specialArgs = { inherit inputs nixpkgs-unstable; };
+                specialArgs = { inherit inputs; };
                 modules = [
                   ./nix/configuration.nix
                   nur.modules.nixos.default
                   home-manager.nixosModules.home-manager
                   {
                     home-manager.users.pmoieni = ./nix/home-manager/home.nix;
-                    home-manager.extraSpecialArgs = { inherit hostname nixpkgs-unstable; };
+                    home-manager.extraSpecialArgs = { inherit hostname; };
                   }
                   stylix.nixosModules.stylix
                 ];
